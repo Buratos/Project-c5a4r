@@ -1,0 +1,1710 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="css/my_reset.css" rel="stylesheet"/>
+	<!-- Bootstrap -->
+	<link href="bootstrap-5.1.3-dist/css/bootstrap.css" rel="stylesheet">
+	<!--	<link href="bootstrap-5.1.3-dist/css/bootstrap.min.css" rel="stylesheet">-->
+	<script src="bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
+	<link href="css/style.css" rel="stylesheet"/>
+	<!--
+		<link href="fontawesome/css/fontawesome_all.min.css" rel="stylesheet">
+	-->
+	<script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
+	<script src="js/live.js" type="text/javascript"></script>
+	<script src="js/script.js" type="module"></script>
+	<script src="js/_my_functions_lib.js" type="text/javascript"></script>
+	<title>LARA CAR SALE index.html</title>
+</head>
+<body>
+<header class="container-fluid m-0 p-0 bg-light">
+	<!--	HEADER с меню ДЛЯ МОБИЛКИ -->
+	<div class="d-sm-none container-fluid bg-light px-0">
+		<nav class="navbar navbar-expand-md navbar-light bg-light mb-2 pb-0 mobile_navbar">
+			<div class="container-fluid px-0">
+				<a href="/" class="d-flex align-items-center mb-2 ms-2 bg-light me-lg-4 car_sale_logo">
+					<div class="i_header_logo">
+						<div><!-- ЭТОТ div тут нужен --></div>
+					</div>
+					<h2 class="text-danger fw-bold m-0">CAR SALE</h2>
+				</a>
+				<button class="navbar-toggler me-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_mobile_red_menu" aria-controls="navbar_mobile_red_menu" aria-expanded="false" aria-label="Переключить навигацию">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="col-12 pb-3">
+					<form class="d-flex">
+						<input class="form-control ms-3 me-2" type="search" placeholder="Search in ads..." aria-label="Поиск">
+						<button class="btn btn-outline-success me-3" type="submit">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+								<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+							</svg>
+						</button>
+					</form>
+				</div>
+				<div class="navbar-collapse collapse" id="navbar_mobile_red_menu">
+					<div class="row mx-0 justify-content-center">
+						<div class="col-12 text-center mt-0 mb-3 for_unknown_user">
+							<button type="button" class="btn btn btn-outline-secondary me-2">Log in</button>
+							<button type="button" class="btn btn-outline-secondary">Register</button>
+						</div>
+						<div class="col-12 mt-0 mb-3 px-0 d-flex flex-nowrap justify-content-center align-items-center for_logged_user d-none">
+							<a type="button" class="btn d-inline-flex align-items-center text-secondary ps-0 py-0" data-func="">
+								<!-- * -->
+								<svg class="bi" width="16" height="16">
+									<use xlink:href="#i_logget_user"></use>
+								</svg>
+								<span>User nickname</span>
+							</a>
+							<button type="button" class="btn btn-outline-secondary">Log out</button>
+						</div>
+
+						<div class="col-12 bg-danger px-0">
+							<ul class="navbar-nav me-auto main_menu_red">
+								<li class="nav-item">
+									<a class="nav-link active" aria-current="page" href="#">CREATE ADS</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#">LATEST ADS</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#">SHOPS</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#">FORUM</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#">CONTACTS</a>
+								</li>
+								<hr class="my-1 d-sm-none text-white">
+								<li class="nav-item d-sm-none">
+									<a class="nav-link" href="#">MY FAVORITEs</a>
+								</li>
+								<li class="nav-item d-sm-none">
+									<a class="nav-link" href="#">COMPARE</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div style="width: 100%;height: 1px;background-color: #AAAAAA;"></div>
+			</div>
+		</nav>
+	</div>
+	<!--	HEADER линия c логотипом для экранов БОЛЬШЕ мобилки -->
+	<div class="d-none d-sm-block container-md bg-light">
+		<div class="d-flex flex-wrap justify-content-left align-items-center flex-nowrap">
+			<a href="/" class="d-flex align-items-center mb-sm-0 mt-sd-0 bg-light me-4 car_sale_logo">
+				<div class="i_header_logo">
+					<div><!-- ЭТОТ div тут нужен --></div>
+				</div>
+				<span class="text-danger fw-bold m-0" style="font-size: 2rem;">CAR SALE</span>
+			</a>
+			<form class="" style="flex: 1 0 8rem">
+				<input type="search" class="form-control form-control-dark" placeholder="Search in ads..." aria-label="Search">
+			</form>
+			<ul class="d-none d-md-flex nav my-2 flex-nowrap">
+				<li>
+					<a href="#" class="nav-link text-secondary pe-2">
+						<svg class="bi d-block mx-auto mt-2" width="24" height="24">
+							<use xlink:href="#i_favorite"></use>
+						</svg>
+						Favorite
+					</a>
+				</li>
+				<li>
+					<a href="#" class="nav-link text-secondary ps-2">
+						<svg class="bi d-block mx-auto mt-2" width="24" height="24">
+							<use xlink:href="#i_compare"></use>
+						</svg>
+						Compare
+					</a>
+				</li>
+			</ul>
+			<div class="for_unknown_user">
+				<button type="button" class="btn btn-outline-secondary ms-4 ms-md-0 me-2">Log in</button>
+				<button type="button" class="btn btn-outline-secondary">Register</button>
+			</div>
+			<div class="text-center for_logged_user d-none">
+				<a type="button" class="btn d-flex align-items-center text-secondary" data-func="">
+					<!-- * -->
+					<svg class="bi" width="16" height="16">
+						<use xlink:href="#i_logget_user"></use>
+					</svg>
+					<span>User nickname lsdh asfda sasf</span>
+				</a>
+				<button type="button" class="btn btn-outline-secondary btn-sm lh-sm mb-sm-2 mb-md-1">Log out</button>
+			</div>
+		</div>
+	</div>
+	</div>
+	<!--	КРАСНОЕ МЕНЮ для экранов БОЛЬШЕ мобилки -->
+	<nav class="d-none d-sm-block py-2 border-bottom bg-danger text-white main_menu_red">
+		<div class="container-fluid container-md d-flex  flex-wrap">
+			<ul class="nav mx-auto justify-content-center">
+				<li class="nav-item">
+					<a href="#" class="nav-link link-light px-2 active" aria-current="page">CREATE ADS</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link link-light px-2">LATEST ADS</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link link-light px-2">SHOPS</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link link-light px-2">FORUM</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="d-md-none nav-link link-light px-2">FAVORITE</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="d-md-none nav-link link-light px-2">COMPARE</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link link-light px-2">CONTACTS</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</header>
+<!-- ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪ МЕНЮ  ИКОНОК  БРЭНДОВ  ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪-->
+<nav class="">
+	<div class="container-md nav_scroller mb-2 overflow-hidden overflow_sm_visible">
+		<ul class="row row-cols-12 flex-nowrap flex-sm-wrap justify-content-sm-center mb-0 pb-0 menu_brand_logos  ">
+			<li class="col">
+				<a href="#">
+					<div class="i_audi"></div>
+					<div>Audi</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_bmw"></div>
+					<div>BMW</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_cadillac"></div>
+					<div>Cadillac</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_cherry"></div>
+					<div>Cherry</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_chevrolet"></div>
+					<div>Chevrolet</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_chrysler"></div>
+					<div>Chrysler</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_dodge"></div>
+					<div>Dodge</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_fiat"></div>
+					<div>Fiat</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_ford"></div>
+					<div>Ford</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_honda"></div>
+					<div>Honda</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_hyundai"></div>
+					<div>Hyundai</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_kia"></div>
+					<div>Kia</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_mazda"></div>
+					<div>Mazda</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_mercedes"></div>
+					<div>Mercedes</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_mitsubishi"></div>
+					<div>Mitsubishi</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_nissan"></div>
+					<div>Nissan</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_opel"></div>
+					<div>Opel</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_peugeot"></div>
+					<div>Peugeot</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_renault"></div>
+					<div>Renault</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_skoda"></div>
+					<div>Skoda</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_suzuki"></div>
+					<div>Suzuki</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_toyota"></div>
+					<div>Toyota</div>
+				</a>
+			</li>
+			<li class="col">
+				<a href="#">
+					<div class="i_volkswagen"></div>
+					<div style="font-size: 0.925rem;">Volkswagen</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+<!--▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪ ФИЛЬТРЫ  FILTERS ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪-->
+<nav class="btn_filters_container">
+	<div class="container">
+		<div class="row justify-content-between">
+			<div class="col-6 col-sm-5 col-md-4 mb-sm-3">
+				<button class="w-100 btn btn-outline-secondary lh-sm" data-func="show_filters">Show filters</button>
+			</div>
+			<div class="col-6 col-sm-5 col-md-4 mb-sm-3">
+				<button class="w-100 btn btn-outline-secondary lh-sm" type="button">Еще чонить</button>
+			</div>
+		</div>
+	</div>
+</nav>
+<section class="container-fluid bg-light collapse" id="filters_global_container">
+	<div class="modal-content container-md bg-light  filters_fullscreen_block " id="filters_container">
+		<div class="filters_header">
+			<div class="d-flex justify-content-between pt-3 px-4 pb-3">
+				<span class="text-secondary">Найдено <span id="filters_founded_products_number">254</span> товара</span>
+				<button type="button" class="btn-close d-sm-none opacity-100" data-func="close_fullscreen_filters" aria-label="Закрыть"></button>
+			</div>
+			<div class="px-3 pb-3 d-flex justify-content-between justify-content-sm-center">
+				<button type="button" class="btn btn-success btn-sm px-2 px-sm-3 ms-1 me-sm-3" data-func="apply_filters">APPLY FILTERS</button>
+				<button type="button" class="btn btn-danger btn-sm px-2 px-sm-3 me-1 ms-sm-3" data-func="clear_all_filters">CLEAR ALL FILTERS</button>
+			</div>
+		</div>
+		<div class="row modal-body g-0 filters_content">
+			<div class="col px-0 mt-0">
+				<form class="needs-validation" novalidate="">
+					<template id="template__btn_checkbox"> <!-- ШАБЛОН ДЛЯ  КНОПКИ ЧЕКБОКСА -->
+						<label class="btn_checkbox btn_checkbox_filters">
+							<input type="checkbox" name="filters_brand_1">
+							<div class="btn_checkbox_text">
+								<span>Audi</span><span>158</span>
+							</div>
+						</label>
+					</template>
+					<div class="accordion" id="filters_accordion">
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="filters_accordion__header1">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filters_accordion__collapse1" aria-expanded="true" aria-controls="filters_accordion__collapse1">Price, $</button>
+								<a type="button" class="btn d-flex align-items-center" data-func="clear_filters">
+									<!-- * -->
+									<span>2</span>
+									<svg class="bi" width="16" height="16">
+										<use xlink:href="#i_close_filters_clear"></use>
+									</svg>
+								</a>
+							</h2>
+							<div id="filters_accordion__collapse1" class="accordion-collapse collapse " aria-labelledby="filters_accordion__header1">
+								<div class="accordion-body">
+									<div class="row">
+										<div class="col-6">
+											<!--							<label for="price_from" class="form-label">From</label>-->
+											<input type="number" class="form-control" id="filters_price_from" placeholder="from, $" value="" name="filters_price_from">
+										</div>
+										<div class="col-6">
+											<!--							<label for="price_from" class="form-label">From</label>-->
+											<input type="number" class="form-control" id="filters_price_to" placeholder="to, $" value="" name="filters_price_to">
+										</div>
+										<div class="col text-center mt-3">
+											<button class="w-50 btn btn-secondary btn-sm" type="">Apply prices</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="filters_accordion__header2">
+								<button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#filters_accordion__collapse2" aria-expanded="false" aria-controls="filters_accordion__collapse2">Car brand</button>
+								<a type="button" class="btn d-flex align-items-center" data-func="clear_filters">
+									<!-- * -->
+									<span>2</span>
+									<svg class="bi" width="16" height="16">
+										<use xlink:href="#i_close_filters_clear"></use>
+									</svg>
+								</a>
+							</h2>
+							<div id="filters_accordion__collapse2" class="accordion-collapse collapse " aria-labelledby="filters_accordion__header2">
+								<div class="accordion-body d-flex flex-wrap g-1">
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_1">
+										<div class="btn_checkbox_text">
+											<span>Audi</span><span>158</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_2">
+										<div class="btn_checkbox_text">
+											<span>BMW</span><span>241</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_3" checked>
+										<div class="btn_checkbox_text">
+											<span>Opel</span><span>92</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Suzuki</span><span>85</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Peugeot</span><span>26</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Skoda</span><span>167</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Toyota</span><span>282</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Renault</span><span>173</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Kia</span><span>17</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Hyunday</span><span>183</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Fiat</span><span>93</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Cherry</span><span>417</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4" checked>
+										<div class="btn_checkbox_text">
+											<span>Ford</span><span>63</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Dodge</span><span>245</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4" checked>
+										<div class="btn_checkbox_text">
+											<span>Chrysler</span><span>37</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Mercedes</span><span>294</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Cadillac</span><span>178</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Chevrolet</span><span>41</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4" checked>
+										<div class="btn_checkbox_text">
+											<span>Volkswagen</span><span>48</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Nissan</span><span>189</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Honda</span><span>163</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Mitsubishi</span><span>317</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Mazda</span><span>19</span>
+										</div>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="filters_accordion__header3">
+								<button class="accordion-button  collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filters_accordion__collapse3" aria-expanded="false" aria-controls="filters_accordion__collapse3">Car model</button>
+								<a type="button" class="btn d-flex align-items-center" data-func="clear_filters">
+									<!-- * -->
+									<span>2</span>
+									<svg class="bi" width="16" height="16">
+										<use xlink:href="#i_close_filters_clear"></use>
+									</svg>
+								</a>
+							</h2>
+							<div id="filters_accordion__collapse3" class="accordion-collapse collapse " aria-labelledby="filters_accordion__header3">
+								<div class="accordion-body d-flex flex-wrap g-1">
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_1">
+										<div class="btn_checkbox_text">
+											<span>Sorento</span><span>158</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_2">
+										<div class="btn_checkbox_text">
+											<span>Rio</span><span>241</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_3" checked>
+										<div class="btn_checkbox_text">
+											<span>Spectra</span><span>92</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Picanto</span><span>85</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Passat</span><span>26</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Phaeton</span><span>167</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Golf</span><span>282</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Beetle</span><span>173</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Jetta</span><span>17</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Mondeo</span><span>183</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Astra</span><span>93</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4">
+										<div class="btn_checkbox_text">
+											<span>Insignia</span><span>417</span>
+										</div>
+									</label>
+									<label class="btn_checkbox btn_checkbox_filters">
+										<input type="checkbox" name="filters_brand_4" checked>
+										<div class="btn_checkbox_text">
+											<span>Corsa</span><span>63</span>
+										</div>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="filters_accordion__header4">
+								<button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#filters_accordion__collapse4" aria-expanded="false" aria-controls="filters_accordion__collapse4">Production year</button>
+								<a type="button" class="btn d-flex align-items-center" data-func="clear_filters">
+									<!-- * -->
+									<span>2</span>
+									<svg class="bi" width="16" height="16">
+										<use xlink:href="#i_close_filters_clear"></use>
+									</svg>
+								</a>
+							</h2>
+							<div id="filters_accordion__collapse4" class="accordion-collapse collapse " aria-labelledby="filters_accordion__header4">
+								<div class="accordion-body">
+									<div class="row justify-content-center">
+										<div class="col-6">
+											<input type="number" class="form-control" id="filters_price_from" placeholder="starting, year" value="" name="filters_price_from">
+										</div>
+										<div class="col-6">
+											<input type="number" class="form-control" id="filters_price_to" placeholder="ending, year" value="" name="filters_price_to">
+										</div>
+										<div class="col col-sm-6 text-center mt-3 mb-2">
+											<button class="w-100 btn btn-secondary btn-sm" type="">Apply or select below</button>
+										</div>
+									</div>
+									<hr class="my-2">
+									<div class="row">
+										<div class="col d-flex flex-wrap g-1">
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_production_year_1">
+												<div class="btn_checkbox_text">
+													<span>2022</span><span>158</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_2">
+												<div class="btn_checkbox_text">
+													<span>2021</span><span>241</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_3" checked>
+												<div class="btn_checkbox_text">
+													<span>2020</span><span>92</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>2019</span><span>85</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>2018</span><span>26</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>2017</span><span>167</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>2016</span><span>282</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>2015</span><span>173</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>2014</span><span>17</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>2013</span><span>183</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>2012</span><span>93</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>2011</span><span>417</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4" checked>
+												<div class="btn_checkbox_text">
+													<span>2010</span><span>63</span>
+												</div>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="filters_accordion__header6">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filters_accordion__collapse6" aria-expanded="false" aria-controls="filters_accordion__collapse6">Car body type</button>
+								<a type="button" class="btn d-flex align-items-center" data-func="clear_filters">
+									<!-- * -->
+									<span>2</span>
+									<svg class="bi" width="16" height="16">
+										<use xlink:href="#i_close_filters_clear"></use>
+									</svg>
+								</a>
+							</h2>
+							<div id="filters_accordion__collapse6" class="accordion-collapse collapse " aria-labelledby="filters_accordion__header6">
+								<div class="accordion-body">
+									<div class="row">
+										<div class="col d-flex flex-wrap g-1">
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_production_year_1">
+												<div class="btn_checkbox_text">
+													<span>Седан</span><span>158</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_2">
+												<div class="btn_checkbox_text">
+													<span>Хэтчбэк</span><span>241</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_3" checked>
+												<div class="btn_checkbox_text">
+													<span>Лифтбэк</span><span>92</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>Универсал</span><span>85</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>Кроссовер</span><span>26</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>Пикап</span><span>167</span>
+												</div>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="filters_accordion__header9">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filters_accordion__collapse9" aria-expanded="false" aria-controls="filters_accordion__collapse9">Color of car</button>
+								<a type="button" class="btn d-flex align-items-center" data-func="clear_filters">
+									<!-- * -->
+									<span>2</span>
+									<svg class="bi" width="16" height="16">
+										<use xlink:href="#i_close_filters_clear"></use>
+									</svg>
+								</a>
+							</h2>
+							<div id="filters_accordion__collapse9" class="accordion-collapse collapse " aria-labelledby="filters_accordion__header9">
+								<div class="accordion-body">
+									<div class="row">
+										<div class="col d-flex flex-wrap g-1">
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_production_year_1">
+												<div class="btn_checkbox_text">
+													<span>Green</span><span>158</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_2">
+												<div class="btn_checkbox_text">
+													<span>Blue</span><span>241</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_3" checked>
+												<div class="btn_checkbox_text">
+													<span>Red</span><span>92</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>Yellow</span><span>85</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>Black</span><span>26</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>White</span><span>167</span>
+												</div>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="filters_accordion__header12">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filters_accordion__collapse12" aria-expanded="false" aria-controls="filters_accordion__collapse12">Number of doors</button>
+								<a type="button" class="btn d-flex align-items-center" data-func="clear_filters">
+									<!-- * -->
+									<span>2</span>
+									<svg class="bi" width="16" height="16">
+										<use xlink:href="#i_close_filters_clear"></use>
+									</svg>
+								</a>
+							</h2>
+							<div id="filters_accordion__collapse12" class="accordion-collapse collapse " aria-labelledby="filters_accordion__header12">
+								<div class="accordion-body">
+									<div class="row">
+										<div class="col d-flex flex-wrap g-1">
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_production_year_1">
+												<div class="btn_checkbox_text">
+													<span>2</span><span>158</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_2">
+												<div class="btn_checkbox_text">
+													<span>3</span><span>241</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_3" checked>
+												<div class="btn_checkbox_text">
+													<span>4</span><span>92</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>5</span><span>85</span>
+												</div>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="filters_accordion__header13">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filters_accordion__collapse13" aria-expanded="false" aria-controls="filters_accordion__collapse13">Number of places</button>
+								<a type="button" class="btn d-flex align-items-center" data-func="clear_filters">
+									<!-- * -->
+									<span>2</span>
+									<svg class="bi" width="16" height="16">
+										<use xlink:href="#i_close_filters_clear"></use>
+									</svg>
+								</a>
+							</h2>
+							<div id="filters_accordion__collapse13" class="accordion-collapse collapse " aria-labelledby="filters_accordion__header13">
+								<div class="accordion-body">
+									<div class="row">
+										<div class="col d-flex flex-wrap g-1">
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_production_year_1">
+												<div class="btn_checkbox_text">
+													<span>2</span><span>158</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_2">
+												<div class="btn_checkbox_text">
+													<span>3</span><span>241</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_3" checked>
+												<div class="btn_checkbox_text">
+													<span>4</span><span>492</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>5</span><span>385</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>6</span><span>186</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>7</span><span>351</span>
+												</div>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="filters_accordion__header10">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filters_accordion__collapse10" aria-expanded="false" aria-controls="filters_accordion__collapse10">Vehicle drive type</button>
+								<a type="button" class="btn d-flex align-items-center" data-func="clear_filters">
+									<!-- * -->
+									<span>2</span>
+									<svg class="bi" width="16" height="16">
+										<use xlink:href="#i_close_filters_clear"></use>
+									</svg>
+								</a>
+							</h2>
+							<div id="filters_accordion__collapse10" class="accordion-collapse collapse" aria-labelledby="filters_accordion__header10">
+								<div class="accordion-body">
+									<div class="row">
+										<div class="col d-flex flex-wrap g-1">
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_production_year_1">
+												<div class="btn_checkbox_text">
+													<span>All wheel drive</span><span>158</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_2">
+												<div class="btn_checkbox_text">
+													<span>Дизель</span><span>241</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_3" checked>
+												<div class="btn_checkbox_text">
+													<span>Гибрид</span><span>92</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>Электро</span><span>85</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>Газ</span><span>26</span>
+												</div>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="filters_accordion__header5">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filters_accordion__collapse5" aria-expanded="false" aria-controls="filters_accordion__collapse5">Transmission type</button>
+								<a type="button" class="btn d-flex align-items-center" data-func="clear_filters">
+									<!-- * -->
+									<span>2</span>
+									<svg class="bi" width="16" height="16">
+										<use xlink:href="#i_close_filters_clear"></use>
+									</svg>
+								</a>
+							</h2>
+							<div id="filters_accordion__collapse5" class="accordion-collapse collapse " aria-labelledby="filters_accordion__header5">
+								<div class="accordion-body">
+									<div class="row">
+										<div class="col d-flex flex-wrap g-1">
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_production_year_1">
+												<div class="btn_checkbox_text">
+													<span>Manual</span><span>158</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_2">
+												<div class="btn_checkbox_text">
+													<span>Automatic</span><span>241</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_3" checked>
+												<div class="btn_checkbox_text">
+													<span>Variator</span><span>92</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>Tiptronic</span><span>85</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>Robotic</span><span>26</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>Reducer</span><span>167</span>
+												</div>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="filters_accordion__header7">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filters_accordion__collapse7" aria-expanded="false" aria-controls="filters_accordion__collapse7">Engine type</button>
+								<a type="button" class="btn d-flex align-items-center" data-func="clear_filters">
+									<!-- * -->
+									<span>2</span>
+									<svg class="bi" width="16" height="16">
+										<use xlink:href="#i_close_filters_clear"></use>
+									</svg>
+								</a>
+							</h2>
+							<div id="filters_accordion__collapse7" class="accordion-collapse collapse" aria-labelledby="filters_accordion__header7">
+								<div class="accordion-body">
+									<div class="row">
+										<div class="col d-flex flex-wrap g-1">
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_production_year_1">
+												<div class="btn_checkbox_text">
+													<span>Бензин</span><span>158</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_2">
+												<div class="btn_checkbox_text">
+													<span>Дизель</span><span>241</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_3" checked>
+												<div class="btn_checkbox_text">
+													<span>Гибрид</span><span>92</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>Электро</span><span>85</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>Газ</span><span>26</span>
+												</div>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="filters_accordion__header8 ">
+								<button class="accordion-button collapsed text-center" type="button" data-bs-toggle="collapse" data-bs-target="#filters_accordion__collapse8" aria-expanded="false" aria-controls="filters_accordion__collapse8">Engine capacity
+								</button>
+								<a type="button" class="btn d-flex align-items-center d-none" data-func="clear_filters">
+									<!-- * -->
+									<span>2</span>
+									<svg class="bi" width="16" height="16">
+										<use xlink:href="#i_close_filters_clear"></use>
+									</svg>
+								</a>
+							</h2>
+							<div id="filters_accordion__collapse8" class="accordion-collapse collapse " aria-labelledby="filters_accordion__header8">
+								<div class="accordion-body">
+									<div class="row justify-content-center">
+										<div class="col-6">
+											<input type="number" class="form-control" id="filters_price_from" placeholder="from 1600, cm" value="" name="filters_price_from">
+										</div>
+										<div class="col-6">
+											<input type="number" class="form-control" id="filters_price_to" placeholder="to 3200, cm" value="" name="filters_price_to">
+										</div>
+										<div class="col col-sm-6 text-center mt-3 mb-2">
+											<button class="w-100 btn btn-secondary btn-sm" type="">Apply or select below</button>
+										</div>
+									</div>
+									<hr class="my-2">
+									<div class="row">
+										<div class="col d-flex flex-wrap g-1">
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_production_year_1">
+												<div class="btn_checkbox_text">
+													<span>0.8L</span><span>158</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_2">
+												<div class="btn_checkbox_text">
+													<span>0.9L</span><span>241</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_3" checked>
+												<div class="btn_checkbox_text">
+													<span>1.0L</span><span>92</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.1L</span><span>85</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.2L</span><span>26</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.3L</span><span>167</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.4L</span><span>282</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.5L</span><span>173</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.6L</span><span>17</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.7L</span><span>183</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.8L</span><span>93</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.9L</span><span>417</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4" checked>
+												<div class="btn_checkbox_text">
+													<span>2.0L</span><span>63</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_production_year_1">
+												<div class="btn_checkbox_text">
+													<span>0.8L</span><span>158</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_2">
+												<div class="btn_checkbox_text">
+													<span>0.9L</span><span>241</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_3" checked>
+												<div class="btn_checkbox_text">
+													<span>1.0L</span><span>92</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.1L</span><span>85</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.2L</span><span>26</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.3L</span><span>167</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.4L</span><span>282</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.5L</span><span>173</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.6L</span><span>17</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.7L</span><span>183</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.8L</span><span>93</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.9L</span><span>417</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4" checked>
+												<div class="btn_checkbox_text">
+													<span>2.0L</span><span>63</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.7L</span><span>183</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.8L</span><span>93</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.9L</span><span>417</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4" checked>
+												<div class="btn_checkbox_text">
+													<span>2.0L</span><span>63</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_production_year_1">
+												<div class="btn_checkbox_text">
+													<span>0.8L</span><span>158</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_2">
+												<div class="btn_checkbox_text">
+													<span>0.9L</span><span>241</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_3" checked>
+												<div class="btn_checkbox_text">
+													<span>1.0L</span><span>92</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.1L</span><span>85</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.2L</span><span>26</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.3L</span><span>167</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.4L</span><span>282</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.5L</span><span>173</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.6L</span><span>17</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.7L</span><span>183</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.8L</span><span>93</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4">
+												<div class="btn_checkbox_text">
+													<span>1.9L</span><span>417</span>
+												</div>
+											</label>
+											<label class="btn_checkbox btn_checkbox_filters">
+												<input type="checkbox" name="filters_brand_4" checked>
+												<div class="btn_checkbox_text">
+													<span>2.0L</span><span>63</span>
+												</div>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="filters_accordion__header11">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filters_accordion__collapse11" aria-expanded="true" aria-controls="filters_accordion__collapse11">Engine power</button>
+								<a type="button" class="btn d-flex align-items-center" data-func="clear_filters">
+									<!-- * -->
+									<span>2</span>
+									<svg class="bi" width="16" height="16">
+										<use xlink:href="#i_close_filters_clear"></use>
+									</svg>
+								</a>
+							</h2>
+							<div id="filters_accordion__collapse11" class="accordion-collapse collapse " aria-labelledby="filters_accordion__header11">
+								<div class="accordion-body">
+									<div class="row justify-content-center">
+										<div class="col-6">
+											<input type="number" class="form-control" id="filters_engine_power_from" placeholder="from, hp" value="" name="filters_engine_power_from">
+										</div>
+										<div class="col-6">
+											<input type="number" class="form-control" id="filters_engine_power_to" placeholder="to, hp" value="" name="filters_engine_power_to">
+										</div>
+										<div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 col-xxl-1 text-center mt-3">
+											<button class="w-100 btn btn-secondary btn-sm" type="">Apply</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="filters_accordion__header15">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filters_accordion__collapse15" aria-expanded="true" aria-controls="filters_accordion__collapse15">Сar mileage</button>
+								<a type="button" class="btn d-flex align-items-center" data-func="clear_filters">
+									<!-- * -->
+									<span>2</span>
+									<svg class="bi" width="16" height="16">
+										<use xlink:href="#i_close_filters_clear"></use>
+									</svg>
+								</a>
+							</h2>
+							<div id="filters_accordion__collapse15" class="accordion-collapse collapse " aria-labelledby="filters_accordion__header15">
+								<div class="accordion-body">
+									<div class="row justify-content-center">
+										<div class="col-6">
+											<input type="number" class="form-control" id="filters_mileage_from" placeholder="from, miles" value="" name="filters_mileage_from">
+										</div>
+										<div class="col-6">
+											<input type="number" class="form-control" id="filters_mileage_to" placeholder="to, miles" value="" name="filters_mileage_to">
+										</div>
+										<div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 col-xxl-1 text-center mt-3">
+											<button class="w-100 btn btn-secondary btn-sm" type="">Apply</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="filters_accordion__header14">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filters_accordion__collapse14" aria-expanded="true" aria-controls="filters_accordion__collapse14">Dimensions of a car</button>
+								<a type="button" class="btn d-flex align-items-center" data-func="clear_filters">
+									<!-- * -->
+									<span>2</span>
+									<svg class="bi" width="16" height="16">
+										<use xlink:href="#i_close_filters_clear"></use>
+									</svg>
+								</a>
+							</h2>
+							<div id="filters_accordion__collapse14" class="accordion-collapse collapse" aria-labelledby="filters_accordion__header14">
+								<div class="accordion-body">
+									<div class="row">
+										<h6 class="text-center">Length, cm</h6>
+										<div class="col-6">
+											<input type="number" class="form-control" id="filters_length_from" placeholder="from, cm" value="" name="filters_length_from">
+										</div>
+										<div class="col-6">
+											<input type="number" class="form-control" id="filters_length_to" placeholder="to, cm" value="" name="filters_length_to">
+										</div>
+									</div>
+									<div class="row mt-3">
+										<h6 class="text-center">Width, cm</h6>
+										<div class="col-6">
+											<input type="number" class="form-control" id="filters_price_from" placeholder="from, cm" value="" name="filters_price_from">
+										</div>
+										<div class="col-6">
+											<input type="number" class="form-control" id="filters_price_to" placeholder="to, cm" value="" name="filters_price_to">
+										</div>
+									</div>
+									<div class="row mt-3">
+										<h6 class="text-center">Height, cm</h6>
+										<div class="col-6">
+											<input type="number" class="form-control" id="filters_price_from" placeholder="from, cm" value="" name="filters_price_from">
+										</div>
+										<div class="col-6">
+											<input type="number" class="form-control" id="filters_price_to" placeholder="to, cm" value="" name="filters_price_to">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col text-center mt-3">
+											<button class="w-50 btn btn-secondary btn-sm" type="">Apply</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row mt-3 justify-content-center">
+						<h6 class="text-center text-black">Car was in an accident</h6>
+						<div class="col d-flex flex-wrap justify-content-center pb-3">
+							<label class="btn_checkbox btn_checkbox_filters">
+								<input type="checkbox" name="filters_production_year_1">
+								<div class="btn_checkbox_text">
+									<span>No</span><span>158</span>
+								</div>
+							</label>
+							<label class="btn_checkbox btn_checkbox_filters">
+								<input type="checkbox" name="filters_brand_2">
+								<div class="btn_checkbox_text">
+									<span>Yes</span><span>241</span>
+								</div>
+							</label>
+						</div>
+					</div>
+					<hr class="d-none my-4">
+					<div class="d-none row justify-content-center">
+						<div class="col col-sm-6 col-md-5 col-lg-4 col-xl-3 col-xxl-2">
+							<button class="w-100 btn btn-primary btn-lg" type="">Show results</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="d-none d-sm-block filters_header">
+			<div class="d-flex px-3 pb-3 justify-content-between justify-content-sm-center">
+				<button type="button" class="btn btn-success btn-sm px-2 px-sm-3 ms-1 me-sm-3" data-func="apply_filters">APPLY FILTERS</button>
+				<button type="button" class="btn btn-danger btn-sm px-2 px-sm-3 me-1 ms-sm-3" data-func="clear_all_filters">CLEAR ALL FILTERS</button>
+			</div>
+		</div>
+	</div>
+</section>
+<div class="content container pt-3 pb-1">
+	<div class="row car_list">
+		<div class="d-flex flex-wrap ps-2 pe-0"> <!-- ОБЁРТКА ЧТОБЫ ВЫРОВНЯТЬ ОТСТУПЫ МЕЖДУ CARDs-->
+			<div class="col-6 col-md-4 col-lg-3 col-xl-2 ps-0 ps-sm-0 pe-2 pe-sm-2 mb-2">
+				<div class="card car_card">
+					<a href="#">
+						<img src="img/users/1/car_1/photo_1.webp" class="card-img-top" alt="car photo">
+						<div class="card-body">
+							<h6 class="car_name">Ford Mondeo</h6>
+							<h6 class="car_price">16 500 $</h6>
+							<span class="card-text car_parameters">2015 г, 27 350 км</span>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-6 col-md-4 col-lg-3 col-xl-2 ps-0 ps-sm-0 pe-2 pe-sm-2 mb-2">
+				<div class="card car_card">
+					<a href="#">
+						<img src="img/users/1/car_1/photo_2.webp" class="card-img-top" alt="car photo">
+						<div class="card-body">
+							<h6 class="car_name">Kia Sportage</h6>
+							<h6 class="car_price">18 300 $</h6>
+							<span class="card-text car_parameters">2018 г, 25 700 км</span>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-6 col-md-4 col-lg-3 col-xl-2 ps-0 ps-sm-0 pe-2 pe-sm-2 mb-2">
+				<div class="card car_card">
+					<a href="#">
+						<img src="img/users/1/car_1/photo_3.webp" class="card-img-top" alt="car photo">
+						<div class="card-body">
+							<h6 class="car_name">Opel Astra</h6>
+							<h6 class="car_price">13 200 $</h6>
+							<span class="card-text car_parameters">2016 г, 17 150 км</span>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-6 col-md-4 col-lg-3 col-xl-2 ps-0 ps-sm-0 pe-2 pe-sm-2 mb-2">
+				<div class="card car_card">
+					<a href="#">
+						<img src="img/users/1/car_1/photo_4.webp" class="card-img-top" alt="car photo">
+						<div class="card-body">
+							<h6 class="car_name">Peugeot 607</h6>
+							<h6 class="car_price">14 850 $</h6>
+							<span class="card-text car_parameters">2013 г, 36 220 км</span>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-6 col-md-4 col-lg-3 col-xl-2 ps-0 ps-sm-0 pe-2 pe-sm-2 mb-2">
+				<div class="card car_card">
+					<a href="#">
+						<img src="img/users/1/car_1/photo_5.webp" class="card-img-top" alt="car photo">
+						<div class="card-body">
+							<h6 class="car_name">Fiat 500</h6>
+							<h6 class="car_price">8 600 $</h6>
+							<span class="card-text car_parameters">2014 г, 8 640 км</span>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-6 col-md-4 col-lg-3 col-xl-2 ps-0 ps-sm-0 pe-2 pe-sm-2 mb-2">
+				<div class="card car_card">
+					<a href="#">
+						<img src="img/users/1/car_1/photo_6.webp" class="card-img-top" alt="car photo">
+						<div class="card-body">
+							<h6 class="car_name">Nissan Murano</h6>
+							<h6 class="car_price">21 400 $</h6>
+							<span class="card-text car_parameters">2016 г, 31 150 км</span>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-6 col-md-4 col-lg-3 col-xl-2 ps-0 ps-sm-0 pe-2 pe-sm-2 mb-2">
+				<div class="card car_card">
+					<a href="#">
+						<img src="img/users/1/car_1/photo_7.webp" class="card-img-top" alt="car photo">
+						<div class="card-body">
+							<h6 class="car_name">Kia Picanto</h6>
+							<h6 class="car_price">4 600 $</h6>
+							<span class="card-text car_parameters">2011 г, 83 200 км</span>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-6 col-md-4 col-lg-3 col-xl-2 ps-0 ps-sm-0 pe-2 pe-sm-2 mb-2">
+				<div class="card car_card">
+					<a href="#">
+						<img src="img/users/1/car_1/photo_8.webp" class="card-img-top" alt="car photo">
+						<div class="card-body">
+							<h6 class="car_name">Toyota Corolla</h6>
+							<h6 class="car_price">10 100 $</h6>
+							<span class="card-text car_parameters">2012 г, 93 020 км</span>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-6 col-md-4 col-lg-3 col-xl-2 ps-0 ps-sm-0 pe-2 pe-sm-2 mb-2">
+				<div class="card car_card">
+					<a href="#">
+						<img src="img/users/1/car_1/photo_9.webp" class="card-img-top" alt="car photo">
+						<div class="card-body">
+							<h6 class="car_name">Peugeot 406</h6>
+							<h6 class="car_price">12 400 $</h6>
+							<span class="card-text car_parameters">2011 г, 105 600 км</span>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-6 col-md-4 col-lg-3 col-xl-2 ps-0 ps-sm-0 pe-2 pe-sm-2 mb-2">
+				<div class="card car_card">
+					<a href="#">
+						<img src="img/users/1/car_1/photo_10.webp" class="card-img-top" alt="car photo">
+						<div class="card-body">
+							<h6 class="car_name">Opel Omega</h6>
+							<h6 class="car_price">6 400 $</h6>
+							<span class="card-text car_parameters">2006 г, 204 600 км</span>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<footer>
+	<nav class=" py-0  border-bottom text-white main_menu_footer">
+		<div class="container d-flex flex-wrap">
+			<ul class="nav mx-auto justify-content-center">
+				<li class="nav-item">
+					<a href="#" class="nav-link link-light px-2 active" aria-current="page">CREATE ADS</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link link-light px-2">LATEST ADS</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link link-light px-2">SHOPS</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link link-light px-2">FORUM</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link link-light px-2">CONTACTS</a>
+				</li>
+				<li class="nav-item d-sm-none">
+					<a class="nav-link link-light px-2" href="#">MY FAVORITEs</a>
+				</li>
+				<li class="nav-item d-sm-none">
+					<a class="nav-link link-light px-2" href="#">COMPARE</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</footer>
+</body>
+<!-- **************  СКЛАД   ИКОНКИ svg  -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+	<symbol id="i_close_filters_clear" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+		<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+	</symbol>
+	<symbol id="i_favorite" class="bi bi-heart-pulse-fill" viewBox="0 0 16 16" fill="currentColor">
+		<path fill-rule="evenodd" d="M1.475 9C2.702 10.84 4.779 12.871 8 15c3.221-2.129 5.298-4.16 6.525-6H12a.5.5 0 0 1-.464-.314l-1.457-3.642-1.598 5.593a.5.5 0 0 1-.945.049L5.889 6.568l-1.473 2.21A.5.5 0 0 1 4 9H1.475ZM.879 8C-2.426 1.68 4.41-2 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C11.59-2 18.426 1.68 15.12 8h-2.783l-1.874-4.686a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.88Z"/>
+	</symbol>
+	<symbol id="i_compare" class="bi bi-nintendo-switch" fill="currentColor" viewBox="0 0 16 16">
+		<path d="M9.34 8.005c0-4.38.01-7.972.023-7.982C9.373.01 10.036 0 10.831 0c1.153 0 1.51.01 1.743.05 1.73.298 3.045 1.6 3.373 3.326.046.242.053.809.053 4.61 0 4.06.005 4.537-.123 4.976-.022.076-.048.15-.08.242a4.136 4.136 0 0 1-3.426 2.767c-.317.033-2.889.046-2.978.013-.05-.02-.053-.752-.053-7.979Zm4.675.269a1.621 1.621 0 0 0-1.113-1.034 1.609 1.609 0 0 0-1.938 1.073 1.9 1.9 0 0 0-.014.935 1.632 1.632 0 0 0 1.952 1.107c.51-.136.908-.504 1.11-1.028.11-.285.113-.742.003-1.053ZM3.71 3.317c-.208.04-.526.199-.695.348-.348.301-.52.729-.494 1.232.013.262.03.332.136.544.155.321.39.556.712.715.222.11.278.123.567.133.261.01.354 0 .53-.06.719-.242 1.153-.94 1.03-1.656-.142-.852-.95-1.422-1.786-1.256Z"/>
+		<path d="M3.425.053a4.136 4.136 0 0 0-3.28 3.015C0 3.628-.01 3.956.005 8.3c.01 3.99.014 4.082.08 4.39.368 1.66 1.548 2.844 3.224 3.235.22.05.497.06 2.29.07 1.856.012 2.048.009 2.097-.04.05-.05.053-.69.053-7.94 0-5.374-.01-7.906-.033-7.952-.033-.06-.09-.063-2.03-.06-1.578.004-2.052.014-2.26.05Zm3 14.665-1.35-.016c-1.242-.013-1.375-.02-1.623-.083a2.81 2.81 0 0 1-2.08-2.167c-.074-.335-.074-8.579-.004-8.907a2.845 2.845 0 0 1 1.716-2.05c.438-.176.64-.196 2.058-.2l1.282-.003v13.426Z"/>
+	</symbol>
+	<symbol id="i_logget_user" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
+		<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+		<path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
+	</symbol>
+</svg>
+<div class="sklad d-none"></div>
+</html>

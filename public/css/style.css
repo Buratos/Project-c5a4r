@@ -1,0 +1,521 @@
+/* ▪▪▪▪▪▪ ВСЯКОЕ РАЗНОЕ ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+/* ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+:root {
+}
+/* это чтобы в скрипте определять тип вьюпорта */
+@media only screen and (max-width: 575.98px) {
+  body {
+    content: "576-";
+  }
+}
+@media only screen and (min-width: 576px) {
+  body {
+    content: "576+";
+  }
+}
+@media only screen and (min-width: 768px) {
+  body {
+    content: "768+";
+  }
+}
+@media (min-width: 1200px) {
+  .container-xl, .container-lg, .container-md, .container-sm, .container {
+    max-width: 960px;
+  }
+}
+/* ▪▪▪▪▪▪▪ УБИРАЮ ПРОТИВНУЮ ОБВОДКУ КНОПОК при фокусе ▪▪▪▪▪▪▪*/
+*:focus[class^="btn"], *:active[class^="btn"] {
+  box-shadow: 0 0 0 0;
+}
+.btn-check:active + .btn-outline-secondary:focus, .btn-check:checked + .btn-outline-secondary:focus, .btn-outline-secondary.active:focus, .btn-outline-secondary.dropdown-toggle.show:focus, .btn-outline-secondary:active:focus {
+  box-shadow: 0 0 0 0;
+}
+/* ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+.btn-check:active + .btn-outline-secondary, /*.btn-check:checked + .btn-outline-secondary,*/ .btn-outline-secondary.active, .btn-outline-secondary.dropdown-toggle.show, .btn-outline-secondary:active {
+/*  color: #6C757D;
+  background-color: #FFFFFF;
+  border-color: #6C757D;*/
+}
+/* ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+/* ▪▪▪▪▪▪▪▪  HEADER над красным меню ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+.i_header_logo {
+  position: relative;
+  width: 5rem;
+  height: 4rem;
+  /*vertical-align: middle;*/
+  /*overflow: hidden;*/
+  margin-left: -0.5rem;
+}
+.i_header_logo div::before {
+  content: '\e984';
+  position: absolute;
+  top: -0.8rem;
+  color: var(--bs-red);
+  font-family: 'Brands_icons';
+  font-size: 3.5rem;
+}
+.header_menu_line_2 .nav-link:hover {
+  background-color: #000000;
+}
+.for_logged_user svg {
+  color: var(--bs-gray-600);
+}
+.for_logged_user span {
+  padding-left: 0.5rem;
+  color: var(--bs-gray-600);
+  white-space: nowrap;
+}
+@media only screen and (max-width: 575.98px) {
+  .for_logged_user svg {
+    height: 1.2rem;
+    width: 1.2rem;
+  }
+  .for_logged_user span {
+    display: block;
+    max-width: 60vw;
+    /*padding-top: 0.5rem;*/
+    /*padding-bottom: 0.5rem;*/
+    font-size: 1.2rem;
+    overflow-x: hidden;
+  }
+  .for_logged_user button {
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+}
+@media only screen and (min-width: 576px) {
+  .for_logged_user {
+    max-width: 12rem;
+  }
+  .for_logged_user span {
+    white-space: nowrap;
+    font-size: 0.9rem;
+    overflow-x: hidden;
+  }
+}
+.car_sale_logo {
+  white-space: nowrap;
+  text-decoration: none;
+}
+/* ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+/* ▪▪▪▪▪▪▪▪ МЕНЮ ИКОНОК БРЭНДОВ ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+.menu_brand_logos {
+  padding-left: 0;
+}
+.menu_brand_logos > li {
+  display: inline-block;
+  margin-left: 1px;
+  margin-right: 1px;
+  margin-bottom: 0.5rem;
+  padding: 0;
+}
+.menu_brand_logos > li > a > div {
+  text-align: center;
+}
+.menu_brand_logos > li > a > div:first-of-type {
+  margin: 0;
+  padding: 0;
+  color: var(--bs-gray-600);
+  font-family: 'Brands_icons';
+  font-size: 2.5rem;
+}
+.menu_brand_logos > li > a > div:nth-of-type(2) {
+  white-space: normal;
+  font-size: 1rem;
+}
+.menu_brand_logos div[class^="i_"]::before {
+  display: block;
+  margin-bottom: -3px;
+}
+.menu_brand_logos > li > a {
+  color: var(--bs-gray-600);
+  text-decoration: none;
+}
+.menu_brand_logos > li > a:hover, .menu_brand_logos > li > a:hover > div {
+  color: var(--bs-red);
+  text-decoration: none;
+}
+/* ГОРИЗОНТАЛЬНАЯ ПРОКРУТКА ДЛЯ МЕНЮ */
+.nav_scroller {
+  position: relative;
+  /*height: 5rem;*/
+  /*overflow-y: hidden;*/
+  z-index: 2;
+}
+.nav_scroller ul {
+  display: flex;
+  /*flex-wrap: nowrap;*/
+  margin-top: -1px;
+  padding-bottom: 1rem;
+  text-align: center;
+  white-space: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+/* ▪▪▪▪▪▪ ROW-COLS для меню иконок брэндов ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+.row-cols-8 {
+  width: 12.5%;
+}
+.row-cols-10 {
+  width: 10%;
+}
+.row-cols-12 > li {
+  flex: 0 0 8.3333333%;
+  width: 8.3333333%;
+  min-width: 4.875rem;
+}
+/* ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪ ИКОНКИ БРЭНДОВ ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+@font-face {
+  font-family: 'Brands_icons';
+  src: url('../font/logo_brands.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+.i_audi::before {
+  content: '\ea05';
+}
+.i_bmw::before {
+  content: '\e900';
+}
+.i_cadillac::before {
+  content: '\e9eb';
+}
+.i_cherry::before {
+  content: '\e9e3';
+}
+.i_chevrolet::before {
+  content: '\e9e2';
+  margin-left: auto;
+  margin-right: auto;
+}
+.i_chrysler::before {
+  content: '\e9da';
+}
+.i_dodge::before {
+  content: '\e9d2';
+}
+.i_fiat::before {
+  content: '\e9c0';
+}
+.i_ford::before {
+  content: '\e9be';
+}
+.i_honda::before {
+  content: '\e9aa';
+}
+.i_hyundai::before {
+  content: '\e9a0';
+}
+.i_kia::before {
+  content: '\e98c';
+}
+.i_mazda::before {
+  content: '\e966';
+}
+.i_mercedes::before {
+  content: '\e962';
+}
+.i_mitsubishi::before {
+  content: '\e95c';
+}
+.i_nissan::before {
+  content: '\e952';
+}
+.i_opel::before {
+  content: '\e94f';
+}
+.i_peugeot::before {
+  content: '\e948';
+}
+.i_renault::before {
+  content: '\e93d';
+}
+.i_skoda::before {
+  content: '\e929';
+}
+.i_suzuki::before {
+  content: '\e922';
+}
+.i_toyota::before {
+  content: '\e91c';
+}
+.i_volkswagen::before {
+  content: '\e90d';
+}
+/* ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+.content {
+  color: var(--bs-gray-700);
+  background-color: var(--bs-white);
+}
+/* ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+/* ▪▪▪▪▪▪▪▪▪ ФИЛЬТРЫ  FILTERS  ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+.total_cars_found {
+  color: #000000;
+  font-weight: bold;
+}
+/* ▪▪▪▪▪▪▪▪▪▪▪▪▪ МЕНЯЮ НАСТРОЙКИ аккордиона фильтров ▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+.accordion-button {
+  padding: 0.3rem 1rem;
+  color: #000000 !important;
+  background-color: #F3F3F3 !important;
+}
+/* ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+/* ▪▪▪▪▪▪▪▪ КНОПКИ-ЧЕКБОКСЫ САМ СДЕЛАЛ ▪▪▪▪▪▪▪▪▪▪*/
+input[type="checkbox"], input[type="radio"] {
+  display: none;
+  width: 25px;
+  height: 25px;
+}
+label.btn_checkbox {
+  display: inline-block;
+  margin: var(--bs-gutter-y) var(--bs-gutter-x);
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  user-select: none;
+}
+.btn_checkbox_text {
+  display: inline-block;
+  line-height: 1.5;
+  padding: 0.375rem 0.75rem;
+  color: #000000;
+  background-color: #FFFFFF;
+  border: 1px solid #AAAAAA;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition-duration: 200ms;
+  transition-property: right;
+}
+input:checked ~ .btn_checkbox_text {
+  background-color: #FAFDD6;
+}
+input:checked ~ .btn_checkbox_text:hover {
+  color: #FFFFFF;
+  background-color: #D63384;
+  border: 1px solid #D63384;
+}
+.btn_checkbox_text > span:first-of-type {
+}
+.btn_checkbox_text > span:nth-of-type(2) {
+  padding-left: 0.4rem;
+  color: #777777;
+  font-size: 0.9em;
+}
+.btn_checkbox_text:hover {
+  background-color: #D63384;
+  border: 1px solid #D63384;
+}
+@media only screen and (max-width: 575.98px) {
+  .btn_checkbox_text:hover {
+    color: #000000;
+    background-color: #FFFFFF;
+    border: 1px solid #AAAAAA;
+  }
+  input:checked ~ .btn_checkbox_text:hover {
+    color: #000000;
+    background-color: #FAFDD6;
+    border: 1px solid #AAAAAA;
+  }
+}
+@media only screen and (min-width: 576px) {
+  .w_sm_auto {
+    width: auto !important;
+  }
+  .btn_checkbox_text:hover > span {
+    color: #FFFFFF;
+  }
+  input:checked ~ .btn_checkbox_text:hover > span {
+    color: #FFFFFF;
+  }
+}
+/* ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+/* ▪▪▪▪▪▪▪▪▪▪▪▪ КАРТОЧКА МАШИНЫ ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+.car_card {
+  height: 100%;
+}
+.car_card a {
+  text-decoration: none;
+}
+.car_card .car_name {
+  margin-bottom: 0.25rem;
+  color: #000000;
+  white-space: nowrap;
+  font-size: 1rem;
+  overflow: hidden;
+}
+.car_card .car_price {
+  margin: 0;
+  color: #000000;
+  font-size: 1rem;
+  font-weight: bold;
+  font-weight: bold;
+}
+.car_card .car_parameters {
+  color: var(--bs-gray-500);
+  font-size: 0.9rem;
+}
+/* ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+/* ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+@media only screen and (max-width: 575.98px) {
+  html {
+    font-size: 20px;
+  }
+  #filters_global_container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    max-width: none;
+    padding: 0;
+    border: 0px;
+    border-radius: 0;
+    outline: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    pointer-events: auto;
+    z-index: 1055;
+  }
+  .filters_fullscreen_block {
+    padding-left: 0;
+    padding-right: 0;
+    overflow-y: hidden;
+    padding-bottom: 0;
+    border: 0px;
+    border-radius: 0;
+  }
+  .filters_content {
+    position: relative;
+    padding-top: 0.25rem;
+    padding-bottom: 0;
+    overflow-y: auto;
+  }
+  #filters_accordion .accordion-body .row .col-6:first-of-type {
+    padding-left: 0.3rem;
+    padding-right: 0.2rem;
+  }
+  #filters_accordion .accordion-body .row .col-6:nth-of-type(2) {
+    padding-left: 0.2rem;
+    padding-right: 0.3rem;
+  }
+}
+@media only screen and (min-width: 576px) {
+  /* классы  -sm */
+  .overflow_sm_visible {
+    overflow: visible;
+  }
+  #filters_global_container {
+    border-top: 1px solid var(--bs-gray-500);
+    border-bottom: 1px solid var(--bs-gray-500);
+  }
+  .filters_fullscreen_block {
+    display: block;
+    overflow-y: auto;
+    border: 0px;
+    border-radius: 0;
+    outline: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .filters_content {
+    padding: 0.25rem 0.25rem 0 0.25rem;
+  }
+  *[data-func=apply_filters] {
+    width: 10rem;
+  }
+  *[data-func=clear_all_filters] {
+    width: 10rem;
+  }
+}
+#filters_accordion .accordion-header .accordion-button:not(.collapsed) + *[data-func="clear_filters"] {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125) !important;
+}
+*[data-func="clear_filters"] {
+  padding: 0 0.5rem 0 0;
+  background-color: #F3F3F3;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0) !important;
+  border-radius: 0;
+  white-space: nowrap;
+  z-index: 2000;
+}
+*[data-func="clear_filters"] > span {
+  margin-left: 0.7rem;
+  padding-right: 0.3em;
+  color: #AAAAAA;
+  font-size: inherit;
+}
+*[data-func="clear_filters"] > svg {
+  margin-top: 1px;
+  color: #FF6666;
+}
+#filters_accordion .accordion-header {
+  display: flex;
+  justify-content: space-between;
+}
+#filters_accordion .accordion-header .accordion-button {
+  padding-left: 2.3rem;
+}
+#filters_accordion .accordion-header .accordion-button::after {
+  position: absolute;
+  left: 0.5rem;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23aaaaaa' class='bi bi-chevron-down' viewBox='0 0 16 16'%3e%3cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+#filters_accordion .accordion-header .accordion-button:not(.collapsed)::after {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%230c63e4' class='bi bi-chevron-down' viewBox='0 0 16 16'%3e%3cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+/* ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+/* ▪▪▪▪▪▪▪▪▪▪ КРАСНОЕ МЕНЮ  в шапке ▪▪▪▪▪▪▪*/
+.main_menu_red {
+  background-color: var(--bs-danger);
+}
+.main_menu_red .nav-link {
+  color: #FFFFFF !important;
+}
+.main_menu_red .nav-link:hover {
+  background-color: #000000 !important;
+}
+.main_menu_red li:active {
+  background-color: #2866BC !important;
+}
+.mobile_navbar .main_menu_red .nav-link {
+  padding-left: 1rem;
+  font-size: 1.1rem;
+}
+/* ▪▪▪▪▪▪▪▪▪▪ СИРЕНЕВОЕ МЕНЮ  в подвале ▪▪▪▪▪▪▪*/
+.main_menu_footer {
+  background-color: var(--bs-indigo);
+}
+.main_menu_footer .nav-link {
+  color: #FFFFFF !important;
+}
+.main_menu_footer .nav-link:hover {
+  background-color: #000000 !important;
+}
+.main_menu_footer li:active {
+  background-color: #2866BC !important;
+}
+.mobile_navbar .main_menu_footer .nav-link {
+  padding-left: 1rem;
+  font-size: 1.1rem;
+}
+/* ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+/* ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+.paginator_container .pagination {
+  justify-content: center;
+}
+/* ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+/* ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
+
+.load_more_btn_container > span > span {
+
+}
+.load_more_btn_container > span > span {
+  color: #000000;
+  font-weight: bold;
+}
+.data_form .col-12 {
+  margin-top: 0.5rem;
+}

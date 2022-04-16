@@ -1,0 +1,119 @@
+●● users
+id
+name
+email
+surname
+sex
+bithdate
+passwort
+address
+- phones 1toM
+- cars  1toM
+- mtom_for_tests MtoM
+
+●● cars
+id
+- user Mto1
+- manufacturer_id Mto1
+- manufacture_country_id  Mto1
+- model Mto1
+- color_id  Mto1
+- body_type Mto1
+- engine_type  Mto1
+engine_capacity = (integer)floor(mt_rand(800,6000) / 100) * 100
+engine_power = (integer)floor(engine_capacity / 11);
+fuel_consumption_highway = mt_rand(60,120)/10;
+fuel_consumption_city = fuel_consumption_highway * 1.6;
+fuel_consumption_mixed = fuel_consumption_highway * 1.3;
+model_year = mt_rand(2000,2021);
+production_year = mt_rand(model_year,2022);
+number_doors = mt_rand(2,5);
+numbert_places = mt_rand(2,7);
+description = Faker
+length = mt_rand(3600,5200);
+width = (integer) (length / (mt_rand(233,254) / 100));
+height = mt_rand(165,190);
+was_in_accident bool
+
+●● body_types
+title
+["Седан",
+"Хэтчбек",
+"Лифтбек",
+"Купе",
+"Универсал","Пикап",
+"Кроссовер",
+"Внедорожник",
+"Кабриолет",
+"Родстер",
+"Фургон",
+"Минивэн"];
+- cars  1toM
+
+●● manufacturers
+id
+title
+- cars 1toM
+- car_models 1toM
+["Audi" => ["A2","A3","A4","A6","Q3","Q5","Q7","Q9","RS4","RS6","RS8"],"BMW" => ["X3","X5","X2","X1","135i","540i","320","Z4"],"Opel" => ["Astra","Zafira","Vectra","Omega","Insignia","Mokka","Corsa","Meriva","Signum"],"Suzuki" => ["Vitara","Swift","Grand Vitara","SX4","Jimmy","Splash","Liana","Ignis"],"Peugeot" => ["208","301","2008","508","3008","Rifter","5008"],"Skoda" => ["Octavia","Fabia","Yeti","Superb","Roomster","Rapid","Octavia RS","Kodiaq"],"Toyota" => ["Corolla","Camry","Avalon","RAV4","Land Cruiser 200","Land Cruiser 300","Land Cruiser Prado","Avensis","Prius","Highlander","Fortuner","Hilux","Yaris",],"Renault" => ["Logan","Sandero","Duster","Arkana","Captur","Megane","Lodgy","Trafic","Koleos","Express","","","",],"Kia" => ["Rio","Sportage","Cerato","Sorento","Soul","Ceed","Picanto","Carnival","Carens","Mohave"],"Hyunday" => ["i10","i20","i30","i40","Elantra","Tucson","Santa Fe","Kona","Venue"],"Fiat" => ["Bravo","Croma","Doblo","Ducato","Freemont","Fullback","500","500L","Punto","Tipo","500X Urban"],"Cherry" => ["Very","Tiggo","Indis","M11","Arrizo"],"Ford" => ["Mustang","F150","Mondeo","Focus","Explorer","Fiesta","Kuga","Tourneo Connect","Ranger","Transit"],"Dodge" => ["Challenger","Avenger","Attitude","Charger","Durango","Journey","Neon","Nitro","Ram","Viper"],"Chrysler" => ["300C","Concorde","Crossfire","Delta","Grand Voyadger","PT Cruiser","Sebring","Voyadger"],"Mercedes" => ["C180","E200","G500","S320","A200","CLS 350D","S500","C200","E230","B300"],"Cadillac" => ["Escalade","DTS","STS","SRX"]];
+
+●● colors
+id
+title
+value
+= [["белый","#FFFFFF"],
+["светло серый","#D0D0D0"],
+["тёмно серый","#858585"],
+["черный","#000000"],
+["синий","#6694FF"],
+["зеленый","#139915"],
+["розовый","#FFC4C8"],
+["красный","#E92045"],
+["оранжевый","#FDB165"],
+["голубой","#69F6FD"],
+["салатовый","#9CFDD1"],
+["коричневый","#4A2E11"],
+["жёлтый","#FFDD00"],
+["фиолетовый","#FF56FC"]];
+- cars  1toM
+
+
+●● manufacture_countries
+title
+["Китай","Россия","США","Мексика","Япония","Корея","Чехия","Венгрия","Англия","Германия","Франция","Италия","Индия","Марокко","Турция","Бразилия","Аргентина","Испания","Швеция","ЮАР","Вьетнам"];
+- cars 1toM
+
+●● car_models
+id
+title
+manufacturer_id
+- cars 1toM
+
+●● engine_types
+["Бензин","Дизель","Гибрид","Электро"];
+- cars 1toM
+
+●● transmission_types
+["Механика","Автомат","Вариатор","Типтроник","Робот","Редуктор];
+- cars 1toM
+
+●● vehicle_drive_types
+["Полный","Передний","Задний"];
+- cars 1toM
+
+●● phones
+id
+number
+- user Mto1
+
+
+   * НЕ СДЕЛАНО *
+
+●● mtom_for_tests
+id
+title
+
+●● mtom_for_test_user
+id
+mtom_for_test_id
+user_id
