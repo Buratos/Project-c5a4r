@@ -16,7 +16,8 @@
        $url = "/view_car/" . $car->id;
        ?>
 			@include('main_carcass.car_card')      {{--▪▪▪ CAR CARD  карточка машины ▪▪▪--}}
-       <?php } ?>
+
+		<?php } ?>
 		</div>
 		<div class="col-12 text-center mt-1 mb-2 load_more_btn_container">
 			<span class="me-4">Показано <span class="total_loaded_cars">{{$cars_per_page}}</span> машин из <span>{{$cars_number}}</span></span>

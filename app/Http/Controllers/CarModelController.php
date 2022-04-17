@@ -19,7 +19,7 @@ class CarModelController extends Controller {
       $models = Brand::whereTitle($brand)->first();
       $models = $models->models;
 
-      return ["success" => 1, "html" => view("dashboard.get_car_model_datalist", ["models" => $models])->render()];
+      return ["success" => 1, "html" => view("crud.get_car_model_datalist", ["models" => $models])->render()];
    }
 
 

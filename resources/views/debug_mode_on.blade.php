@@ -1,0 +1,1 @@
+<?php $debug_mode_on = 1; ?>

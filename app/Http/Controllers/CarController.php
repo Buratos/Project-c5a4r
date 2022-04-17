@@ -28,7 +28,7 @@ class CarController extends Controller {
       if (!$cars_number) {
          $error = 1;
          $error_message = "No cars for brand '" . $request->brand . "' found.";
-         return view("main_page__carcass", ["error" => $error, "error_message" => $error_message, "filters" => $filters["filters"]]);
+         return view("main_page._carcass_", ["error" => $error, "error_message" => $error_message, "filters" => $filters["filters"], "total_cars_found" => $filters["total_cars_found"], "brands" => Brand::pluck("title")->toArray()]);
       }
 
 
@@ -44,7 +44,7 @@ class CarController extends Controller {
                 })->Paginate($cars_per_page);*/
       $cars = $cars->Paginate($cars_per_page);
 
-      return view("main_page__carcass", ["catalog"=>1,"cars" => $cars, "filters" => $filters["filters"], /*"total_cars_found" => $filters["total_cars_found"],*/ "cars_per_page" => $cars_per_page, "cars_number" => $cars_number]);
+      return view("main_page._carcass_", ["catalog" => 1, "cars" => $cars, "filters" => $filters["filters"], "total_cars_found" => $filters["total_cars_found"], "cars_per_page" => $cars_per_page, "cars_number" => $cars_number, "brands" => Brand::pluck("title")->toArray()]);
    }
 
    /*********************************************************************
@@ -63,9 +63,9 @@ class CarController extends Controller {
                   $query->where("title", "Fiat");
                 })->Paginate($cars_per_page);*/
       $cars = Car::inRandomOrder()->Paginate($cars_per_page);
-      $total_cars_number = Car::count();
+      $cars_number = Car::count();
       $filters = Car::get_filters();
-      return view("main_page__carcass", ["cars" => $cars, "filters" => $filters["filters"], "total_cars_found" => $filters["total_cars_found"], "cars_per_page" => $cars_per_page, "total_cars_number" => $total_cars_number]);
+      return view("main_page._carcass_", ["cars" => $cars, "filters" => $filters["filters"], "total_cars_found" => $filters["total_cars_found"], "cars_per_page" => $cars_per_page, "cars_number" => $cars_number, "brands" => Brand::pluck("title")->toArray()]);
    }
 
    /*********************************************************************
@@ -75,7 +75,7 @@ class CarController extends Controller {
 
       $car_title = Car::create($request);
 
-      return ["success" => 1, "html" => view("dashboard.new_ad_saved", ["car_title" => $car_title])->render()];
+      return ["success" => 1, "html" => view("crud.new_ad_saved", ["car_title" => $car_title])->render()];
    }
 
    /*********************************************************************
@@ -84,7 +84,7 @@ class CarController extends Controller {
    public function add() {
       $brand_titles = Brand::orderBy("title")->pluck("title", "id");
       $body_type_titles = BodyType::orderBy("title")->pluck("title", "id");
-      return view("crud.main_carcass", ["content_template_name" => "create_new_ad", "brand_titles" => $brand_titles, "body_type_titles" => $body_type_titles]);
+      return view("main_page._carcass_", ["create_new_ad_page" => 1, "brand_titles" => $brand_titles, "body_type_titles" => $body_type_titles]);
    }
 
    /*********************************************************************
@@ -92,9 +92,11 @@ class CarController extends Controller {
     */
    public function view(Request $request) {
 
-      $car_title = Car::view($request);
+      $car = Car::view($request);
+      if (!$car) $response = ["error_message" => "No such car found :(",];
+      else $response = ["view_car_page" => 1, "car" => $car];
 
-      return ["success" => 1, "html" => view("dashboard.new_ad_saved", ["car_title" => $car_title])->render()];
+      return view("main_page._carcass_", $response);
    }
 
    /*********************************************************************
@@ -117,11 +119,11 @@ class CarController extends Controller {
          $query->where("title", "Nissan");
       })->skip($request->data * $cars_per_page)->limit($cars_per_page)->get();
 
-      $total_cars_number = Car::whereHas("brand", function ($query) {
+      $cars_number = Car::whereHas("brand", function ($query) {
          $query->where("title", "Nissan");
       })->limit($cars_per_page)->count();
       $total_loaded_cars = $cars_per_page * ($request->data + 1);
-      if ($total_loaded_cars > $total_cars_number) $total_loaded_cars = $total_cars_number;
+      if ($total_loaded_cars > $cars_number) $total_loaded_cars = $cars_number;
 
       return ["content" => view("main_page.default_content_load_more", ["cars" => $cars])->render(), "new_already_loaded_pages" => $request->data + 1, "total_loaded_cars" => $total_loaded_cars];
    }

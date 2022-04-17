@@ -56,13 +56,14 @@ class Car extends Model {
    /*********************************************************************
     * просмотр записи / машины / row
     */
-   public function view(Request $request) {
-
+   static function view(Request $request) {
+      return Car::whereId($request->id)->first();
    }
+
    /*********************************************************************
     * просмотр записи / машины / row
     */
-   public function edit(Request $request) {
+   static function edit(Request $request) {
 
    }
 
@@ -315,7 +316,6 @@ class Car extends Model {
       return ["filters" => $filters, "total_cars_found" => $total_cars_found, "template" => view("main_page.paginator_test", ["cars" => $cars])->render()];
    }
 
-
    public function user() {
       return $this->belongsTo(User::class);
    }
@@ -332,10 +332,6 @@ class Car extends Model {
       return $this->belongsTo(CarModel::class);
    }
 
-   public function getModelAttribute() {
-      return $this->carModel->title;
-   }
-
    public function color() {
       return $this->belongsTo(Color::class);
    }
@@ -343,7 +339,6 @@ class Car extends Model {
    public function bodyType() {
       return $this->belongsTo(BodyType::class);
    }
-
 
    public function engineType() {
       return $this->belongsTo(EngineType::class);
@@ -357,13 +352,22 @@ class Car extends Model {
       return $this->belongsTo(VehicleDriveType::class);
    }
 
+   public function carPhotos() {
+      return $this->hasMany(CarPhoto::class);
+   }
+
+   public function getModelAttribute() {
+      return $this->carModel->title;
+   }
+
    public function getPhotosAttribute() {
       return $this->carPhotos->pluck("filename")->toArray();
    }
 
-   public function carPhotos() {
-      return $this->hasMany(CarPhoto::class);
+   public function getTitleAttribute() {
+      return $this->Brand->title . " " . $this->carModel->title;
    }
+
 
 }
 

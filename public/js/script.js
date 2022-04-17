@@ -8,6 +8,7 @@ $(function () {
   init_events();
 
 
+/*  открыть фильтры
   var elem = $('#filters_global_container');
   elem.collapse("toggle")
   // распахнуть фильтры на мобилке
@@ -15,6 +16,7 @@ $(function () {
     $("body").css("pointer-events", "none");
     elem.addClass("h-100");
   }
+*/
 
   // клик по фильтру
   function filter_click_handler(e) {
@@ -248,10 +250,10 @@ $(function () {
 
     // обработчик клика кнопка-checkbox  фильтра
     // $(document).on("change", "input[type=checkbox,name^='filters_']", filter_click_handler);
+    $(document).on("click", "*[data-func]", datafunc_click_handler);
     $(document).on("change", "input[name^=filters_checkbox__]", filter_click_handler);
     $(document).on("click", "*[data-func^=apply_filters_]", filter_click_handler);
 
-    $(document).on("click", "[data-func=clear_filters]", datafunc_click_handler);
     $(document).on("click", "a, button", {}, datafunc_click_handler);
 
     // $(document).on("change", ".filter_checkbox", filter_click_handler);
