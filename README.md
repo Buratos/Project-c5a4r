@@ -6,4 +6,5 @@
 
 - создать БД  car-sale
 - создать в папке с доменами папку lara3-car-sale (это будет папка проекта)
-- затем запустить  внутри этой папки  команды           php artisan migrate:fresh               php artisan db:seed
+- запустить  внутри этой папки  команду    php artisan migrate:fresh
+- запустить  php artisan db:seed
