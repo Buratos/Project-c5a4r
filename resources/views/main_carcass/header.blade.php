@@ -14,13 +14,25 @@
 				</button>
 				<div class="col-12 pb-3">
 					<form class="d-flex">
+						<div class="input-group search_wrapper">
+							<input id="search_mobile" name="search_mobile" type="search" class="form-control" placeholder="Search in ads..." aria-label="Search" autocomplete="off">
+							<button class="btn btn-outline-secondary" type="button" id="button-addon1">
+								<svg class="bi" width="16" height="16">
+									<use xlink:href="#i_search"></use>
+								</svg>
+							</button>
+							<div class="dynamic_search_results_mobile mt-2 mb-2 d-none">
+							</div>
+						</div>
+
+						{{--
 						<input id="search" name="search" type="search" class="form-control" placeholder="Search in ads..." aria-label="Search" autocomplete="off">
 						<button class="btn btn-outline-success me-3" type="submit">
 							<svg class="bi" width="16" height="16">
 								<use xlink:href="#i_search"></use>
 							</svg>
 						</button>
-					</form>
+					--}}</form>
 				</div>
 				<div class="navbar-collapse collapse" id="navbar_mobile_red_menu">
 					<div class="row mx-0 justify-content-center">
@@ -81,44 +93,13 @@
 			</a>
 			<form class="me-3" style="flex: 1 0 8rem">
 				<div class="input-group search_wrapper">
-					<input type="text" name="search" id="search">
-					<div class="res">sfg</div>
-					<script>
-            jQuery(function ($) {
-              $(document).on('keyup', '#search', function (e) {
-                $('div.res').html($('#search').val());
-              });
-            });
-					</script>
 					<input id="search" name="search" type="search" class="form-control" placeholder="Search in ads..." aria-label="Search" autocomplete="off">
 					<button class="btn btn-outline-secondary" type="button" id="button-addon1">
 						<svg class="bi" width="16" height="16">
 							<use xlink:href="#i_search"></use>
 						</svg>
 					</button>
-					<div class="dynamic_search_results d-none ">
-						<ul>
-							{{--
-														<li class="dynamic_search_list_item">
-															<a href="">Mercedes</a>
-														</li>
-														<li class="dynamic_search_list_item">
-															<a href="">Opel</a>
-														</li>
-														<li class="dynamic_search_list_item">
-															<a href="">Mazda</a>
-														</li>
-														<li class="dynamic_search_list_item">
-															<a href="">Volkswagen</a>
-														</li>
-														<li class="dynamic_search_list_item">
-															<a href="">Fiat</a>
-														</li>
-														<li class="dynamic_search_list_item">
-															<a href="">Chevrolet</a>
-														</li>
-							--}}
-						</ul>
+					<div class="dynamic_search_results mt-2 mb-2 d-none ">
 					</div>
 				</div>
 			</form>

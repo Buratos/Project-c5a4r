@@ -81,7 +81,7 @@ class Car extends Model {
       $found_items = [];
       $search_str = "%" . $request->data . "%";
       // сначала поиск по брэнду
-      $search = Brand::where("title", "like", $search_str)->limit(10);
+/*      $search = Brand::where("title", "like", $search_str)->limit(10);
       if ($search->count()) {
          $search = Brand::where("title", "like", $search_str)->limit(10)->pluck("title");
          $additional_search = Car::whereHas("brand", function ($query) use ($search) {
@@ -92,7 +92,7 @@ class Car extends Model {
             $title = $car->title . "  " . $car->production_year . "   " . number_format($car->price, 0, "", " ") . " $";
             $found_items[] = ["title" => $title, "id" => $car->id];
          }
-      }
+      }*/
 
       $search = CarModel::where("title", "like", $search_str)->limit(10);
       if ($search->count()) {

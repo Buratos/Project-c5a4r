@@ -8,27 +8,35 @@ $(function () {
   init_events();
 
 
-/*  открыть фильтры
-  var elem = $('#filters_global_container');
-  elem.collapse("toggle")
-  // распахнуть фильтры на мобилке
-  if (mobile_viewport()) {
-    $("body").css("pointer-events", "none");
-    elem.addClass("h-100");
-  }
-*/
+  /*  открыть фильтры
+   var elem = $('#filters_global_container');
+   elem.collapse("toggle")
+   // распахнуть фильтры на мобилке
+   if (mobile_viewport()) {
+   $("body").css("pointer-events", "none");
+   elem.addClass("h-100");
+   }
+   */
 
   /*
    создание динамического поиска, надо ввести 3+ букв чтобы начался поиск в БД
    */
   function search_input_handler(event) {
-    dynamic_search_results = $(".dynamic_search_results");
-    var search_str = $("#search").val();
+    if (mobile_viewport()) {
+      var div_title = ".dynamic_search_results_mobile";
+      var input_title = "#search_mobile";
+    }
+    else {
+      var div_title = ".dynamic_search_results";
+      var input_title = "#search";
+    }
+    dynamic_search_results = $(div_title);
+    var search_str = $(input_title).val();
     if (search_str.length < 2) {
       dynamic_search_results.addClass("d-none");
-      return ;
+      return;
     }
-bip();
+    bip();
     $.ajax({
       url: '/dynamic_search',
       type: 'POST',
@@ -40,7 +48,7 @@ bip();
       success: function (response_data, b, c) {
         if (!response_data.success) {
           dynamic_search_results.addClass("d-none");
-          return ;
+          return;
         }
         dynamic_search_results.removeClass("d-none");
         dynamic_search_results.html(response_data.html)
@@ -90,7 +98,7 @@ bip();
       data: {data: already_loaded_pages},
       dataType: 'json',
       success: function (response_data, b, c) {
-        btn_load_more.attr("data-already-loaded-pages",response_data.new_already_loaded_pages);
+        btn_load_more.attr("data-already-loaded-pages", response_data.new_already_loaded_pages);
         $(".car_list_container").append(response_data.content);
         $(".total_loaded_cars").text(response_data.total_loaded_cars);
       },
@@ -264,20 +272,6 @@ bip();
       var value = checked_filters.eq(i).attr("data-value");
       checked_filters_by_groups[group_name].push(value);
     }
-    /*
-     var price_min = Number($("#price_min").val()), price_max = Number($("#price_max").val());
-     if (price_max > 0) {
-     if (price_min < 0) price_min = 0; else if (price_min > price_max) {
-     let qq = price_min;
-     price_min = price_max;
-     price_max = qq;
-     }
-     checked_filters_by_groups.price = {
-     price_min: price_min,
-     price_max: price_max
-     };
-     }
-     */
     return checked_filters_by_groups;
   }
 
@@ -286,61 +280,16 @@ bip();
    Установка обработчиков событий
    */
   function init_events() {
-/*    $(document).on("touchhend", "body", function () {
-      bip();
-    });*/
-
-/*    search.on('touchend', function(){
-      bip();
-    });*/
     // обработчик клика кнопка-checkbox  фильтра
     // $(document).on("change", "input[type=checkbox,name^='filters_']", filter_click_handler);
     $(document).on("click", "*[data-func]", datafunc_click_handler);
     $(document).on("change", "input[name^=filters_checkbox__]", filter_click_handler);
     $(document).on("click", "*[data-func^=apply_filters_]", filter_click_handler);
-    $(document).on("keyup input", "#search", search_input_handler);
+    $(document).on("keyup input", "#search, #search_mobile", search_input_handler);
     // $(document).on("touchhend", "input#search", search_input_handler);
     $(document).on("click", "a, button", {}, datafunc_click_handler);
 
-
-    // $(document).on("change", ".filter_checkbox", filter_click_handler);
-    // $(document).on("change", "input.filter_checkbox", reload_filtered_product_numbers);
-
-    // КЛИК ПО INPUT ДЛЯ ПОИСКА
-    /*
-     $(document).on("focus", "#search_input", "ничо не передаю в event.data", function (event) {
-     $("body").addClass("search_focus");
-
-     $(document).on("click", ".search_background", {}, function (event) {
-     if (event.target != event.currentTarget) return;
-     $("body").removeClass("search_focus");
-     $(this).off("click");
-     });
-     });
-     */
-
   }
-
-  /*
-   function for___test() {
-   var filter_groups = $("#filters_accordion .accordion-item");
-   for (let i = 0; i < filter_groups.length; i++) {
-   var div = filter_groups.eq(i);
-   var checkboxes_number_text = div.find(".btn_checkbox_text");
-   var sum = 0;
-   var eee = $(".accordion-item").eq(2).find(".btn_checkbox_text span");
-   $(".accordion-item").each(function (index) {
-   var ttt = $(this).find(".btn_checkbox_text span");
-   var t = $("#");
-   });
-   checkboxes_number_text.each(function (index) {
-   sum = sum + Number($(this).text);
-   });
-   var span = filter_groups.find("a[data-func=clear_filters] > span");
-   span.text(sum);
-   }
-   }
-   */
 
   /*
    в зависимости размера вьюпорта возвращает одно из 3х значений:

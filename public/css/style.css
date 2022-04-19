@@ -523,42 +523,42 @@ input:checked ~ .btn_checkbox_text:hover {
 .search_wrapper {
   position: relative;
 }
-.dynamic_search_results {
-  margin: 0.5rem 0.5rem !important;
-  padding: 0;
-  border: 1px solid #AAAAAA;
-  background-color: #FFFFFF;
-  z-index: 500;
-  top: 2rem;
+.dynamic_search_results, .dynamic_search_results_mobile {
   position: absolute;
-  /*border-radius: 04rem !important;*/
+  top: 2rem;
+  background-color: #FFFFFF;
+  border: 1px solid #AAAAAA;
+  z-index: 500;
+  border-radius: 0.25rem !important;
 }
-.dynamic_search_results ul {
-  margin: 0;
-  text-decoration: none;
+.dynamic_search_results_mobile {
+  max-width: 100vw;
+  overflow: auto;
+}
+.dynamic_search_results ul, .dynamic_search_results_mobile ul {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   padding: 0;
+  text-decoration: none;
 }
-.dynamic_search_results li {
+.dynamic_search_results li, .dynamic_search_results_mobile li {
   list-style-type: none;
-
-}
-.dynamic_search_list_item {
 }
 .dynamic_search_list_item a {
   display: block;
-  text-decoration: none;
   line-height: 1.5;
-  color: #777777;
-  white-space: pre;
-  padding-right: 1rem;
   padding-left: 1rem;
+  padding-right: 1rem;
+  color: #777777;
   background-color: #FFFFFF;
-  font-size: 1rem;
-  font-family: Roboto;
   white-space: pre;
+  white-space: pre;
+  text-decoration: none;
+  font-family: Roboto;
+  font-size: 1rem;
 }
 .dynamic_search_list_item a:hover {
-  background: #444444;
   color: #FFFFFF;
+  background: #444444;
 }
 
