@@ -6,6 +6,7 @@ use App\Models\BodyType;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\CarModel;
+use App\View\Components\car_card;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -109,6 +110,19 @@ class CarController extends Controller {
       return ["success" => 1, "html" => view("dashboard.new_ad_saved", ["car_title" => $car_title])->render()];
    }
 
+   /*********************************************************************
+    * редактирование записи / машины / row
+    */
+   public function dynamic_search(Request $request) {
+
+      $found_items = Car::dynamic_search($request);
+
+      if (count($found_items) > 0) $response = ["success" => 1, "html" => view("search.dynamic_search_list_item", ["found_items" => $found_items])->render()];
+      else $response = ["success" => 0];
+
+      return $response;
+   }
+
    /********************************************************************
     * вызывается при клике по кнопке Load more... под контентом по умолчанию
     */
@@ -161,36 +175,43 @@ class CarController extends Controller {
     */
    public function tests() {
       echo "<div style='padding-left: 3rem; text-align: left;font-family:Roboto '>";
+      // ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪
+
+      $title = "viper";
+      $additional_search = Car::query();
+      $additional_search->whereHas("carModel", function ($query) use ($title) {
+         $query->where("title", $title);
+      });
+      $title = "fiat";
+
+      $additional_search->orWhere(function ($query) {
+         $query->whereHas("brand", function ($query) {
+            $query->where("title", "fiat");
+         });
+      });
+      /*      $additional_search->whereHas("brand", function ($query) use ($title) {
+               $query->where("title", $title);
+            });*/
+
+      $search = $additional_search->limit(100)->get();
+
+      $search->each(function ($item, $key) {
+         ech("ID - " . $item->id);
+         ech("BRAND - " . $item->brand->title);
+         ech("MODEL - " . $item->model);
+         ech("PRICE - " . $item->price);
+         ech();
+      });
+      // ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪
+      echo "</div>";
+      return;
+
       /*    $start_time = microtime(true);
-          echo 'Время выполнения SELECT : <b>' . round(microtime(true) - $start_time, 2) . ' </b> сек.<br>';*/
+    echo 'Время выполнения SELECT : <b>' . round(microtime(true) - $start_time, 2) . ' </b> сек.<br>';*/
 
       /*    $data3 = Car::where("price","<",15000)->orWhereHas("brand", function ($query) {
             $query->where("title", "Kia");
           })->get()*/
-
-      if (Storage::exists('dc40a269-5296-4e54-9323-4a10170c3190.webp')) {
-         ech("dc40a269-5296-4e54-9323-4a10170c3190.webp    СУЩЕСТВУЕТ");
-      }
-      if (Storage::exists('public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp')) {
-         ech("public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp    СУЩЕСТВУЕТ");
-      }
-
-      if (Storage::missing('dc40a269-5296-4e54-9323-4a10170c3190.webp')) {
-         ech("dc40a269-5296-4e54-9323-4a10170c3190.webp    НЕТУ");
-      }
-      if (Storage::missing('public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp')) {
-         ech("public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp    НЕТУ");
-      }
-
-      $img_url = asset("public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp");
-      $url = Storage::url('dc40a269-5296-4e54-9323-4a10170c3190.webp');
-      $url2 = Storage::disk('local')->url('public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp');
-      $url3 = Storage::Url('public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp');
-      ech("<img src='public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp'>");
-//      ech("<img src='img/dc40a269-5296-4e54-9323-4a10170c3190.webp'>");
-      ech("<img src='" . $url2 . "'>");
-      ech("<img src='" . $url3 . "'>");
-      return;
 
       /*      $data = Car::query();
             $data->where("was_in_accident", false);
@@ -211,14 +232,27 @@ class CarController extends Controller {
 
                ech();
             });*/
+      /*      if (Storage::exists('dc40a269-5296-4e54-9323-4a10170c3190.webp')) {
+               ech("dc40a269-5296-4e54-9323-4a10170c3190.webp    СУЩЕСТВУЕТ");
+            }
+            if (Storage::exists('public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp')) {
+               ech("public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp    СУЩЕСТВУЕТ");
+            }
 
-// ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪
+            if (Storage::missing('dc40a269-5296-4e54-9323-4a10170c3190.webp')) {
+               ech("dc40a269-5296-4e54-9323-4a10170c3190.webp    НЕТУ");
+            }
+            if (Storage::missing('public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp')) {
+               ech("public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp    НЕТУ");
+            }
 
-
-      //    var_dump($data2->all());
-      echo "</div>";
-
-   }//*************** ДЯЛ ТЕСТОВ
+            $img_url = asset("public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp");
+            $url = Storage::url('public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp');
+            ech("<img src='public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp'>");
+      //      ech("<img src='img/dc40a269-5296-4e54-9323-4a10170c3190.webp'>");
+            ech("<img src='" . $url2 . "'>");
+            ech("<img src='" . $url3 . "'>");*/
+   }
 }
 
 //  улучшенный echo, просто вывод строки и переход на новую строку

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Artisan::call('view:clear');
 
-Route::get('/view_car/{id}', [\App\Http\Controllers\CarController::class, "view"]);
+Route::get('/view_car/{id}', [\App\Http\Controllers\CarController::class, "view"])->name("view_car");
 Route::get('/catalog/{brand}', [\App\Http\Controllers\CarController::class, "display_catalog"]);
 Route::get('/', function () {
   return view('main_page__carcass');
@@ -32,6 +32,7 @@ Route::get('/html', function () {
 /* обработка запросов AJAX-POST */
 //Route::post('load_car_model_datalist', [\App\Http\Controllers\CarController::class, "get_car_model_datalist"]);
 
+Route::post('/dynamic_search', [\App\Http\Controllers\CarController::class, "dynamic_search"])->name("dynamic_search");
 Route::post('/load_car_model_datalist', [\App\Http\Controllers\CarModelController::class, "get_car_model_datalist"]);
 Route::post('/load_filters_numbers', [\App\Http\Controllers\CarController::class, "get_filters_numbers"]);
 Route::post('/default_content_load_more', [\App\Http\Controllers\CarController::class, "default_content_load_more"]);

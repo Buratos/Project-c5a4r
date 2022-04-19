@@ -12,9 +12,7 @@
 		<link href="fontawesome/css/fontawesome_all.min.css" rel="stylesheet">
 	-->
 	<script src="/js/jquery-3.6.0.min.js" type="text/javascript"></script>
-	@if(isset($debug_mode_on))
-		<script src="/js/live.js" type="text/javascript"></script> @endif
-	<script src="/js/dashboard.js" type="text/javascript"></script>
+	@isset($debug_mode_on) <script src="/js/live_only_JS_and_css.js" type="text/javascript"></script> @endisset	<script src="/js/dashboard.js" type="text/javascript"></script>
 	<script src="/js/_my_functions_lib.js" type="text/javascript"></script>
 	<!-- jquery-fancy file uploader -->
 	{{--

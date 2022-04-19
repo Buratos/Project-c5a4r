@@ -16,8 +16,8 @@
 					<form class="d-flex">
 						<input class="form-control ms-3 me-2" type="search" placeholder="Search in ads..." aria-label="Поиск">
 						<button class="btn btn-outline-success me-3" type="submit">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-								<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+							<svg class="bi" width="16" height="16">
+								<use xlink:href="#i_search"></use>
 							</svg>
 						</button>
 					</form>
@@ -73,16 +73,49 @@
 	<!--	HEADER линия c логотипом для экранов БОЛЬШЕ мобилки -->
 	<div class="d-none d-sm-block container-md bg-light">
 		<div class="d-flex flex-wrap justify-content-left align-items-center flex-nowrap">
-			<a href="/" class="d-flex align-items-center mb-sm-0 mt-sd-0 bg-light me-4 car_sale_logo">
+			<a href="/" class="d-flex align-items-center mb-sm-0 mt-sd-0 bg-light me-3 car_sale_logo">
 				<div class="i_header_logo">
 					<div><!-- ЭТОТ div тут нужен --></div>
 				</div>
 				<span class="text-danger fw-bold m-0" style="font-size: 2rem;">CAR SALE</span>
 			</a>
-			<form class="" style="flex: 1 0 8rem">
-				<input type="search" class="form-control form-control-dark" placeholder="Search in ads..." aria-label="Search">
+			<form class="me-3" style="flex: 1 0 8rem">
+				<div class="input-group search_wrapper">
+					<input id="search" name="search" type="search" class="form-control" placeholder="Search in ads..." aria-label="Search"    autocomplete="off" >
+					<button class="btn btn-outline-secondary" type="button" id="button-addon1">
+						<svg class="bi" width="16" height="16">
+							<use xlink:href="#i_search"></use>
+						</svg>
+					</button>
+					<div class="dynamic_search_results d-none ">
+						<ul>
+{{--
+							<li class="dynamic_search_list_item">
+								<a href="">Mercedes</a>
+							</li>
+							<li class="dynamic_search_list_item">
+								<a href="">Opel</a>
+							</li>
+							<li class="dynamic_search_list_item">
+								<a href="">Mazda</a>
+							</li>
+							<li class="dynamic_search_list_item">
+								<a href="">Volkswagen</a>
+							</li>
+							<li class="dynamic_search_list_item">
+								<a href="">Fiat</a>
+							</li>
+							<li class="dynamic_search_list_item">
+								<a href="">Chevrolet</a>
+							</li>
+--}}
+						</ul>
+					</div>
+				</div>
+
+
 			</form>
-			<ul class="d-none d-md-flex nav my-2 flex-nowrap">
+			{{--<ul class="d-none d-md-flex nav my-2 flex-nowrap">
 				<li>
 					<a href="#" class="nav-link text-secondary pe-2">
 						<svg class="bi d-block mx-auto mt-2" width="24" height="24">
@@ -99,7 +132,7 @@
 						Compare
 					</a>
 				</li>
-			</ul>
+			</ul>--}}
 			<div class="for_unknown_user">
 				<button type="button" class="btn btn-outline-secondary ms-4 ms-md-0 me-2">Log in</button>
 				<button type="button" class="btn btn-outline-secondary">Register</button>
@@ -134,10 +167,10 @@
 					<a href="#" class="nav-link link-light px-2">FORUM</a>
 				</li>
 				<li class="nav-item">
-					<a href="#" class="d-md-none nav-link link-light px-2">FAVORITE</a>
+					<a href="#" class="nav-link link-light px-2">FAVORITE</a>
 				</li>
 				<li class="nav-item">
-					<a href="#" class="d-md-none nav-link link-light px-2">COMPARE</a>
+					<a href="#" class="nav-link link-light px-2">COMPARE</a>
 				</li>
 				<li class="nav-item">
 					<a href="#" class="nav-link link-light px-2">CONTACTS</a>

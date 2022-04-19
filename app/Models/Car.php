@@ -77,6 +77,29 @@ class Car extends Model {
       return $cars;
    }
 
+   static function dynamic_search(Request $request) {
+      $found_items = [];
+      $search_str = "%" . $request->data . "%";
+      $search = CarModel::where("title", "like", $search_str)->limit(10);
+      if ($search->count()) {
+         $search = $search->get();
+         $additional_search = Car::query();
+         foreach ($search as $model) {
+            $additional_search->orWhereHas("carModel", function ($query) use ($model) {
+               $query->where("title", $model->title);
+            });
+            if ($additional_search->count() >= 10) break;
+         }
+         $search = $additional_search->limit(10)->get();
+
+         foreach ($search as $car) {
+            $title = $car->title . " " . $car->production_year . "   " . number_format($car->price, 0, "", " ") . " $";
+            $found_items[] = ["title" => $title, "id" => $car->id];
+         }
+      }
+      return $found_items;
+   }
+
    static function get_filters($checked_filters_from_site = [], $json = false) {
       $global_start_time = microtime(true);
       $start_time = microtime(true);

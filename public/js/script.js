@@ -18,6 +18,43 @@ $(function () {
   }
 */
 
+  /*
+   создание динамического поиска, надо ввести 3+ букв чтобы начался поиск в БД
+   */
+  function search_input_handler(event) {
+    dynamic_search_results = $(".dynamic_search_results");
+    var search_str = $("#search").val();
+    if (search_str.length < 3) {
+      dynamic_search_results.addClass("d-none");
+      return ;
+    }
+
+    $.ajax({
+      url: '/dynamic_search',
+      type: 'POST',
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      data: {data: search_str},
+      dataType: 'json',
+      success: function (response_data, b, c) {
+        if (!response_data.success) {
+          dynamic_search_results.addClass("d-none");
+          return ;
+        }
+        dynamic_search_results.removeClass("d-none");
+        dynamic_search_results.html(response_data.html)
+        $(document).on("click", "*", function (event) {
+
+        })
+      },
+      error: function (jqXHR, status, errorThrown) { // функция ошибки ответа сервера
+        console.log('DYNAMIC_SEARCH > ОШИБКА AJAX запроса: ' + status, jqXHR);
+      }
+    });
+
+  }
+
   // клик по фильтру
   function filter_click_handler(e) {
     var data_func = $(this).attr("data-func");
@@ -58,7 +95,7 @@ $(function () {
       error: function (jqXHR, status, errorThrown) { // функция ошибки ответа сервера
         console.log('default_content_load_more > ОШИБКА AJAX запроса: ' + status, jqXHR);
       }
-    })
+    });
   }
 
   /*
@@ -253,8 +290,9 @@ $(function () {
     $(document).on("click", "*[data-func]", datafunc_click_handler);
     $(document).on("change", "input[name^=filters_checkbox__]", filter_click_handler);
     $(document).on("click", "*[data-func^=apply_filters_]", filter_click_handler);
-
+    $(document).on("keyup", "input#search", search_input_handler);
     $(document).on("click", "a, button", {}, datafunc_click_handler);
+
 
     // $(document).on("change", ".filter_checkbox", filter_click_handler);
     // $(document).on("change", "input.filter_checkbox", reload_filtered_product_numbers);
