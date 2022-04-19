@@ -80,6 +80,20 @@ class Car extends Model {
    static function dynamic_search(Request $request) {
       $found_items = [];
       $search_str = "%" . $request->data . "%";
+      // сначала поиск по брэнду
+      $search = Brand::where("title", "like", $search_str)->limit(10);
+      if ($search->count()) {
+         $search = Brand::where("title", "like", $search_str)->limit(10)->pluck("title");
+         $additional_search = Car::whereHas("brand", function ($query) use ($search) {
+            $query->whereIn("title",$search);
+         })->limit(10)->get();
+         $search = $additional_search;
+         foreach ($search as $car) {
+            $title = $car->title . "  " . $car->production_year . "   " . number_format($car->price, 0, "", " ") . " $";
+            $found_items[] = ["title" => $title, "id" => $car->id];
+         }
+      }
+
       $search = CarModel::where("title", "like", $search_str)->limit(10);
       if ($search->count()) {
          $search = $search->get();
@@ -93,11 +107,11 @@ class Car extends Model {
          $search = $additional_search->limit(10)->get();
 
          foreach ($search as $car) {
-            $title = $car->title . " " . $car->production_year . "   " . number_format($car->price, 0, "", " ") . " $";
+            $title = $car->title . "    " . $car->production_year . "       " . number_format($car->price, 0, "", " ") . " $";
             $found_items[] = ["title" => $title, "id" => $car->id];
          }
       }
-      return $found_items;
+      return collect($found_items)->sortBy("title");
    }
 
    static function get_filters($checked_filters_from_site = [], $json = false) {

@@ -545,15 +545,17 @@ input:checked ~ .btn_checkbox_text:hover {
 .dynamic_search_list_item {
 }
 .dynamic_search_list_item a {
+  display: block;
+  text-decoration: none;
   line-height: 1.5;
   color: #777777;
+  white-space: pre;
   padding-right: 1rem;
-  display: block;
   padding-left: 1rem;
   background-color: #FFFFFF;
-  white-space: nowrap;
-  text-decoration: none;
-
+  font-size: 1rem;
+  font-family: Roboto;
+  white-space: pre;
 }
 .dynamic_search_list_item a:hover {
   background: #444444;

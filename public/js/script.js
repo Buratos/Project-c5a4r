@@ -24,11 +24,11 @@ $(function () {
   function search_input_handler(event) {
     dynamic_search_results = $(".dynamic_search_results");
     var search_str = $("#search").val();
-    if (search_str.length < 3) {
+    if (search_str.length < 2) {
       dynamic_search_results.addClass("d-none");
       return ;
     }
-
+bip();
     $.ajax({
       url: '/dynamic_search',
       type: 'POST',
@@ -44,9 +44,11 @@ $(function () {
         }
         dynamic_search_results.removeClass("d-none");
         dynamic_search_results.html(response_data.html)
-        $(document).on("click", "*", function (event) {
-
-        })
+        var handle = function (event) {
+          dynamic_search_results.addClass("d-none");
+          $(document).off("click", "*", handle);
+        }
+        $(document).on("click", "*", handle);
       },
       error: function (jqXHR, status, errorThrown) { // функция ошибки ответа сервера
         console.log('DYNAMIC_SEARCH > ОШИБКА AJAX запроса: ' + status, jqXHR);
@@ -284,13 +286,20 @@ $(function () {
    Установка обработчиков событий
    */
   function init_events() {
+/*    $(document).on("touchhend", "body", function () {
+      bip();
+    });*/
 
+/*    search.on('touchend', function(){
+      bip();
+    });*/
     // обработчик клика кнопка-checkbox  фильтра
     // $(document).on("change", "input[type=checkbox,name^='filters_']", filter_click_handler);
     $(document).on("click", "*[data-func]", datafunc_click_handler);
     $(document).on("change", "input[name^=filters_checkbox__]", filter_click_handler);
     $(document).on("click", "*[data-func^=apply_filters_]", filter_click_handler);
-    $(document).on("keyup", "input#search", search_input_handler);
+    $(document).on("keyup input", "#search", search_input_handler);
+    // $(document).on("touchhend", "input#search", search_input_handler);
     $(document).on("click", "a, button", {}, datafunc_click_handler);
 
 

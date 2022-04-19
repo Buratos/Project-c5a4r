@@ -3,3 +3,7 @@
 
 Описание будет добавлено потом
 "# Project-c5a4r" 
+
+- создать БД  car-sale
+- создать в папке с доменами папку lara3-car-sale (это будет папка проекта)
+- затем запустить  внутри этой папки  команды           php artisan migrate:fresh               php artisan db:seed
