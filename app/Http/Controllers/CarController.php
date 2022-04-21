@@ -7,6 +7,8 @@ use App\Models\Brand;
 use App\Models\Car;
 use App\Models\CarModel;
 use App\View\Components\car_card;
+use Faker\Factory;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -83,9 +85,12 @@ class CarController extends Controller {
     * вызывается для добавления новой машины / в БД
     */
    public function add() {
+      $faker = Factory::create();
+      $description = $faker->text(1000);
       $brand_titles = Brand::orderBy("title")->pluck("title", "id");
       $body_type_titles = BodyType::orderBy("title")->pluck("title", "id");
-      return view("main_page._carcass_", ["create_new_ad_page" => 1, "brand_titles" => $brand_titles, "body_type_titles" => $body_type_titles]);
+      return view("main_page._carcass_", ["create_new_ad_page" => 1, "brand_titles" => $brand_titles, "body_type_titles" => $body_type_titles, "description" => $description]);
+
    }
 
    /*********************************************************************
@@ -105,9 +110,17 @@ class CarController extends Controller {
     */
    public function edit(Request $request) {
 
-      $car_title = Car::edit($request);
+      $car = Car::whereId($request->id)->first();
+      if (!$car) $response = ["error_message" => "No such car found :(",];
+      else {
+         $brand_titles = Brand::orderBy("title")->pluck("title", "id");
+         $body_type_titles = BodyType::orderBy("title")->pluck("title", "id");
 
-      return ["success" => 1, "html" => view("dashboard.new_ad_saved", ["car_title" => $car_title])->render()];
+         $car_title = $car->title . " " . $car->production_year;
+         $response = ["edit_car_page" => 1, "car" => $car,"car_title" => $car_title, "brand_titles" => $brand_titles, "body_type_titles" => $body_type_titles];
+
+      }
+      return view("main_page._carcass_", $response);
    }
 
    /*********************************************************************
@@ -115,9 +128,9 @@ class CarController extends Controller {
     */
    public function dynamic_search(Request $request) {
 
-      $found_items = Car::dynamic_search($request);
+      $found_cars = Car::dynamic_search($request);
 
-      if (count($found_items) > 0) $response = ["success" => 1, "html" => view("search.dynamic_search_list_item", ["found_items" => $found_items])->render()];
+      if (count($found_cars) > 0) $response = ["success" => 1, "html" => view("search.dynamic_search_list_item", ["found_items" => $found_cars])->render()];
       else $response = ["success" => 0];
 
       return $response;
@@ -166,8 +179,7 @@ class CarController extends Controller {
    }
 
    public function dashboard() {
-
-      return view("dashboard.dashboard_carcass");
+      return view("main_page._carcass_");
    }
 
    /*********************************************************************

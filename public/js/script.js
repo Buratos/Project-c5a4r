@@ -1,10 +1,5 @@
 $(function () {
-  /*    $(document).on("click", "#apply_colour", {}, function () {
-   var color = String($("#hex_colour").val());
-   if (!color) color = "#AAAAAA";
-   $("#colour_me").css("background-color", color);
-   });
-   */
+
   init_events();
 
 
@@ -21,6 +16,7 @@ $(function () {
   /*
    создание динамического поиска, надо ввести 3+ букв чтобы начался поиск в БД
    */
+/*
   function search_input_handler(event) {
     if (mobile_viewport()) {
       var div_title = ".dynamic_search_results_mobile";
@@ -36,7 +32,7 @@ $(function () {
       dynamic_search_results.addClass("d-none");
       return;
     }
-    bip();
+    // bip();
     $.ajax({
       url: '/dynamic_search',
       type: 'POST',
@@ -64,6 +60,7 @@ $(function () {
     });
 
   }
+*/
 
   // клик по фильтру
   function filter_click_handler(e) {
@@ -78,7 +75,6 @@ $(function () {
         break;
       case "apply_filters__price" :
         e.stopImmediatePropagation();
-
         break;
       default:
         break;
@@ -282,58 +278,56 @@ $(function () {
   function init_events() {
     // обработчик клика кнопка-checkbox  фильтра
     // $(document).on("change", "input[type=checkbox,name^='filters_']", filter_click_handler);
-    $(document).on("click", "*[data-func]", datafunc_click_handler);
-    $(document).on("change", "input[name^=filters_checkbox__]", filter_click_handler);
-    $(document).on("click", "*[data-func^=apply_filters_]", filter_click_handler);
-    $(document).on("keyup input", "#search, #search_mobile", search_input_handler);
-    // $(document).on("touchhend", "input#search", search_input_handler);
+    $(document).on("click", "*[data-func]", {}, datafunc_click_handler);
+    $(document).on("change", "input[name^=filters_checkbox__]", {}, filter_click_handler);
+    $(document).on("click", "*[data-func^=apply_filters_]", {}, filter_click_handler);
+    // $(document).on("keyup input", "#search, #search_mobile", search_input_handler);
     $(document).on("click", "a, button", {}, datafunc_click_handler);
 
-  }
 
-  /*
-   в зависимости размера вьюпорта возвращает одно из 3х значений:
-   "576-"    "576+"    "768+"
-   при этом в CSS надо добавить такой код:
-   @media only screen and (max-width: 575.98px) {
-   body {
-   content: "576-";
-   }
-   }
-   @media only screen and (min-width: 576px) {
-   body {
-   content: "576+";
-   }
-   }
-   @media only screen and (min-width: 768px) {
-   body {
-   content: "768+";
-   }
-   }
-   */
-  function get_viewport_mode() {
-    var response = "768+";
-    switch ($("body").css("content")) {
-      case '\"576-\"' :
-        response = "576-";
-        break;
-      case '\"576+\"' :
-        response = "576+";
-        break;
-      case '\"768+\"' :
-        response = "768+";
-        break;
-    }
-    return response;
   }
-
-  /*
-   вернёт true, если это вьюпорт телефона/планшета вертикально
-   */
-  function mobile_viewport() {
-    return $("body").css("content") == '\"576-\"';
-  }
-
 
 });
 
+/*
+ в зависимости размера вьюпорта возвращает одно из 3х значений:
+ "576-"    "576+"    "768+"
+ при этом в CSS надо добавить такой код:
+ @media only screen and (max-width: 575.98px) {
+ body {
+ content: "576-";
+ }
+ }
+ @media only screen and (min-width: 576px) {
+ body {
+ content: "576+";
+ }
+ }
+ @media only screen and (min-width: 768px) {
+ body {
+ content: "768+";
+ }
+ }
+ */
+function get_viewport_mode() {
+  var response = "768+";
+  switch ($("body").css("content")) {
+    case '\"576-\"' :
+      response = "576-";
+      break;
+    case '\"576+\"' :
+      response = "576+";
+      break;
+    case '\"768+\"' :
+      response = "768+";
+      break;
+  }
+  return response;
+}
+
+/*
+ вернёт true, если это вьюпорт телефона/планшета вертикально
+ */
+function mobile_viewport() {
+  return $("body").css("content") == '\"576-\"';
+}

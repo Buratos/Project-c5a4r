@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Artisan::call('view:clear');
+//Artisan::call('view:clear');
 
 Route::get('/view_car/{id}', [\App\Http\Controllers\CarController::class, "view"])->name("view_car");
+Route::get('/edit_car/{id}', [\App\Http\Controllers\CarController::class, "edit"])->name("edit_car");
 Route::get('/catalog/{brand}', [\App\Http\Controllers\CarController::class, "display_catalog"]);
 Route::get('/', function () {
   return view('main_page__carcass');

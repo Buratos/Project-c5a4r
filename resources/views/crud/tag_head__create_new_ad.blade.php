@@ -12,7 +12,9 @@
 		<link href="fontawesome/css/fontawesome_all.min.css" rel="stylesheet">
 	-->
 	<script src="/js/jquery-3.6.0.min.js" type="text/javascript"></script>
-	@isset($debug_mode_on) <script src="/js/live_only_JS_and_css.js" type="text/javascript"></script> @endisset	<script src="/js/dashboard.js" type="text/javascript"></script>
+	@isset($debug_mode_on) <script src="/js/live_only_JS_and_css.js" type="text/javascript"></script> @endisset
+	<script src="/js/dashboard.js" type="text/javascript"></script>
+	<script src="/js/search.js" type="text/javascript"></script>
 	<script src="/js/_my_functions_lib.js" type="text/javascript"></script>
 	<!-- jquery-fancy file uploader -->
 	{{--
@@ -27,6 +29,9 @@
 		<script src="js/dropzone/dropzone-min.js"></script>
 		<link href="js/dropzone/dropzone.css" rel="stylesheet" type="text/css"/>
 	--}}
+{{--
 	<title>@if(isset($page_title)) {{$page_title}}
 		@else CREATE NEW AD @endif </title>
+--}}
+	<title>{{$page_title ?? "CREATE NEW AD" }}</title>
 </head>

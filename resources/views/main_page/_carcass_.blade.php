@@ -19,6 +19,8 @@
 	@include('crud.create_new_ad')
 @elseif (isset($view_car_page))
 	@include('crud.view_car')
+@elseif (isset($edit_car_page))
+	@include('crud.edit_car')
 @else
 	@include("main_carcass.brands_menu")       {{--▪▪▪ МЕНЮ  ИКОНОК  БРЭНДОВ  ▪▪▪--}}
 	@include('main_carcass.filters')           {{--▪▪▪ ФИЛЬТРЫ  FILTERS ▪▪▪--}}

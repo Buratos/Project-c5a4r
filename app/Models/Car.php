@@ -78,10 +78,50 @@ class Car extends Model {
    }
 
    static function dynamic_search(Request $request) {
-      $found_items = [];
-      $search_str = "%" . $request->data . "%";
+      $words = str_word_count($request->data, 1, '1234567890');
+      if (count($words) == 1) {
+         if (strlen($words[0]) < 2) return collect();
+         $result = collect();
+         $brands = brands_search($words[0]);
+         if (!$brands) {   // brands not found, looking for models
+            $models = models_search($words[0]);
+         } else {  // brands found, looking for models of these brands
+            $models = collect();
+            foreach ($brands as $brand) {
+               $s = Brand::whereTitle($brand)->first()->carModels;
+               $models = $models->concat($s);
+            }
+         }
+         $cars = collect();
+         foreach ($models as $model) {
+            $s = $model->cars;
+            $cars = $cars->concat($s);
+            if ($cars->count() >= 1000) break;
+         }
+      } else {  // 2+ words  - 1-brand & 2-model
+         $cars = Car::whereHas("brand", function ($query) use ($words) {
+            $query->where("title", "like", "%" . $words[0] . "%");
+         });
+//         $cars = $cars->limit(1000)->get();
+         $cars->whereHas("carModels", function ($query) use ($words) {
+            $query->where("title", "like", "%" . $words[1] . "%");
+         });
+         $cars = $cars->limit(1000)->get();
+      }
+
+      // convert found cars to the result array of car->title + car->id
+      $cars = $cars->slice(0, 1000);
+      $found_cars = [];
+      foreach ($cars as $car) {
+         $title = $car->title . "    " . $car->production_year . "       " . number_format($car->price, 0, "", " ") . " $";
+         $found_cars[] = ["title" => $title, "id" => $car->id];
+      }
+      return collect($found_cars)->sortBy("title");
+
+//      $search_str = "%" . $request->data . "%";
       // сначала поиск по брэнду
-/*      $search = Brand::where("title", "like", $search_str)->limit(10);
+
+      /*      $search = Brand::where("title", "like", $search_str)->limit(10);
       if ($search->count()) {
          $search = Brand::where("title", "like", $search_str)->limit(10)->pluck("title");
          $additional_search = Car::whereHas("brand", function ($query) use ($search) {
@@ -94,24 +134,26 @@ class Car extends Model {
          }
       }*/
 
-      $search = CarModel::where("title", "like", $search_str)->limit(10);
-      if ($search->count()) {
-         $search = $search->get();
-         $additional_search = Car::query();
-         foreach ($search as $model) {
-            $additional_search->orWhereHas("carModel", function ($query) use ($model) {
-               $query->where("title", $model->title);
-            });
-            if ($additional_search->count() >= 10) break;
-         }
-         $search = $additional_search->limit(10)->get();
+      $found_models = models_search($words[0], "oyo");
+      /*      $search = CarModel::where("title", "like", $search_str)->limit(10);
+            if ($search->count()) {
+               $search = $search->get();
+               $additional_search = Car::query();
+               foreach ($search as $model) {
+                  $additional_search->orWhereHas("carModel", function ($query) use ($model) {
+                     $query->where("title", $model->title);
+                  });
+                  if ($additional_search->count() >= 10) break;
+               }
+               $search = $additional_search->limit(10)->get();
 
-         foreach ($search as $car) {
-            $title = $car->title . "    " . $car->production_year . "       " . number_format($car->price, 0, "", " ") . " $";
-            $found_items[] = ["title" => $title, "id" => $car->id];
-         }
-      }
-      return collect($found_items)->sortBy("title");
+               foreach ($search as $car) {
+                  $title = $car->title . "    " . $car->production_year . "       " . number_format($car->price, 0, "", " ") . " $";
+                  $found_items[] = ["title" => $title, "id" => $car->id];
+               }
+            }*/
+      return collect($found_models)->sortBy("title");
+
    }
 
    static function get_filters($checked_filters_from_site = [], $json = false) {
@@ -460,6 +502,36 @@ function count_one_filter_number($filter_category, $filter_value, $checked_filte
    Car::whereBetween("engine_capacity", [$filter_value, $end_value])->count();
 }
 
+function brands_search($brand_title) {
+   $search = Brand::where("title", "like", "%" . $brand_title . "%")->limit(10)->pluck("title")->toArray();
 
+   return $search;
+}
 
+function models_search($model, $brand = "") {
+   if ($brand) $search = CarModel::where("title", "like", "%" . $model . "%")->whereHas("brand", function ($query) use ($brand) {
+      $query->where("title", "like", "%" . $brand . "%");
+   })->limit(10);
+   else $search = CarModel::where("title", "like", "%" . $model . "%")->limit(10);
+   $search = $search->get();
+   return $search;
 
+   /*   $found_items = [];
+      if ($search->count()) {
+         $search = $search->get();
+         $additional_search = Car::query();
+         foreach ($search as $model) {
+            $additional_search->orWhereHas("carModel", function ($query) use ($model) {
+               $query->where("title", $model->title);
+            });
+            if ($additional_search->count() >= 10) break;
+         }
+         $search = $additional_search->limit(10)->get();
+
+         foreach ($search as $car) {
+            $title = $car->title . "    " . $car->production_year . "       " . number_format($car->price, 0, "", " ") . " $";
+            $found_items[] = ["title" => $title, "id" => $car->id];
+         }
+      }
+      return $found_items;*/
+}
