@@ -279,7 +279,7 @@ $(function () {
     // обработчик клика кнопка-checkbox  фильтра
     // $(document).on("change", "input[type=checkbox,name^='filters_']", filter_click_handler);
     $(document).on("click", "*[data-func]", {}, datafunc_click_handler);
-    $(document).on("change", "input[name^=filters_checkbox__]", {}, filter_click_handler);
+    $(document).on("change", "input[name^=filters_checkbox__]", filter_click_handler);
     $(document).on("click", "*[data-func^=apply_filters_]", {}, filter_click_handler);
     // $(document).on("keyup input", "#search, #search_mobile", search_input_handler);
     $(document).on("click", "a, button", {}, datafunc_click_handler);

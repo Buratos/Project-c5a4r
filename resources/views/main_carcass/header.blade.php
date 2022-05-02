@@ -16,7 +16,7 @@
 					<form class="d-flex">
 						<div class="input-group search_wrapper">
 							<input id="search_mobile" name="search_mobile" type="search" class="form-control" placeholder="Search in ads..." aria-label="Search" autocomplete="off">
-							<button class="btn btn-outline-secondary" type="button" id="button-addon1">
+							<button class="btn btn-outline-secondary do_search" type="button" id="button-addon1">
 								<svg class="bi" width="16" height="16">
 									<use xlink:href="#i_search"></use>
 								</svg>
@@ -24,15 +24,7 @@
 							<div class="dynamic_search_results_mobile mt-2 mb-2 d-none">
 							</div>
 						</div>
-
-						{{--
-						<input id="search" name="search" type="search" class="form-control" placeholder="Search in ads..." aria-label="Search" autocomplete="off">
-						<button class="btn btn-outline-success me-3" type="submit">
-							<svg class="bi" width="16" height="16">
-								<use xlink:href="#i_search"></use>
-							</svg>
-						</button>
-					--}}</form>
+						</form>
 				</div>
 				<div class="navbar-collapse collapse" id="navbar_mobile_red_menu">
 					<div class="row mx-0 justify-content-center">
@@ -91,36 +83,19 @@
 				</div>
 				<span class="text-danger fw-bold m-0" style="font-size: 2rem;">CAR SALE</span>
 			</a>
-			<form class="me-3" style="flex: 1 0 8rem">
+			<form id="search_form" class="me-3" style="flex: 1 0 8rem" action="/search">
 				<div class="input-group search_wrapper">
-					<input id="search" name="search" type="search" class="form-control" placeholder="Search in ads..." aria-label="Search" autocomplete="off">
-					<button class="btn btn-outline-secondary" type="button" id="button-addon1">
+					<input id="search" name="search_str" type="search" class="form-control" placeholder="Search in ads..." aria-label="Search" autocomplete="off">
+					<button class="btn btn-outline-secondary" id="btn_search_submit" type="submit">
 						<svg class="bi" width="16" height="16">
 							<use xlink:href="#i_search"></use>
 						</svg>
 					</button>
+{{--					<input id="btn_search_submit" class="btn btn-outline-secondary" type="submit" value="SEARCH">--}}
 					<div class="dynamic_search_results mt-2 mb-2 d-none ">
 					</div>
 				</div>
 			</form>
-			{{--<ul class="d-none d-md-flex nav my-2 flex-nowrap">
-				<li>
-					<a href="#" class="nav-link text-secondary pe-2">
-						<svg class="bi d-block mx-auto mt-2" width="24" height="24">
-							<use xlink:href="#i_favorite"></use>
-						</svg>
-						Favorite
-					</a>
-				</li>
-				<li>
-					<a href="#" class="nav-link text-secondary ps-2">
-						<svg class="bi d-block mx-auto mt-2" width="24" height="24">
-							<use xlink:href="#i_compare"></use>
-						</svg>
-						Compare
-					</a>
-				</li>
-			</ul>--}}
 			<div class="for_unknown_user">
 				<button type="button" class="btn btn-outline-secondary ms-4 ms-md-0 me-2">Log in</button>
 				<button type="button" class="btn btn-outline-secondary">Register</button>

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 //Artisan::call('view:clear');
 
+Route::get('/search', [\App\Http\Controllers\CarController::class, "show_search_results"])->name("show_search_results");
 Route::get('/view_car/{id}', [\App\Http\Controllers\CarController::class, "view"])->name("view_car");
 Route::get('/edit_car/{id}', [\App\Http\Controllers\CarController::class, "edit"])->name("edit_car");
 Route::get('/catalog/{brand}', [\App\Http\Controllers\CarController::class, "display_catalog"]);
@@ -23,11 +24,9 @@ Route::get('/', function () {
 });
 Route::get('/', [\App\Http\Controllers\CarController::class, "index"]);
 Route::get('/tests', [\App\Http\Controllers\CarController::class, "tests"]);
-Route::get('/dashboard', [\App\Http\Controllers\CarController::class, "dashboard"]);
 Route::get('/add', [\App\Http\Controllers\CarController::class, "add"]);
 Route::get('/html', function () {
   return file_get_contents("index.html");
-// return view('main_page_template');
 });
 
 /* обработка запросов AJAX-POST */

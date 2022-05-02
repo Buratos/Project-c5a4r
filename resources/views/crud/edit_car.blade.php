@@ -6,24 +6,24 @@
 		<form class="add_new_car_form" enctype="multipart/form-data" id="add_new_car_form">
 			<div class="row justify-content-center">
 				<div class="col-12 col-sm-6">
-					<div class="col-12 mt-1">
+					<div class="col-12 mt-0">
 						<label class="" for="brand_list">Car brand</label>
-						<input list="brand_datalist" id="brand_list" name="brand" placeholder="Choose car brand" value="{{$car->brand->title}}">
+						<input list="brand_datalist" id="brand_list" name="brand" placeholder="Choose car brand" value="">  {{-- {{$car->brand->title}} --}}
 						<datalist id="brand_datalist">
 							@foreach ($brand_titles as $title)
 								<option value="{{$title}}">
 							@endforeach
 						</datalist>
 					</div>
-					<div class="col-12 col-sm-6 mt-2 first_choose_brand">
+					<div class="col-12 col-sm-6 mt-2 first_choose_brand d-none">
 						<span class="text-nowrap" for="">Car model - first choose car brand</span>
 					</div>
 					<div class="col-12 col-sm-6 mt-2 d-none no_models_found">
 						<span class="" for="">No models found of the brand you entered</span>
 					</div>
-					<div class="col-12 car_model_selection d-none">
+					<div class="col-12 mt-2 car_model_selection">
 						<label for="car_model_list">Car model</label>
-						<input list="car_model_datalist" id="car_model_list" name="car_model" placeholder="Choose or input car model" autocomplete="off" value="{{$car->model}}">
+						<input list="car_model_datalist" id="car_model_list" name="car_model" placeholder="Choose or input car model" autocomplete="off" value="">  {{-- {{$car->model}} --}}
 						<datalist id="car_model_datalist"></datalist>
 					</div>
 					<div class="col-12 mt-2">
@@ -68,7 +68,7 @@
 				</div>
 				<div class="d-none d-sm-block p-0 m-0" style="width: 0px;outline: 1px solid #ecedee;margin-left: -20px"></div>
 				<div class="col-12 col-sm-6">
-					<div class="col-12 mt-2">
+					<div class="col-12 mt-0">
 						<label for="transmission_type_list">Car transmission type</label>
 						<input list="transmission_type_datalist" id="transmission_type_list" name="transmission_type" placeholder="input or choose transmission type" value="{{$car->transmissionType->title}}">
 						<datalist id="transmission_type_datalist">

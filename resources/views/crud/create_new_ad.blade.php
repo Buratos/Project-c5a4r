@@ -6,9 +6,9 @@
 		<form class="add_new_car_form" enctype="multipart/form-data" id="add_new_car_form">
 			<div class="row justify-content-center">
 				<div class="col-12 col-sm-6">
-					<div class="col-12 mt-1">
+					<div class="col-12 mt-0">
 						<label class="" for="brand_list">Car brand</label>
-						<input list="brand_datalist" id="brand_list" name="brand" placeholder="Choose car brand" value="Fiat">
+						<input list="brand_datalist" id="brand_list" name="brand" placeholder="Choose car brand" value="">
 						<datalist id="brand_datalist">
 							@foreach ($brand_titles as $title)
 								<option value="{{$title}}">
@@ -21,9 +21,9 @@
 					<div class="col-12 col-sm-6 mt-2 d-none no_models_found">
 						<span class="" for="">No models found of the brand you entered</span>
 					</div>
-					<div class="col-12 car_model_selection d-none">
+					<div class="col-12 car_model_selection mt-2 d-none">
 						<label for="car_model_list">Car model</label>
-						<input list="car_model_datalist" id="car_model_list" name="car_model" placeholder="Choose or input car model" autocomplete="off" value="Bravo">
+						<input list="car_model_datalist" id="car_model_list" name="car_model" placeholder="Choose or input car model" autocomplete="off" value="">
 						<datalist id="car_model_datalist"></datalist>
 					</div>
 					<div class="col-12 mt-2">
@@ -68,7 +68,7 @@
 				</div>
 				<div class="d-none d-sm-block p-0 m-0" style="width: 0px;outline: 1px solid #ecedee;margin-left: -20px"></div>
 				<div class="col-12 col-sm-6">
-					<div class="col-12 mt-2">
+					<div class="col-12 mt-0">
 						<label for="transmission_type_list">Car transmission type</label>
 						<input list="transmission_type_datalist" id="transmission_type_list" name="transmission_type" placeholder="input or choose transmission type" value="Automatic">
 						<datalist id="transmission_type_datalist">
@@ -96,12 +96,12 @@
 					</div>
 					<div class="col-12 mt-2">
 						<h6 class="">Dimensions of a car:</h6>
-						<label for="dimensions_length" class="">Length, mm</label>
-						<input id="dimensions_length" name="dimensions_length" type="number" placeholder="Input height, mm" value="4700" style="width: 5rem" class="me-3">
-						<label for="dimensions_width" class="">Width, mm</label>
-						<input id="dimensions_width" name="dimensions_width" type="number" placeholder="Input width, mm" value="1780" style="width: 5rem" class="me-3">
-						<label for="dimensions_height" class="">Height, mm</label>
-						<input id="dimensions_height" name="dimensions_height" type="number" placeholder="Input height, mm" value="1730" style="width: 5rem">
+						<label for="dimensions_length" class="mt-2">Length, mm</label>
+						<input id="dimensions_length" name="dimensions_length" type="number" placeholder="Input height, mm" value="510" style="width: 5rem" class="me-3"><br>
+						<label for="dimensions_width" class="mt-2">Width, mm</label>
+						<input id="dimensions_width" name="dimensions_width" type="number" placeholder="Input width, mm" value="181" style="width: 5rem" class="me-3"><br>
+						<label for="dimensions_height" class="mt-2">Height, mm</label>
+						<input id="dimensions_height" name="dimensions_height" type="number" placeholder="Input height, mm" value="176" style="width: 5rem">
 					</div>
 					<div class=" col-12 mt-2 ">
 						<span class="mt-3 me-2">Was a car in accident ?</span>

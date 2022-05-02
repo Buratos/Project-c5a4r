@@ -13,7 +13,7 @@
 	-->
 	<script src="/js/jquery-3.6.0.min.js" type="text/javascript"></script>
 	@isset($debug_mode_on) <script src="/js/live_only_JS_and_css.js" type="text/javascript"></script> @endisset
-	<script src="/js/dashboard.js" type="text/javascript"></script>
+	<script src="/js/create_and_edit_car.js" type="text/javascript"></script>
 	<script src="/js/search.js" type="text/javascript"></script>
 	<script src="/js/_my_functions_lib.js" type="text/javascript"></script>
 	<!-- jquery-fancy file uploader -->

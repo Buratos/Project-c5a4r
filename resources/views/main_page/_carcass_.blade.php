@@ -1,9 +1,10 @@
 <!doctype html>
 <html lang="en">
-@includeIf("debug_mode_on") {{--▪ Для включения режима отладки (включает live_js) ▪--}}
 
+{{--▪▪▪  tag HEAD  ▪▪▪--}}
 @if (isset($create_new_ad_page))	@include('crud.tag_head__create_new_ad')
-@else  @include('main_page.tag_head')           {{--▪▪▪  HEADER  ШАПКА и МЕНЮ  ▪▪▪--}}
+@elseif (isset($edit_car_page))	@include('crud.tag_head__create_new_ad')
+@else  @include('main_page.tag_head')
 @endif
 
 <body>
@@ -21,6 +22,8 @@
 	@include('crud.view_car')
 @elseif (isset($edit_car_page))
 	@include('crud.edit_car')
+@elseif (isset($show_search_results))
+	@include('search.show_search_results')
 @else
 	@include("main_carcass.brands_menu")       {{--▪▪▪ МЕНЮ  ИКОНОК  БРЭНДОВ  ▪▪▪--}}
 	@include('main_carcass.filters')           {{--▪▪▪ ФИЛЬТРЫ  FILTERS ▪▪▪--}}

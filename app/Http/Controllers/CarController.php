@@ -15,6 +15,13 @@ use Illuminate\Support\Str;
 
 class CarController extends Controller {
 
+   public function show_search_results(Request $request) {
+
+      $cars = Car::get_search_results($request);
+      return view("main_page._carcass_", ["show_search_results" => 1, "cars" => $cars]);
+
+
+   }
 
    /*********************************************************************
     * вызывается для выдачи корневой страницы
@@ -33,18 +40,6 @@ class CarController extends Controller {
          $error_message = "No cars for brand '" . $request->brand . "' found.";
          return view("main_page._carcass_", ["error" => $error, "error_message" => $error_message, "filters" => $filters["filters"], "total_cars_found" => $filters["total_cars_found"], "brands" => Brand::pluck("title")->toArray()]);
       }
-
-
-      /*      //    $cars = Car::inRandomOrder()->limit(15)->get();
-            $cars = Car::whereHas("brand", function ($query) {
-               $query->where("title", "Nissan");
-            })->limit($cars_per_page)->get();
-            $total_cars_number = Car::whereHas("brand", function ($query) {
-               $query->where("title", "Nissan");
-            })->limit($cars_per_page)->count();*/
-      /*          $cars = Car::whereHas("brand", function ($query) {
-                  $query->where("title", "Fiat");
-                })->Paginate($cars_per_page);*/
       $cars = $cars->Paginate($cars_per_page);
 
       return view("main_page._carcass_", ["catalog" => 1, "cars" => $cars, "filters" => $filters["filters"], "total_cars_found" => $filters["total_cars_found"], "cars_per_page" => $cars_per_page, "cars_number" => $cars_number, "brands" => Brand::pluck("title")->toArray()]);
@@ -55,16 +50,7 @@ class CarController extends Controller {
     */
    public function index() {
       $cars_per_page = 15;
-      /*      //    $cars = Car::inRandomOrder()->limit(15)->get();
-            $cars = Car::whereHas("brand", function ($query) {
-               $query->where("title", "Nissan");
-            })->limit($cars_per_page)->get();
-            $total_cars_number = Car::whereHas("brand", function ($query) {
-               $query->where("title", "Nissan");
-            })->limit($cars_per_page)->count();*/
-      /*          $cars = Car::whereHas("brand", function ($query) {
-                  $query->where("title", "Fiat");
-                })->Paginate($cars_per_page);*/
+
       $cars = Car::inRandomOrder()->Paginate($cars_per_page);
       $cars_number = Car::count();
       $filters = Car::get_filters();
@@ -117,7 +103,7 @@ class CarController extends Controller {
          $body_type_titles = BodyType::orderBy("title")->pluck("title", "id");
 
          $car_title = $car->title . " " . $car->production_year;
-         $response = ["edit_car_page" => 1, "car" => $car,"car_title" => $car_title, "brand_titles" => $brand_titles, "body_type_titles" => $body_type_titles];
+         $response = ["edit_car_page" => 1, "car" => $car, "car_title" => $car_title, "brand_titles" => $brand_titles, "body_type_titles" => $body_type_titles, "page_title" => "EDIT CAR"];
 
       }
       return view("main_page._carcass_", $response);
@@ -189,12 +175,19 @@ class CarController extends Controller {
       echo "<div style='padding-left: 3rem; text-align: left;font-family:Roboto '>";
       // ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪
 
-      $title = "viper";
+      $cars = Car::whereHas("brand", function ($query) {
+         $query->where("title", "Fiat");
+      });
+
+      $cars->Paginate(15)->withPath("/");
+
+
+      $title = "vectra";
       $additional_search = Car::query();
       $additional_search->whereHas("carModel", function ($query) use ($title) {
          $query->where("title", $title);
       });
-      $title = "fiat";
+      $title = "opel";
 
       $additional_search->orWhere(function ($query) {
          $query->whereHas("brand", function ($query) {
@@ -207,13 +200,45 @@ class CarController extends Controller {
 
       $search = $additional_search->limit(100)->get();
 
-      $search->each(function ($item, $key) {
+      /*      $search->each(function ($item, $key) {
+               ech("ID - " . $item->id);
+               ech("BRAND - " . $item->brand->title);
+               ech("MODEL - " . $item->model);
+               ech("PRICE - " . $item->price);
+               ech();
+            });*/
+      ech("---------------------");
+
+      $words = ["yo", "er"];
+      $cars = Car::whereHas("brand", function ($query) use ($words) {
+         $query->where("title", "like", "%" . $words[0] . "%");
+      })->whereHas("carModel", function ($query) use ($words) {
+         $query->where("title", "like", "%" . $words[1] . "%");
+      })->limit(1000)->get();
+
+      ech("ВСЕГО НАЙДЕНО - " . $cars->count());
+      $cars->each(function ($item, $key) {
          ech("ID - " . $item->id);
          ech("BRAND - " . $item->brand->title);
          ech("MODEL - " . $item->model);
          ech("PRICE - " . $item->price);
          ech();
       });
+      ech("---------------------");
+      ech();
+      $cars = Car::whereHas("carModel", function ($query) use ($words) {
+         $query->where("title", "like", "%" . $words[1] . "%");
+      })->limit(1000)->get();
+
+      ech("ВСЕГО НАЙДЕНО - " . $cars->count());
+      $cars->each(function ($item, $key) {
+         ech("ID - " . $item->id);
+         ech("BRAND - " . $item->brand->title);
+         ech("MODEL - " . $item->model);
+         ech("PRICE - " . $item->price);
+         ech();
+      });
+
       // ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪
       echo "</div>";
       return;
