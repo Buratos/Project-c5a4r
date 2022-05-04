@@ -5,22 +5,46 @@ namespace App\Http\Controllers;
 use App\Models\BodyType;
 use App\Models\Brand;
 use App\Models\Car;
-use App\Models\CarModel;
-use App\View\Components\car_card;
 use Faker\Factory;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class CarController extends Controller {
+
+
+   /*********************************************************************
+    */
+   public function test_edit(Request $request) {
+      /*      $car = Car::whereId($request->id)->first();
+            if (!$car) $response = ["error_message" => "No such car found :(",];
+            else {
+               $brand_titles = Brand::orderBy("title")->pluck("title", "id");
+               $body_type_titles = BodyType::orderBy("title")->pluck("title", "id");
+
+               $car_title = $car->title . " " . $car->production_year;
+               $response = ["edit_car_page" => 1, "car" => $car, "car_title" => $car_title, "brand_titles" => $brand_titles, "body_type_titles" => $body_type_titles, "page_title" => "EDIT CAR"];
+
+            }
+            return view("main_page._carcass_", $response);*/
+      $car = Car::whereId(123)->first();
+      if (!$car) $response = ["error_message" => "No such car found :("];
+      else {
+         $car_title = $car->title . " " . $car->production_year;
+         $faker = Factory::create();
+         $description = $faker->text(1000);
+         $brand_titles = Brand::orderBy("title")->pluck("title", "id");
+         $body_type_titles = BodyType::orderBy("title")->pluck("title", "id");
+
+         $response = ["test_edit" => 1, "car" => $car, "car_title" => $car_title, "brand_titles" => $brand_titles, "body_type_titles" => $body_type_titles, "page_title" => "TEST_EDIT"];
+      }
+      return view("main_page._carcass_", $response);
+
+   }
 
    public function show_search_results(Request $request) {
 
       $cars = Car::get_search_results($request);
-      return view("main_page._carcass_", ["show_search_results" => 1, "cars" => $cars]);
-
-
+      if (!$cars["cars"]->count()) return view("main_page._carcass_", ["error_message" => "No cars found"]);
+      return view("main_page._carcass_", ["show_search_results" => 1, "cars" => $cars["cars"], "cars_per_page" => 15, "cars_number" => $cars["cars_number"]]);
    }
 
    /*********************************************************************
@@ -85,7 +109,7 @@ class CarController extends Controller {
    public function view(Request $request) {
 
       $car = Car::view($request);
-      if (!$car) $response = ["error_message" => "No such car found :(",];
+      if (!$car) $response = ["error_message" => "No such car found :("];
       else $response = ["view_car_page" => 1, "car" => $car];
 
       return view("main_page._carcass_", $response);
@@ -97,7 +121,7 @@ class CarController extends Controller {
    public function edit(Request $request) {
 
       $car = Car::whereId($request->id)->first();
-      if (!$car) $response = ["error_message" => "No such car found :(",];
+      if (!$car) $response = ["error_message" => "No such car found :("];
       else {
          $brand_titles = Brand::orderBy("title")->pluck("title", "id");
          $body_type_titles = BodyType::orderBy("title")->pluck("title", "id");
@@ -174,13 +198,10 @@ class CarController extends Controller {
    public function tests() {
       echo "<div style='padding-left: 3rem; text-align: left;font-family:Roboto '>";
       // ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪
-
-      $cars = Car::whereHas("brand", function ($query) {
-         $query->where("title", "Fiat");
-      });
-
-      $cars->Paginate(15)->withPath("/");
-
+      $test_str_rus = "Cтрoка тekctа. Проверяю функцию str_word_count.";
+      $test_str_eng = "Line of text. Checking the str_word_count function.";
+      $rus_words = str_word_count($test_str_rus, 1, '1234567890йцукенгшщзхъфывапролджэячсмитьбюёЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮЁ');
+      $eng_words = str_word_count($test_str_eng, 1, '1234567890йцукенгшщзхъфывапролджэячсмитьбюёЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮЁ');
 
       $title = "vectra";
       $additional_search = Car::query();

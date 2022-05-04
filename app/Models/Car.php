@@ -21,8 +21,8 @@ class Car extends Model {
       $results_limit = 10000000;
       $cars_per_page = 15;
 
-      $cars = search($request, $results_limit)->Paginate($cars_per_page)->appends("search_str",$request->search_str);
-      return $cars;
+      $cars = search($request, $results_limit);
+      return ["cars" => $cars->Paginate($cars_per_page)->appends("search_str", $request->search_str), "cars_number" => $cars->count()];
    }
 
    /*
@@ -440,10 +440,10 @@ function count_one_filter_number($filter_category, $filter_value, $checked_filte
 function search(Request $request, $limit = 20) {
    switch ($request->method()) {
       case "GET" :   // standard search
-         $words = str_word_count($request->search_str, 1, '1234567890');
+         $words = str_word_count($request->search_str, 1, '1234567890йцукенгшщзхъфывапролджэячсмитьбюёЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮЁ');
          break;
       case "POST" :  // dynamic quick search
-         $words = str_word_count($request->data, 1, '1234567890');
+         $words = str_word_count($request->data, 1, '1234567890йцукенгшщзхъфывапролджэячсмитьбюёЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮЁ');
          break;
    }
    if (count($words) == 1) {
@@ -459,6 +459,7 @@ function search(Request $request, $limit = 20) {
             $models = $models->concat($s);
          }
       }
+      if (!$models->count()) return Car::whereId(-1);
       $cars = Car::query();
       foreach ($models as $model) {
          $cars->orWhereHas("carModel", function ($query) use ($model) {
@@ -466,11 +467,6 @@ function search(Request $request, $limit = 20) {
          });
          if ($cars->count() >= $limit) break;
       }
-/*      foreach ($models as $model) {
-         if (!isset($cars)) $cars = $model->cars;
-         else $cars = $cars->concat($model->cars);
-         if ($cars->count() >= $limit) break;
-      }*/
    } else {  // 2+ words  - 1-brand & 2-model
       $cars = Car::whereHas("brand", function ($query) use ($words) {
          $query->where("title", "like", "%" . $words[0] . "%");
@@ -495,23 +491,4 @@ function models_search($model, $brand = "") {
    else $search = CarModel::where("title", "like", "%" . $model . "%")->limit(10);
    $search = $search->get();
    return $search;
-
-   /*   $found_items = [];
-      if ($search->count()) {
-         $search = $search->get();
-         $additional_search = Car::query();
-         foreach ($search as $model) {
-            $additional_search->orWhereHas("carModel", function ($query) use ($model) {
-               $query->where("title", $model->title);
-            });
-            if ($additional_search->count() >= 10) break;
-         }
-         $search = $additional_search->limit(10)->get();
-
-         foreach ($search as $car) {
-            $title = $car->title . "    " . $car->production_year . "       " . number_format($car->price, 0, "", " ") . " $";
-            $found_items[] = ["title" => $title, "id" => $car->id];
-         }
-      }
-      return $found_items;*/
 }

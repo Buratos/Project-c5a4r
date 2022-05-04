@@ -4,6 +4,7 @@
 {{--▪▪▪  tag HEAD  ▪▪▪--}}
 @if (isset($create_new_ad_page))	@include('crud.tag_head__create_new_ad')
 @elseif (isset($edit_car_page))	@include('crud.tag_head__create_new_ad')
+@elseif (isset($test_edit))	@include('crud.tag_head__create_new_ad')
 @else  @include('main_page.tag_head')
 @endif
 
@@ -12,6 +13,8 @@
 @include('main_carcass.header')           {{--▪▪▪  HEADER  ШАПКА и МЕНЮ  ▪▪▪--}}
 
 @if (isset($error_message)) @include('errors.default')
+@elseif (isset($test_edit))
+	@include('crud.___test_edit')
 @elseif (isset($catalog))
 	@include("main_carcass.brands_menu")       {{--▪▪▪ МЕНЮ  ИКОНОК  БРЭНДОВ  ▪▪▪--}}
 	@include('main_carcass.filters')           {{--▪▪▪ ФИЛЬТРЫ  FILTERS ▪▪▪--}}

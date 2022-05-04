@@ -1,7 +1,9 @@
 <div class="content container pt-3 pb-1">
 	<div class="row car_list">
-		<div class="col-12 paginator_container">{{$cars->onEachSide(0)->links()}}</div>
-		<div class="col-12 paginator__test_container"></div>
+		<div class="col-12 col-sm-6 mt-1 mb-2 load_more_btn_container">
+			<span class="me-4">Found <span>{{$cars->total()}}</span> cars</span>
+		</div>
+		<div class="col-12 col-sm-6 paginator_container">{{$cars->onEachSide(0)->links()}}</div>
 		<div class="d-flex flex-wrap ps-2 pe-0 car_list_container"> <!-- ОБЁРТКА ЧТОБЫ ВЫРОВНЯТЬ ОТСТУПЫ МЕЖДУ CARDs-->
 			@foreach($cars as $car)
 				@php
@@ -14,9 +16,10 @@
 				<x-car_card_for_search_results :url-for-card="$url_for_card" :car-photo-url="$car_photo_url" :car-title="$car->title" :car-price="$car_price" :car-parameters="$car_year"/>
 			@endforeach
 		</div>
-		{{--<div class="col-12 text-center mt-1 mb-2 load_more_btn_container">
-			<span class="me-4">Показано <span class="total_loaded_cars">{{$cars_per_page}}</span> машин из <span>{{$cars_number}}</span></span>
-			<button class="btn btn-outline-secondary lh-sm btn_load_more" type="button" data-func="load_more" data-already-loaded-pages="1">Load more...</button>
-		</div>--}}
+		<div class="col-12 col-sm-6 mt-1 mb-2 load_more_btn_container">
+			<span class="me-4">Found <span>{{$cars->total()}}</span> cars</span>
+		</div>
+		<div class="col-12 col-sm-6 paginator_container">{{$cars->onEachSide(0)->links()}}</div>
+
 	</div>
 </div>

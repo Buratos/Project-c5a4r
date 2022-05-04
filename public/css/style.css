@@ -505,7 +505,7 @@ input:checked ~ .btn_checkbox_text:hover {
 /* ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
 /* ▪▪▪▪▪▪▪▪▪▪ PAGINATOR ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
 .paginator_container .pagination {
-  justify-content: center;
+  justify-content: end;
 }
 .page-item.active .page-link {
   color: #FFFFFF;
@@ -517,13 +517,15 @@ input:checked ~ .btn_checkbox_text:hover {
   background-color: #FFFFFF;
 }
 /* ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
-/* ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
-.load_more_btn_container > span > span {
-}
-.load_more_btn_container > span > span {
+.load_more_btn_container > span > span, .found_xxx_cars > span > span {
   color: #000000;
   font-weight: bold;
 }
+.found_xxx_cars {
+  display: flex;
+  align-items: center;
+}
+/* ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪*/
 .data_form .col-12 {
   margin-top: 0.5rem;
 }

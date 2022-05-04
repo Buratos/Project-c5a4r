@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 //Artisan::call('view:clear');
 
 Route::get('/search', [\App\Http\Controllers\CarController::class, "show_search_results"])->name("show_search_results");
+Route::get('/test_edit', [\App\Http\Controllers\CarController::class, "test_edit"])->name("test_edit");
 Route::get('/view_car/{id}', [\App\Http\Controllers\CarController::class, "view"])->name("view_car");
 Route::get('/edit_car/{id}', [\App\Http\Controllers\CarController::class, "edit"])->name("edit_car");
 Route::get('/catalog/{brand}', [\App\Http\Controllers\CarController::class, "display_catalog"]);
