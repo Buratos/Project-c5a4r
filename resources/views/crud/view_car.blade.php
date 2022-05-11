@@ -5,6 +5,7 @@
 		<div class="row my-1">
 			<div class="col-12 text-center">
 				<a href="{{route("edit_car",["id" => $car->id])}}" class="btn btn-primary me-3" id="edit_car" style="min-width: 7rem">Edit car</a>
+				<a href="{{route("delete_car",["id" => $car])}}" class="btn btn-primary me-3" id="delete_car" style="min-width: 7rem">Delete car</a>
 			</div>
 		</div>
 		<div class="col-12 ps-0 ps-sm-0 pe-2 pe-sm-2 mb-2">

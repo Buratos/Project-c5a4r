@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Listeners\DeleteCarPhotos;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -13,6 +15,7 @@ class Car extends Model {
    use HasFactory;
 
    protected $guarded = [];
+   protected $dispatchesEvents = ["deleting" => DeleteCarPhotos::class];
 
    /*
       Returns the search results for search in the head of page
@@ -344,8 +347,19 @@ class Car extends Model {
    }
 
    /*
-
+Delete car and it's photos (The photos deletes by events)
    */
+   public static function delete_car(Request $request) {
+/*      $car = Car::find($request->id);
+      $car_title = $car->title . " " . $car->production_year;
+      $car->delete();
+      return $car_title;*/
+
+//      Car::destroy(1250);
+      $car = Car::latest()->first();
+      $ttt = $car->delete();
+      return "НИЧО НЕ УДАЛЕНО, ЭТО ТЕСТ";
+   }
 
    public function user() {
       return $this->belongsTo(User::class);
@@ -402,6 +416,9 @@ class Car extends Model {
 
 }
 
+// ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪
+// ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪
+// ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪
 function count_one_filter_number($filter_category, $filter_value, $checked_filters, $count_only_checked = false) {
    $simple_columns = ["production_year", "number_doors", "number_places", "was_in_accident"];
    $binded_columns = ["brand", "car_model", "body_type", "color", "transmission_type", "vehicle_drive_type", "engine_type"];

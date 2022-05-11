@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Car;
 use Faker\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller {
 
@@ -25,12 +26,10 @@ class CarController extends Controller {
 
             }
             return view("main_page._carcass_", $response);*/
-      $car = Car::whereId(123)->first();
+      $car = Car::whereId(33/*$request->id*/)->first();
       if (!$car) $response = ["error_message" => "No such car found :("];
       else {
          $car_title = $car->title . " " . $car->production_year;
-         $faker = Factory::create();
-         $description = $faker->text(1000);
          $brand_titles = Brand::orderBy("title")->pluck("title", "id");
          $body_type_titles = BodyType::orderBy("title")->pluck("title", "id");
 
@@ -130,6 +129,32 @@ class CarController extends Controller {
          $response = ["edit_car_page" => 1, "car" => $car, "car_title" => $car_title, "brand_titles" => $brand_titles, "body_type_titles" => $body_type_titles, "page_title" => "EDIT CAR"];
 
       }
+      return view("main_page._carcass_", $response);
+   }
+
+   /*********************************************************************
+    * удаление записи / машины / row
+    */
+   public function delete(Request $request) {
+
+//      $car = Car::find($request->id);
+//      $car_title = $car->title . " " . $car->production_year;
+
+//      $car = $car->delete();
+//      $car = Car::find(12323423);
+//      $car->delete();
+//      $car = Car::destroy($request->id);
+//      $car = Car::destroy([1261]);
+//      Car::destroy(1251);
+
+      /*      $aaa = Storage::delete("public/car_photos/" . "nofile.ext");
+      $car = Car::find(1249);
+      foreach ($car->carPhotos as $photo_file) $aaa = Storage::delete("public/car_photos/" . $photo_file->filename);
+      $bbb = $car->carPhotos()->delete();
+      $aaa = $car->delete();*/
+
+      $car_title = Car::delete_car($request);
+      $response = ["delete_car" => 1, "message" => "Car <em>" . $car_title . "</em> deleted."];
       return view("main_page._carcass_", $response);
    }
 

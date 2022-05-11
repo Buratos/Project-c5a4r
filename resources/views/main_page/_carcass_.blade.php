@@ -25,6 +25,8 @@
 	@include('crud.view_car')
 @elseif (isset($edit_car_page))
 	@include('crud.edit_car')
+@elseif (isset($delete_car))
+	@include('crud.car_deleted')
 @elseif (isset($show_search_results))
 	@include('search.show_search_results')
 @else

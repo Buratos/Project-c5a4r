@@ -25,7 +25,8 @@ Route::get('/', function () {
 });
 Route::get('/', [\App\Http\Controllers\CarController::class, "index"]);
 Route::get('/tests', [\App\Http\Controllers\CarController::class, "tests"]);
-Route::get('/add', [\App\Http\Controllers\CarController::class, "add"]);
+Route::get('/add/', [\App\Http\Controllers\CarController::class, "add"]);
+Route::get('/delete_car/{id}', [\App\Http\Controllers\CarController::class, "delete"])->name("delete_car");
 Route::get('/html', function () {
   return file_get_contents("index.html");
 });
