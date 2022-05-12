@@ -25,7 +25,6 @@ class CarCreatedListener {
     */
    public function handle(CarCreatedEvent $event) {
       $car_title = $event->car->title . $event->car->production_year;
-//      ech("СОХРАНЕНА car " . $car_title);
       return false;
    }
 }

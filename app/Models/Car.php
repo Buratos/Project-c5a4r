@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use function App\Http\Controllers\ech;
@@ -34,39 +35,42 @@ class Car extends Model {
    */
 
    static function create($request) {
-      $files = $request->allFiles();
       $data = $_POST;
-      $photos_to_DB = [];
-      $number = 0;
-      foreach ($files as $file) {
-         if ($file->getError()) continue;
-         $filename = (string)Str::uuid() . "." . $file->extension();
-         $path = Storage::putFileAs("public/car_photos", $file, $filename);
-         $number++;
-         $photos_to_DB[] = CarPhoto::make(["filename" => $filename, "number" => $number]);
-      }
+      DB::transaction(function () use ($request, $data) {
+         $files = $request->allFiles();
+         $photos_to_DB = [];
+         $number = 0;
+         foreach ($files as $file) {
+            if ($file->getError()) continue;
+            $filename = (string)Str::uuid() . "." . $file->extension();
+            $path = Storage::putFileAs("public/car_photos", $file, $filename);
+            $number++;
+            $photos_to_DB[] = CarPhoto::make(["filename" => $filename, "number" => $number]);
+         }
 
-      $fuel_consumption_highway = mt_rand(60, 120) / 10;
-      $fuel_consumption_city = $fuel_consumption_highway * 1.6;
-      $fuel_consumption_mixed = $fuel_consumption_highway * 1.3;
-      $model_year = $data["production_year"] - mt_rand(0, 4);
+         $fuel_consumption_highway = mt_rand(60, 120) / 10;
+         $fuel_consumption_city = $fuel_consumption_highway * 1.6;
+         $fuel_consumption_mixed = $fuel_consumption_highway * 1.3;
+         $model_year = $data["production_year"] - mt_rand(0, 4);
 
-      $brand_id = Brand::whereTitle($data["brand"])->first();
-      if ($brand_id == null) $brand_id = Brand::forceCreate(["title" => $data["brand"]])->id;
-      else $brand_id = $brand_id->id;
-      $model_id = CarModel::whereTitle($data["car_model"])->first()->id;
-      $body_type_id = BodyType::whereTitle($data["body_type"])->first()->id;
-      $engine_type_id = EngineType::whereTitle($data["engine_type"])->first()->id;
-      $color_id = Color::whereTitle($data["color"])->first()->id;
-      $transmission_type_id = TransmissionType::whereTitle($data["transmission_type"])->first()->id;
-      $vehicle_drive_type_id = VehicleDriveType::whereTitle($data["vehicle_drive_type"])->first()->id;
-      $production_country_id = 10;
+         $brand_id = Brand::whereTitle($data["brand"])->first();
+         if ($brand_id == null) $brand_id = Brand::forceCreate(["title" => $data["brand"]])->id;
+         else $brand_id = $brand_id->id;
+         $model_id = CarModel::whereTitle($data["car_model"])->first()->id;
+         $body_type_id = BodyType::whereTitle($data["body_type"])->first()->id;
+         $engine_type_id = EngineType::whereTitle($data["engine_type"])->first()->id;
+         $color_id = Color::whereTitle($data["color"])->first()->id;
+         $transmission_type_id = TransmissionType::whereTitle($data["transmission_type"])->first()->id;
+         $vehicle_drive_type_id = VehicleDriveType::whereTitle($data["vehicle_drive_type"])->first()->id;
+         $production_country_id = 10;
 //      $user_id = 1;
 
-      $car = User::find(1)->cars()->create(["brand_id" => $brand_id, "car_model_id" => $model_id, "body_type_id" => $body_type_id, "engine_type_id" => $engine_type_id, "color_id" => $color_id, "transmission_type_id" => $transmission_type_id, "vehicle_drive_type_id" => $vehicle_drive_type_id, "production_country_id" => $production_country_id/*, "user_id" => $user_id*/, "engine_capacity" => $data["engine_capacity"], "engine_power" => $data["engine_power"], "fuel_consumption_highway" => $fuel_consumption_highway, "fuel_consumption_city" => $fuel_consumption_city, "fuel_consumption_mixed" => $fuel_consumption_mixed, "model_year" => $model_year, "production_year" => $data["production_year"], "number_doors" => $data["number_doors"], "number_places" => $data["number_places"], "description" => $data["description"], "length" => $data["dimensions_length"], "width" => $data["dimensions_width"], "height" => $data["dimensions_height"], "price" => $data["price"], "mileage" => $data["mileage"], "was_in_accident" => $data["was_in_accident"]]);
-      $car->carPhotos()->saveMany($photos_to_DB);
+         $car = User::find(1)->cars()->create(["brand_id" => $brand_id, "car_model_id" => $model_id, "body_type_id" => $body_type_id, "engine_type_id" => $engine_type_id, "color_id" => $color_id, "transmission_type_id" => $transmission_type_id, "vehicle_drive_type_id" => $vehicle_drive_type_id, "production_country_id" => $production_country_id/*, "user_id" => $user_id*/, "engine_capacity" => $data["engine_capacity"], "engine_power" => $data["engine_power"], "fuel_consumption_highway" => $fuel_consumption_highway, "fuel_consumption_city" => $fuel_consumption_city, "fuel_consumption_mixed" => $fuel_consumption_mixed, "model_year" => $model_year, "production_year" => $data["production_year"], "number_doors" => $data["number_doors"], "number_places" => $data["number_places"], "description" => $data["description"], "length" => $data["dimensions_length"], "width" => $data["dimensions_width"], "height" => $data["dimensions_height"], "price" => $data["price"], "mileage" => $data["mileage"], "was_in_accident" => $data["was_in_accident"]]);
+         $car->carPhotos()->saveMany($photos_to_DB);
 
-      CarCreatedEvent::dispatch($car);
+         CarCreatedEvent::dispatch($car);
+
+      });
       return $data["brand"] . " " . $data["car_model"] . " " . $data["production_year"];
    }
 
