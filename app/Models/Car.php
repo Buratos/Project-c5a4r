@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\CarCreatedEvent;
 use App\Listeners\DeleteCarPhotos;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,17 +10,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use function App\Http\Controllers\ech;
 use function Psy\debug;
 
 class Car extends Model {
    use HasFactory;
 
    protected $guarded = [];
-   protected $dispatchesEvents = ["deleting" => DeleteCarPhotos::class];
+//   protected $dispatchesEvents = ["deleting" => DeleteCarPhotos::class];
 
-   /*
-      Returns the search results for search in the head of page
-   */
+   // добавляю обработку события  deleting у машины
+
    public static function get_search_results(Request $request) {
       $results_limit = 10000000;
       $cars_per_page = 15;
@@ -29,8 +30,9 @@ class Car extends Model {
    }
 
    /*
-      вызывается для записи новой машины/row в БД
+      Returns the search results for search in the head of page
    */
+
    static function create($request) {
       $files = $request->allFiles();
       $data = $_POST;
@@ -64,8 +66,13 @@ class Car extends Model {
       $car = User::find(1)->cars()->create(["brand_id" => $brand_id, "car_model_id" => $model_id, "body_type_id" => $body_type_id, "engine_type_id" => $engine_type_id, "color_id" => $color_id, "transmission_type_id" => $transmission_type_id, "vehicle_drive_type_id" => $vehicle_drive_type_id, "production_country_id" => $production_country_id/*, "user_id" => $user_id*/, "engine_capacity" => $data["engine_capacity"], "engine_power" => $data["engine_power"], "fuel_consumption_highway" => $fuel_consumption_highway, "fuel_consumption_city" => $fuel_consumption_city, "fuel_consumption_mixed" => $fuel_consumption_mixed, "model_year" => $model_year, "production_year" => $data["production_year"], "number_doors" => $data["number_doors"], "number_places" => $data["number_places"], "description" => $data["description"], "length" => $data["dimensions_length"], "width" => $data["dimensions_width"], "height" => $data["dimensions_height"], "price" => $data["price"], "mileage" => $data["mileage"], "was_in_accident" => $data["was_in_accident"]]);
       $car->carPhotos()->saveMany($photos_to_DB);
 
+      CarCreatedEvent::dispatch($car);
       return $data["brand"] . " " . $data["car_model"] . " " . $data["production_year"];
    }
+
+   /*
+      вызывается для записи новой машины/row в БД
+   */
 
    /*********************************************************************
     * просмотр записи / машины / row
@@ -346,19 +353,27 @@ class Car extends Model {
       return ["filters" => $filters, "total_cars_found" => $total_cars_found, "template" => view("main_page.paginator_test", ["cars" => $cars])->render()];
    }
 
-   /*
-Delete car and it's photos (The photos deletes by events)
-   */
    public static function delete_car(Request $request) {
-/*      $car = Car::find($request->id);
+      $car = Car::find($request->id);
       $car_title = $car->title . " " . $car->production_year;
       $car->delete();
-      return $car_title;*/
+      return $car_title;
+   }
 
-//      Car::destroy(1250);
-      $car = Car::latest()->first();
-      $ttt = $car->delete();
-      return "НИЧО НЕ УДАЛЕНО, ЭТО ТЕСТ";
+   /*
+These events occur while working with the model
+   */
+   protected static function booted() {
+      static::created(function ($car) {
+//         ech("CREATED id = " . $car->id);
+      });
+      static::deleting(function ($car) {
+         foreach ($car->carPhotos as $photo) $aaa = Storage::delete("public/car_photos/" . $photo->filename);
+         $car->carPhotos()->delete();
+      });
+      static::deleted(function ($car) {
+//         ech("DELETED");
+      });
    }
 
    public function user() {

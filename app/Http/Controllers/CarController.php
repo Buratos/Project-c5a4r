@@ -136,25 +136,8 @@ class CarController extends Controller {
     * удаление записи / машины / row
     */
    public function delete(Request $request) {
-
-//      $car = Car::find($request->id);
-//      $car_title = $car->title . " " . $car->production_year;
-
-//      $car = $car->delete();
-//      $car = Car::find(12323423);
-//      $car->delete();
-//      $car = Car::destroy($request->id);
-//      $car = Car::destroy([1261]);
-//      Car::destroy(1251);
-
-      /*      $aaa = Storage::delete("public/car_photos/" . "nofile.ext");
-      $car = Car::find(1249);
-      foreach ($car->carPhotos as $photo_file) $aaa = Storage::delete("public/car_photos/" . $photo_file->filename);
-      $bbb = $car->carPhotos()->delete();
-      $aaa = $car->delete();*/
-
       $car_title = Car::delete_car($request);
-      $response = ["delete_car" => 1, "message" => "Car <em>" . $car_title . "</em> deleted."];
+      $response = ["delete_car" => 1, "message" => "Car " . $car_title . " deleted."];
       return view("main_page._carcass_", $response);
    }
 
