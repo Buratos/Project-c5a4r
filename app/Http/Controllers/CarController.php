@@ -2,15 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\TestJob;
 use App\Models\BodyType;
 use App\Models\Brand;
 use App\Models\Car;
+use App\Models\Testtable;
+use App\Models\Testtest;
 use Faker\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller {
 
+
+   /*********************************************************************
+    * вызывается для выдачи корневой страницы
+    */
+   public function test_queue() {
+      for ($i = 0, $a = 0; $i < 10000; $i++) {
+         $a++;
+      }
+
+      $cars_per_page = 15;
+
+      $cars = Car::inRandomOrder()->Paginate($cars_per_page);
+      $cars_number = Car::count();
+      $filters = Car::get_filters();
+      return view("main_page._carcass_", ["cars" => $cars, "filters" => $filters["filters"], "total_cars_found" => $filters["total_cars_found"], "cars_per_page" => $cars_per_page, "cars_number" => $cars_number, "brands" => Brand::pluck("title")->toArray()]);
+   }
 
    /*********************************************************************
     */
@@ -72,6 +91,8 @@ class CarController extends Controller {
     * вызывается для выдачи корневой страницы
     */
    public function index() {
+            TestJob::dispatch("function index __ ЗАДАНИЕ ВЫПОЛНЯЕТСЯ из ОЧЕРЕДИ");
+
       $cars_per_page = 15;
 
       $cars = Car::inRandomOrder()->Paginate($cars_per_page);
@@ -138,6 +159,7 @@ class CarController extends Controller {
    public function delete(Request $request) {
       $car_title = Car::delete_car($request);
       $response = ["delete_car" => 1, "message" => "Car " . $car_title . " deleted."];
+
       return view("main_page._carcass_", $response);
    }
 
@@ -206,6 +228,16 @@ class CarController extends Controller {
    public function tests() {
       echo "<div style='padding-left: 3rem; text-align: left;font-family:Roboto '>";
       // ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪
+      TestJob::dispatch("ВЫПОЛНЯЕТСЯ из ОЧЕРЕДИ _ запущена из function tests");
+//      Testtest::create(["title" => "ЗАПИСЬ ИЗ function tests _ " . now()]);
+
+/*      $myfile = fopen("testfile.txt", "a");
+      $txt = "public function get_filters_numbers()\n";
+      fwrite($myfile, $txt);
+      $txt = "---------------------------------------\n";
+      fwrite($myfile, $txt);
+      fclose($myfile);*/
+
       $test_str_rus = "Cтрoка тekctа. Проверяю функцию str_word_count.";
       $test_str_eng = "Line of text. Checking the str_word_count function.";
       $rus_words = str_word_count($test_str_rus, 1, '1234567890йцукенгшщзхъфывапролджэячсмитьбюёЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮЁ');

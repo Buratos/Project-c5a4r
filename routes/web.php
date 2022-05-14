@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 //Artisan::call('view:clear');
 
+/*Route::get('/test_queue', [\App\Http\Controllers\CarController::class, "test_queue"])->name("test_queue");*/
+Route::get('/delete_car/{id}', [\App\Http\Controllers\CarController::class, "delete"])->name("delete_car");
 Route::get('/search', [\App\Http\Controllers\CarController::class, "show_search_results"])->name("show_search_results");
 Route::get('/test_edit', [\App\Http\Controllers\CarController::class, "test_edit"])->name("test_edit");
 Route::get('/view_car/{id}', [\App\Http\Controllers\CarController::class, "view"])->name("view_car");
@@ -26,7 +28,6 @@ Route::get('/', function () {
 Route::get('/', [\App\Http\Controllers\CarController::class, "index"]);
 Route::get('/tests', [\App\Http\Controllers\CarController::class, "tests"]);
 Route::get('/add/', [\App\Http\Controllers\CarController::class, "add"]);
-Route::get('/delete_car/{id}', [\App\Http\Controllers\CarController::class, "delete"])->name("delete_car");
 Route::get('/html', function () {
   return file_get_contents("index.html");
 });
