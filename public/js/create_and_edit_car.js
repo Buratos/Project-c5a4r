@@ -2,7 +2,6 @@ $(function () {
   init_events();
 
 
-
   /*******************************************************************************
    FUNCTIONS
    *******************************************************************************/
@@ -81,8 +80,7 @@ $(function () {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
       data: data,
-      cache: false,
-      // dataType: 'json',
+      cache: false, // dataType: 'json',
       processData: false, // отключаем обработку передаваемых данных, пусть передаются как есть
       contentType: false, // отключаем установку заголовка типа запроса. Так jQuery скажет серверу что это строковой запрос
       success: function (response, status, jqXHR) {
@@ -90,7 +88,21 @@ $(function () {
       },
       error: function (jqXHR, status, errorThrown) { // функция ошибки ответа сервера
         console.log('add new car ОШИБКА отправки : ' + status, jqXHR);
-        // alert("add new car ОШИБКА отправки");
+        if (jqXHR.status == 422) { // Input data has not been validated
+          clog("INPUT DATA HAS NOT BEEN VALIDATED");
+          Object.keys(jqXHR.responseJSON.errors).forEach(function (key) {
+            if (key == "message") return ;
+            if (!Array.isArray(jqXHR.responseJSON.errors[key])) return ;
+            clog(" -> ", jqXHR.responseJSON.errors[key][0]);
+          });
+          /*
+           for (let key of Object.keys(jqXHR.responseJSON.errors)) {
+           if (key == "message") continue;
+           if (!Array.isArray(jqXHR.responseJSON.errors[key])) continue;
+           clog(" -> ", jqXHR.responseJSON.errors[key][0]);
+           }
+           */
+        }
       }
     });
   }
@@ -120,8 +132,7 @@ $(function () {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
       data: data,
-      cache: false,
-      // dataType: 'json',
+      cache: false, // dataType: 'json',
       processData: false, // отключаем обработку передаваемых данных, пусть передаются как есть
       contentType: false, // отключаем установку заголовка типа запроса. Так jQuery скажет серверу что это строковой запрос
       success: function (response, status, jqXHR) {

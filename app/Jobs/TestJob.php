@@ -10,6 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use function App\Http\Controllers\ech;
 
 class TestJob implements ShouldQueue {
@@ -32,18 +33,24 @@ class TestJob implements ShouldQueue {
     * @return void
     */
    public function handle() {
-      for ($i = 0, $a = 0; $i < 10; $i++) {
-         $a++;
-      }
-      Testtest::create(["title" => $this->param . " " . now()]);
-      /*            ech("ВЫПОЛНЕНИЕ ОЧЕРЕДИ - " . $this->param);
-                  var_dump("ВЫПОЛНЕНИЕ ОЧЕРЕДИ - " . $this->param);*/
-
       $myfile = fopen("testfile . txt", "a");
       $txt = $this->param . " " . now() . "\n";
       fwrite($myfile, $txt);
       $txt = "---------------------------------------\n";
       fwrite($myfile, $txt);
       fclose($myfile);
+      for ($i = 0, $a = 0; $i < 10; $i++) {
+         $a++;
+      }
+      Testtest::create(["title" => $this->param . " " . now()]);
+      Log::channel('daily')->notice("Тестовое сообщение из задания в очереди  " . now());
+      Log::build([
+        'driver' => 'single',
+        'path' => storage_path('logs/custom.log'),
+      ])->info(' Log::build( из очереди');
+
+      /*            ech("ВЫПОЛНЕНИЕ ОЧЕРЕДИ - " . $this->param);
+                  var_dump("ВЫПОЛНЕНИЕ ОЧЕРЕДИ - " . $this->param);*/
+
    }
 }

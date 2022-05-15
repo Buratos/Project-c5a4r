@@ -97,11 +97,11 @@
 					<div class="col-12 mt-2">
 						<h6 class="">Dimensions of a car:</h6>
 						<label for="dimensions_length" class="mt-2">Length, mm</label>
-						<input id="dimensions_length" name="dimensions_length" type="number" placeholder="Input height, mm" value="510" style="width: 5rem" class="me-3"><br>
+						<input id="dimensions_length" name="dimensions_length" type="number" placeholder="Input height, mm" value="5100" style="width: 5rem" class="me-3"><br>
 						<label for="dimensions_width" class="mt-2">Width, mm</label>
-						<input id="dimensions_width" name="dimensions_width" type="number" placeholder="Input width, mm" value="181" style="width: 5rem" class="me-3"><br>
+						<input id="dimensions_width" name="dimensions_width" type="number" placeholder="Input width, mm" value="1810" style="width: 5rem" class="me-3"><br>
 						<label for="dimensions_height" class="mt-2">Height, mm</label>
-						<input id="dimensions_height" name="dimensions_height" type="number" placeholder="Input height, mm" value="176" style="width: 5rem">
+						<input id="dimensions_height" name="dimensions_height" type="number" placeholder="Input height, mm" value="1760" style="width: 5rem">
 					</div>
 					<div class=" col-12 mt-2 ">
 						<span class="mt-3 me-2">Was a car in accident ?</span>

@@ -8,8 +8,10 @@ use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Testtable;
 use App\Models\Testtest;
+use Carbon\Carbon;
 use Faker\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller {
@@ -91,7 +93,7 @@ class CarController extends Controller {
     * вызывается для выдачи корневой страницы
     */
    public function index() {
-            TestJob::dispatch("function index __ ЗАДАНИЕ ВЫПОЛНЯЕТСЯ из ОЧЕРЕДИ");
+      TestJob::dispatch("function index __ ЗАДАНИЕ ВЫПОЛНЯЕТСЯ из ОЧЕРЕДИ");
 
       $cars_per_page = 15;
 
@@ -106,6 +108,9 @@ class CarController extends Controller {
     */
    public function create(Request $request) {
 
+      $current_year = (integer)date("Y");
+      $t = Carbon::now()->year;
+      $validated_data = $request->validate(["brand" => ["required", "string", "min:20"],"car_model" => ["required", "string", "min:2"],"engine_capacity" => ["required", "integer", "between:700,10000"], "engine_power" => ["required", "integer", "between:20,2000"], "production_year" => ["required", "integer", "max:$current_year"], "number_doors" => ["required", "integer", "between:2,5"], "number_places" => ["required", "integer", "between:2,7"], "description" => ["nullable","string",  "max:20"], "dimensions_length" => ["required", "integer", "between:1500,8000"], "dimensions_width" => ["required", "integer", "between:500,3000"], "dimensions_height" => ["required", "integer", "between:500,2500"], "price" => ["required", "integer"], "mileage" => ["required", "integer", "nullable"], "was_in_accident" => ["required", "integer", "in:5,4"]]);
       $car_title = Car::create($request);
 
       return ["success" => 1, "html" => view("crud.new_ad_saved", ["car_title" => $car_title])->render()];
@@ -229,14 +234,21 @@ class CarController extends Controller {
       echo "<div style='padding-left: 3rem; text-align: left;font-family:Roboto '>";
       // ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪
       TestJob::dispatch("ВЫПОЛНЯЕТСЯ из ОЧЕРЕДИ _ запущена из function tests");
-//      Testtest::create(["title" => "ЗАПИСЬ ИЗ function tests _ " . now()]);
+      Log::info("Log::info  Тестовое сообщение из function tests  " . now());
+      Log::channel('debug')->info("Log::info  Тестовое сообщение из function tests  " . now());
+      Log::build([
+        'driver' => 'single',
+        'path'   => storage_path('logs/custom.log'),
+      ])->info('Log::build  Тестовое сообщение из function tests  ');
 
-/*      $myfile = fopen("testfile.txt", "a");
-      $txt = "public function get_filters_numbers()\n";
-      fwrite($myfile, $txt);
-      $txt = "---------------------------------------\n";
-      fwrite($myfile, $txt);
-      fclose($myfile);*/
+      //      Testtest::create(["title" => "ЗАПИСЬ ИЗ function tests _ " . now()]);
+
+      /*      $myfile = fopen("testfile.txt", "a");
+            $txt = "public function get_filters_numbers()\n";
+            fwrite($myfile, $txt);
+            $txt = "---------------------------------------\n";
+            fwrite($myfile, $txt);
+            fclose($myfile);*/
 
       $test_str_rus = "Cтрoка тekctа. Проверяю функцию str_word_count.";
       $test_str_eng = "Line of text. Checking the str_word_count function.";
