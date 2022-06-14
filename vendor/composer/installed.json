@@ -1078,17 +1078,17 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.4.1",
-            "version_normalized": "7.4.1.0",
+            "version": "7.4.2",
+            "version_normalized": "7.4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "ee0a041b1760e6a53d2a39c8c34115adc2af2c79"
+                "reference": "ac1ec1cd9b5624694c3a40be801d94137afb12b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/ee0a041b1760e6a53d2a39c8c34115adc2af2c79",
-                "reference": "ee0a041b1760e6a53d2a39c8c34115adc2af2c79",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/ac1ec1cd9b5624694c3a40be801d94137afb12b4",
+                "reference": "ac1ec1cd9b5624694c3a40be801d94137afb12b4",
                 "shasum": ""
             },
             "require": {
@@ -1114,7 +1114,7 @@
                 "ext-intl": "Required for Internationalized Domain Name (IDN) support",
                 "psr/log": "Required for using the Log middleware"
             },
-            "time": "2021-12-06T18:43:05+00:00",
+            "time": "2022-03-20T14:16:28+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1123,12 +1123,12 @@
             },
             "installation-source": "dist",
             "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\": "src/"
-                },
                 "files": [
                     "src/functions_include.php"
-                ]
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1185,7 +1185,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.4.1"
+                "source": "https://github.com/guzzle/guzzle/tree/7.4.2"
             },
             "funding": [
                 {
@@ -1900,6 +1900,70 @@
                 "source": "https://github.com/laravel/tinker/tree/v2.7.0"
             },
             "install-path": "../laravel/tinker"
+        },
+        {
+            "name": "laravel/ui",
+            "version": "v3.4.2",
+            "version_normalized": "3.4.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/ui.git",
+                "reference": "e01198123f7f4369d13c1f83a897c3f5e97fc9f4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/ui/zipball/e01198123f7f4369d13c1f83a897c3f5e97fc9f4",
+                "reference": "e01198123f7f4369d13c1f83a897c3f5e97fc9f4",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^8.42|^9.0",
+                "illuminate/filesystem": "^8.42|^9.0",
+                "illuminate/support": "^8.42|^9.0",
+                "illuminate/validation": "^8.42|^9.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.23|^7.0"
+            },
+            "time": "2022-01-25T20:15:56+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Ui\\UiServiceProvider"
+                    ]
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Ui\\": "src/",
+                    "Illuminate\\Foundation\\Auth\\": "auth-backend/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel UI utilities and presets.",
+            "keywords": [
+                "laravel",
+                "ui"
+            ],
+            "support": {
+                "source": "https://github.com/laravel/ui/tree/v3.4.2"
+            },
+            "install-path": "../laravel/ui"
         },
         {
             "name": "league/commonmark",

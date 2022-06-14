@@ -8,7 +8,7 @@
        <?php foreach ($cars as $car) {
        //      $car_photo_url = "img/users/{$car->user->id}/car_{$car->id}/photo_1.webp";
        //      $car_photo_url = "storage/app/car_photos/{$car->photos[0]}.webp";
-       $url_for_card = route("view_car", [$car->id]);
+       $url_for_card = route("car.view", [$car->id]);
        $car_photo_url = "/storage/car_photos/{$car->photos[0]}";
 
        $car_name = $car->brand->title . " " . $car->carModel->title;

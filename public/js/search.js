@@ -88,3 +88,9 @@ $(function () {
 
 });
 
+/*
+ вернёт true, если это вьюпорт телефона/планшета вертикально
+ */
+function mobile_viewport() {
+  return $("body").css("content") == '\"576-\"';
+}

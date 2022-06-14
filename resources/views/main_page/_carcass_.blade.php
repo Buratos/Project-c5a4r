@@ -2,9 +2,9 @@
 <html lang="en">
 
 {{--▪▪▪  tag HEAD  ▪▪▪--}}
-@if (isset($create_new_ad_page))	@include('crud.tag_head__create_new_ad')
-@elseif (isset($edit_car_page))	@include('crud.tag_head__create_new_ad')
-@elseif (isset($test_edit))	@include('crud.tag_head__create_new_ad')
+@if (isset($create_new_ad_page))	@include('crud.tag_head__create_car')
+@elseif (isset($edit_car_page))	@include('crud.tag_head__edit_car')
+@elseif (isset($test_edit))	@include('crud.tag_head__edit_car')
 @else  @include('main_page.tag_head')
 @endif
 

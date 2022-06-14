@@ -7,12 +7,8 @@ use App\Models\BodyType;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Testtable;
-use App\Models\Testtest;
-use Carbon\Carbon;
 use Faker\Factory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller {
 
@@ -60,13 +56,6 @@ class CarController extends Controller {
 
    }
 
-   public function show_search_results(Request $request) {
-
-      $cars = Car::get_search_results($request);
-      if (!$cars["cars"]->count()) return view("main_page._carcass_", ["error_message" => "No cars found"]);
-      return view("main_page._carcass_", ["show_search_results" => 1, "cars" => $cars["cars"], "cars_per_page" => 15, "cars_number" => $cars["cars_number"]]);
-   }
-
    /*********************************************************************
     * вызывается для выдачи корневой страницы
     */
@@ -89,61 +78,11 @@ class CarController extends Controller {
       return view("main_page._carcass_", ["catalog" => 1, "cars" => $cars, "filters" => $filters["filters"], "total_cars_found" => $filters["total_cars_found"], "cars_per_page" => $cars_per_page, "cars_number" => $cars_number, "brands" => Brand::pluck("title")->toArray()]);
    }
 
-   /*********************************************************************
-    * вызывается для выдачи корневой страницы
-    */
-   public function index() {
-      TestJob::dispatch("function index __ ЗАДАНИЕ ВЫПОЛНЯЕТСЯ из ОЧЕРЕДИ");
-
-      $cars_per_page = 15;
-
-      $cars = Car::inRandomOrder()->Paginate($cars_per_page);
-      $cars_number = Car::count();
-      $filters = Car::get_filters();
-      return view("main_page._carcass_", ["cars" => $cars, "filters" => $filters["filters"], "total_cars_found" => $filters["total_cars_found"], "cars_per_page" => $cars_per_page, "cars_number" => $cars_number, "brands" => Brand::pluck("title")->toArray()]);
-   }
-
-   /*********************************************************************
-    * записывает новую машину в БД, вызывается из добавления новой машины при получении данных через post
-    */
-   public function create(Request $request) {
-
-      $current_year = (integer)date("Y");
-      $t = Carbon::now()->year;
-      $validated_data = $request->validate(["brand" => ["required", "string", "min:20"],"car_model" => ["required", "string", "min:2"],"engine_capacity" => ["required", "integer", "between:700,10000"], "engine_power" => ["required", "integer", "between:20,2000"], "production_year" => ["required", "integer", "max:$current_year"], "number_doors" => ["required", "integer", "between:2,5"], "number_places" => ["required", "integer", "between:2,7"], "description" => ["nullable","string",  "max:20"], "dimensions_length" => ["required", "integer", "between:1500,8000"], "dimensions_width" => ["required", "integer", "between:500,3000"], "dimensions_height" => ["required", "integer", "between:500,2500"], "price" => ["required", "integer"], "mileage" => ["required", "integer", "nullable"], "was_in_accident" => ["required", "integer", "in:5,4"]]);
-      $car_title = Car::create($request);
-
-      return ["success" => 1, "html" => view("crud.new_ad_saved", ["car_title" => $car_title])->render()];
-   }
-
-   /*********************************************************************
-    * вызывается для добавления новой машины / в БД
-    */
-   public function add() {
-      $faker = Factory::create();
-      $description = $faker->text(1000);
-      $brand_titles = Brand::orderBy("title")->pluck("title", "id");
-      $body_type_titles = BodyType::orderBy("title")->pluck("title", "id");
-      return view("main_page._carcass_", ["create_new_ad_page" => 1, "brand_titles" => $brand_titles, "body_type_titles" => $body_type_titles, "description" => $description]);
-
-   }
-
-   /*********************************************************************
-    * просмотр записи / машины / row
-    */
-   public function view(Request $request) {
-
-      $car = Car::view($request);
-      if (!$car) $response = ["error_message" => "No such car found :("];
-      else $response = ["view_car_page" => 1, "car" => $car];
-
-      return view("main_page._carcass_", $response);
-   }
 
    /*********************************************************************
     * редактирование записи / машины / row
     */
-   public function edit(Request $request) {
+/*   public function edit(Request $request) {
 
       $car = Car::whereId($request->id)->first();
       if (!$car) $response = ["error_message" => "No such car found :("];
@@ -156,20 +95,11 @@ class CarController extends Controller {
 
       }
       return view("main_page._carcass_", $response);
-   }
+   }*/
+
 
    /*********************************************************************
-    * удаление записи / машины / row
-    */
-   public function delete(Request $request) {
-      $car_title = Car::delete_car($request);
-      $response = ["delete_car" => 1, "message" => "Car " . $car_title . " deleted."];
-
-      return view("main_page._carcass_", $response);
-   }
-
-   /*********************************************************************
-    * редактирование записи / машины / row
+    * динамический поиск
     */
    public function dynamic_search(Request $request) {
 
@@ -223,146 +153,7 @@ class CarController extends Controller {
       return $filters;
    }
 
-   public function dashboard() {
-      return view("main_page._carcass_");
-   }
 
-   /*********************************************************************
-    * ДЛЯ ЛЮБЫХ ТЕСТОВ ****************************************************************
-    */
-   public function tests() {
-      echo "<div style='padding-left: 3rem; text-align: left;font-family:Roboto '>";
-      // ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪
-      TestJob::dispatch("ВЫПОЛНЯЕТСЯ из ОЧЕРЕДИ _ запущена из function tests");
-      Log::info("Log::info  Тестовое сообщение из function tests  " . now());
-      Log::channel('debug')->info("Log::info  Тестовое сообщение из function tests  " . now());
-      Log::build([
-        'driver' => 'single',
-        'path'   => storage_path('logs/custom.log'),
-      ])->info('Log::build  Тестовое сообщение из function tests  ');
-
-      //      Testtest::create(["title" => "ЗАПИСЬ ИЗ function tests _ " . now()]);
-
-      /*      $myfile = fopen("testfile.txt", "a");
-            $txt = "public function get_filters_numbers()\n";
-            fwrite($myfile, $txt);
-            $txt = "---------------------------------------\n";
-            fwrite($myfile, $txt);
-            fclose($myfile);*/
-
-      $test_str_rus = "Cтрoка тekctа. Проверяю функцию str_word_count.";
-      $test_str_eng = "Line of text. Checking the str_word_count function.";
-      $rus_words = str_word_count($test_str_rus, 1, '1234567890йцукенгшщзхъфывапролджэячсмитьбюёЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮЁ');
-      $eng_words = str_word_count($test_str_eng, 1, '1234567890йцукенгшщзхъфывапролджэячсмитьбюёЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮЁ');
-
-      $title = "vectra";
-      $additional_search = Car::query();
-      $additional_search->whereHas("carModel", function ($query) use ($title) {
-         $query->where("title", $title);
-      });
-      $title = "opel";
-
-      $additional_search->orWhere(function ($query) {
-         $query->whereHas("brand", function ($query) {
-            $query->where("title", "fiat");
-         });
-      });
-      /*      $additional_search->whereHas("brand", function ($query) use ($title) {
-               $query->where("title", $title);
-            });*/
-
-      $search = $additional_search->limit(100)->get();
-
-      /*      $search->each(function ($item, $key) {
-               ech("ID - " . $item->id);
-               ech("BRAND - " . $item->brand->title);
-               ech("MODEL - " . $item->model);
-               ech("PRICE - " . $item->price);
-               ech();
-            });*/
-      ech("---------------------");
-
-      $words = ["yo", "er"];
-      $cars = Car::whereHas("brand", function ($query) use ($words) {
-         $query->where("title", "like", "%" . $words[0] . "%");
-      })->whereHas("carModel", function ($query) use ($words) {
-         $query->where("title", "like", "%" . $words[1] . "%");
-      })->limit(1000)->get();
-
-      ech("ВСЕГО НАЙДЕНО - " . $cars->count());
-      $cars->each(function ($item, $key) {
-         ech("ID - " . $item->id);
-         ech("BRAND - " . $item->brand->title);
-         ech("MODEL - " . $item->model);
-         ech("PRICE - " . $item->price);
-         ech();
-      });
-      ech("---------------------");
-      ech();
-      $cars = Car::whereHas("carModel", function ($query) use ($words) {
-         $query->where("title", "like", "%" . $words[1] . "%");
-      })->limit(1000)->get();
-
-      ech("ВСЕГО НАЙДЕНО - " . $cars->count());
-      $cars->each(function ($item, $key) {
-         ech("ID - " . $item->id);
-         ech("BRAND - " . $item->brand->title);
-         ech("MODEL - " . $item->model);
-         ech("PRICE - " . $item->price);
-         ech();
-      });
-
-      // ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪
-      echo "</div>";
-      return;
-
-      /*    $start_time = microtime(true);
-    echo 'Время выполнения SELECT : <b>' . round(microtime(true) - $start_time, 2) . ' </b> сек.<br>';*/
-
-      /*    $data3 = Car::where("price","<",15000)->orWhereHas("brand", function ($query) {
-            $query->where("title", "Kia");
-          })->get()*/
-
-      /*      $data = Car::query();
-            $data->where("was_in_accident", false);
-
-            ech("найдено - " . $data->count());
-            ech();
-            $data->get();
-
-            $data->each(function ($item, $key) {
-               ech("ID - " . $item->id);
-               ech("BRAND - " . $item->brand->title);
-               ech("MODEL - " . $item->model);
-               ech("ENGINE CAPACITY - " . $item->engine_capacity);
-               ech("BODY TYPE - " . $item->bodyType->title);
-               ech("PRICE - " . number_format($item->price, 0, "", " ") . " $");
-               ech("BODY TYPE - " . $item->bodyType->title);
-               ech("TRANSMISSION TYPE - " . $item->transmissionType->title);
-
-               ech();
-            });*/
-      /*      if (Storage::exists('dc40a269-5296-4e54-9323-4a10170c3190.webp')) {
-               ech("dc40a269-5296-4e54-9323-4a10170c3190.webp    СУЩЕСТВУЕТ");
-            }
-            if (Storage::exists('public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp')) {
-               ech("public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp    СУЩЕСТВУЕТ");
-            }
-
-            if (Storage::missing('dc40a269-5296-4e54-9323-4a10170c3190.webp')) {
-               ech("dc40a269-5296-4e54-9323-4a10170c3190.webp    НЕТУ");
-            }
-            if (Storage::missing('public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp')) {
-               ech("public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp    НЕТУ");
-            }
-
-            $img_url = asset("public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp");
-            $url = Storage::url('public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp');
-            ech("<img src='public/car_photos/dc40a269-5296-4e54-9323-4a10170c3190.webp'>");
-      //      ech("<img src='img/dc40a269-5296-4e54-9323-4a10170c3190.webp'>");
-            ech("<img src='" . $url2 . "'>");
-            ech("<img src='" . $url3 . "'>");*/
-   }
 }
 
 //  улучшенный echo, просто вывод строки и переход на новую строку

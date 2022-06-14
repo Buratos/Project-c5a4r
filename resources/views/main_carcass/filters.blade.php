@@ -5,7 +5,7 @@
 				<button class="w-100 btn btn-outline-secondary lh-sm" data-func="show_filters">Show filters</button>
 			</div>
 			<div class="col-6 col-sm-5 col-md-4 mb-sm-3">
-				<a  href="/add" class="w-100 btn btn-outline-secondary lh-sm" type="button" >Create new ad</a>
+				<a  href="{{route("car.create")}}" class="w-100 btn btn-outline-secondary lh-sm" type="button" >Create new ad</a>
 			</div>
 		</div>
 	</div>

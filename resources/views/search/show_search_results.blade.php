@@ -7,7 +7,7 @@
 		<div class="d-flex flex-wrap ps-2 pe-0 car_list_container"> <!-- ОБЁРТКА ЧТОБЫ ВЫРОВНЯТЬ ОТСТУПЫ МЕЖДУ CARDs-->
 			@foreach($cars as $car)
 				@php
-					$url_for_card = route("view_car", [$car]);
+					$url_for_card = route("car.view", [$car]);
 					$car_photo_url = "/storage/car_photos/{$car->photos[0]}";
 					$car_name = $car->title;
 					$car_price = number_format($car->price, 0, "", " ") . " $";

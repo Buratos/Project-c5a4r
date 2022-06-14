@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Events\CarCreatedEvent;
 use App\Listeners\DeleteCarPhotos;
+use App\Models\Traits\Filterable;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,6 +18,8 @@ use function Psy\debug;
 
 class Car extends Model {
    use HasFactory;
+   use SoftDeletes;
+   use Filterable;
 
    protected $guarded = [];
 //   protected $dispatchesEvents = ["deleting" => DeleteCarPhotos::class];
@@ -35,7 +39,9 @@ class Car extends Model {
    */
 
    static function create($request) {
-      $data = $_POST;
+      $data = $request->validated();
+
+//      $data = $_POST;
       DB::transaction(function () use ($request, $data) {
          $files = $request->allFiles();
          $photos_to_DB = [];
@@ -159,7 +165,7 @@ class Car extends Model {
 
       $production_years = [];
       $production_years_checked_count = 0;
-      $data = Car::pluck("production_year")->unique()->sortDesc();;
+      $data = Car::pluck("production_year")->unique()->sortDesc();
       foreach ($data as $value) {
          $checked = isset($checked_filters_from_site["production_year"]) ? in_array($value, $checked_filters_from_site["production_year"]) : false;
          if ($checked) $production_years_checked_count++;
@@ -365,7 +371,7 @@ class Car extends Model {
    }
 
    /*
-These events occur while working with the model
+      These events occur while working with the model
    */
    protected static function booted() {
       static::created(function ($car) {
@@ -422,6 +428,10 @@ These events occur while working with the model
 
    public function getModelAttribute() {
       return $this->carModel->title;
+   }
+
+   public function getBrandTitleAttribute() {
+      return $this->brand->title;
    }
 
    public function getPhotosAttribute() {

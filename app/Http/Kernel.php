@@ -2,6 +2,9 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CreateCarMiddleware;
+use App\Http\Middleware\UpdateCarMiddleware;
+use App\Http\Middleware\UsersRoleCheckMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -63,5 +66,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'users_role_check'=>UsersRoleCheckMiddleware::class,
+        "car.create" => CreateCarMiddleware::class,
+        "car.update"=>UpdateCarMiddleware::class
     ];
 }

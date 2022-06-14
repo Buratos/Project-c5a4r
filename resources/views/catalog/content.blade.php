@@ -6,7 +6,7 @@
 		<div class="col-12 paginator__test_container"></div>
 		<div class="d-flex flex-wrap ps-2 pe-0 car_list_container"> <!-- ОБЁРТКА ЧТОБЫ ВЫРОВНЯТЬ ОТСТУПЫ МЕЖДУ CARDs-->
        <?php foreach ($cars as $car) {
-       $url_for_card = route("view_car", [$car->id]);
+       $url_for_card = route("car.view", [$car->id]);
        $car_photo_url = "/storage/car_photos/{$car->photos[0]}";
 
        $car_name = $car->brand->title . " " . $car->carModel->title;

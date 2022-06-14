@@ -36,11 +36,13 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+            'host' => env('MAIL_HOST', 'smtp.gmail.com'),
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
+            'username' => env('kratatai258@gmail.com'),
+            'password' => env('keh8SkJSjnQ284iT1h8471NdkguwH27dkq471Jdkej62J'),
+/*            'username' => env('MAIL_USERNAME'),
+            'password' => env('MAIL_PASSWORD'),*/
             'timeout' => null,
             'auth_mode' => null,
         ],

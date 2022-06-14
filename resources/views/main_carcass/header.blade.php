@@ -3,7 +3,7 @@
 	<div class="d-sm-none container-fluid bg-light px-0">
 		<nav class="navbar navbar-expand-md navbar-light bg-light mb-2 pb-0 mobile_navbar">
 			<div class="container-fluid px-0">
-				<a href="/" class="d-flex align-items-center mb-2 ms-2 bg-light me-lg-4 car_sale_logo">
+				<a href="{{route("car.index")}}" class="d-flex align-items-center mb-2 ms-2 bg-light me-lg-4 car_sale_logo">
 					<div class="i_header_logo">
 						<div><!-- ЭТОТ div тут нужен --></div>
 					</div>
@@ -21,27 +21,43 @@
 									<use xlink:href="#i_search"></use>
 								</svg>
 							</button>
-							<div class="dynamic_search_results_mobile mt-2 mb-2 d-none">
-							</div>
+							<div class="dynamic_search_results_mobile mt-2 mb-2 d-none"></div>
 						</div>
-						</form>
+					</form>
 				</div>
 				<div class="navbar-collapse collapse" id="navbar_mobile_red_menu">
 					<div class="row mx-0 justify-content-center">
-						<div class="col-12 text-center mt-0 mb-3 for_unknown_user">
-							<button type="button" class="btn btn btn-outline-secondary me-2">Log in</button>
-							<button type="button" class="btn btn-outline-secondary">Register</button>
-						</div>
-						<div class="col-12 mt-0 mb-3 px-0 d-flex flex-nowrap justify-content-center align-items-center for_logged_user d-none">
-							<a type="button" class="btn d-inline-flex align-items-center text-secondary ps-0 py-0" data-func="">
-								<!-- * -->
-								<svg class="bi" width="16" height="16">
-									<use xlink:href="#i_logget_user"></use>
-								</svg>
-								<span>User nickname</span>
-							</a>
-							<button type="button" class="btn btn-outline-secondary">Log out</button>
-						</div>
+						@guest
+							<div class="col-12 text-center mt-0 mb-3 for_unknown_user">
+								<a href="{{ route('login') }}" type="button" class="btn btn btn-outline-secondary me-2">{{ __('Login') }}</a>
+								<a href="{{ route('register') }}" type="button" class="btn btn-outline-secondary">{{ __('Register') }}</a>
+							</div>
+						@else
+							<div class="col-12 mt-0 mb-3 px-0 d-flex flex-nowrap justify-content-center align-items-center for_logged_user">
+								{{--								<a type="button" class="btn d-inline-flex align-items-center text-secondary ps-0 py-0" data-func="">
+																	<!-- * -->
+																	<svg class="bi" width="16" height="16">
+																		<use xlink:href="#i_logget_user"></use>
+																	</svg>
+																	<span>{{ Auth::user()->name }}</span>
+																</a>
+																<button type="button" class="btn btn-outline-secondary">Log out</button>--}}
+								<li class="nav-item dropdown">
+									<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+										{{ Auth::user()->name }}
+									</a>
+									<div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+										<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+											{{ __('Logout') }}
+										</a>
+										<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+											@csrf
+										</form>
+									</div>
+								</li>
+							</div>
+						@endguest
 						<div class="col-12 bg-danger px-0">
 							<ul class="navbar-nav me-auto main_menu_red">
 								<li class="nav-item">
@@ -61,10 +77,10 @@
 								</li>
 								<hr class="my-1 d-sm-none text-white">
 								<li class="nav-item d-sm-none">
-									<a class="nav-link" href="#">MY FAVORITEs</a>
+									<a class="nav-link" href="#">COMPARE</a>
 								</li>
 								<li class="nav-item d-sm-none">
-									<a class="nav-link" href="#">COMPARE</a>
+									<a class="nav-link" href="{{ route('admin.car.index') }}">ADMIN</a>
 								</li>
 							</ul>
 						</div>
@@ -91,25 +107,47 @@
 							<use xlink:href="#i_search"></use>
 						</svg>
 					</button>
-{{--					<input id="btn_search_submit" class="btn btn-outline-secondary" type="submit" value="SEARCH">--}}
-					<div class="dynamic_search_results mt-2 mb-2 d-none ">
-					</div>
+					{{--					<input id="btn_search_submit" class="btn btn-outline-secondary" type="submit" value="SEARCH">--}}
+					<div class="dynamic_search_results mt-2 mb-2 d-none "></div>
 				</div>
 			</form>
-			<div class="for_unknown_user">
-				<button type="button" class="btn btn-outline-secondary ms-4 ms-md-0 me-2">Log in</button>
-				<button type="button" class="btn btn-outline-secondary">Register</button>
-			</div>
-			<div class="text-center for_logged_user d-none">
-				<a type="button" class="btn d-flex align-items-center text-secondary" data-func="">
-					<!-- * -->
-					<svg class="bi" width="16" height="16">
-						<use xlink:href="#i_logget_user"></use>
-					</svg>
-					<span>User nickname lsdh asfda sasf</span>
-				</a>
-				<button type="button" class="btn btn-outline-secondary btn-sm lh-sm mb-sm-2 mb-md-1">Log out</button>
-			</div>
+			<!-- Authentication Links -->
+			@guest
+				<div class="for_unknown_user">
+					<a href="{{ route('login') }}" type="button" class="btn btn btn-outline-secondary me-2">{{ __('Login') }}</a>
+					<a href="{{ route('register') }}" type="button" class="btn btn-outline-secondary">{{ __('Register') }}</a>
+				</div>
+			@else
+				<div class="text-center for_logged_user">
+					<a type="button" class="btn d-flex align-items-center text-secondary" data-func="">
+						<!-- * -->
+						<svg class="bi" width="16" height="16">
+							<use xlink:href="#i_logget_user"></use>
+						</svg>
+						<span>{{ Auth::user()->name }}</span>
+					</a>
+					<form id="logout-form" action="{{ route('logout') }}" method="POST">
+						@csrf
+						<input href="{{ route('logout') }}" type="submit" class="btn btn-outline-secondary btn-sm lh-sm mb-sm-2 mb-md-1" value="{{ __('Logout') }}">
+					</form>
+					{{--<a href="{{ route('logout') }}" type="button" class="btn btn-outline-secondary btn-sm lh-sm mb-sm-2 mb-md-1">{{ __('Logout') }}</a>--}}
+				</div>
+
+				{{--<li class="nav-item dropdown">
+					<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+
+					</a>
+					<div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+							{{ __('Logout') }}
+						</a>
+						<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+							@csrf
+						</form>
+					</div>
+				</li>--}}
+			@endguest
 		</div>
 	</div>
 	</div>
@@ -130,13 +168,13 @@
 					<a href="#" class="nav-link link-light px-2">FORUM</a>
 				</li>
 				<li class="nav-item">
-					<a href="#" class="nav-link link-light px-2">FAVORITE</a>
-				</li>
-				<li class="nav-item">
-					<a href="#" class="nav-link link-light px-2">COMPARE</a>
-				</li>
-				<li class="nav-item">
 					<a href="#" class="nav-link link-light px-2">CONTACTS</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link link-light px-2" href="#">COMPARE</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link link-light px-2" href="{{ route('admin.car.index') }}">ADMIN</a>
 				</li>
 			</ul>
 		</div>

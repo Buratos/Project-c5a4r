@@ -14,7 +14,7 @@ class UserSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        User::factory()->count(500)->create()->each(function ($user) {
+        User::factory()->count(1000)->create()->each(function ($user) {
             $user->phones()->saveMany(Phone::factory()->count(mt_rand(1, 3))->make());
             $user->cars()->saveMany(Car::factory()->count(mt_rand(0, 5))->make());
         });

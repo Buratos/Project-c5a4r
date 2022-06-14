@@ -4,21 +4,29 @@
 		<h4 class="text-center">{{$car_title}}</h4>
 		<hr>
 		<form class="edit_car_form" enctype="multipart/form-data" id="edit_car_form">
+			@csrf
+			<input id="id" name="id" type="hidden" value="{{$car->id}}">
 			<div class="row justify-content-center">
 				<div class="col-12 col-sm-6">
 					<div class="col-12 mt-0">
 						<label class="" for="brand_list">Car brand</label>
-						<input list="brand_datalist" id="brand_list" name="brand" placeholder="Choose car brand" value="">
+						<input list="brand_datalist" id="brand_list" name="brand" placeholder="Choose car brand" value="{{$car->brandTitle}}">
 						<datalist id="brand_datalist">
 							@foreach ($brand_titles as $title)
 								<option value="{{$title}}">
 							@endforeach
 						</datalist>
 					</div>
+					<div class="col-12 col-sm-6 mt-2 first_choose_brand d-none">
+						<span class="text-nowrap" for="">Car model - first choose car brand</span>
+					</div>
+					<div class="col-12 col-sm-6 mt-2 d-none no_models_found">
+						<span class="" for="">No models found of the brand you entered</span>
+					</div>
 					<div class="col-12 car_model_selection mt-2">
 						<label for="car_model_list">Car model</label>
-						<input list="car_model_datalist" id="car_model_list" name="car_model" placeholder="Choose or input car model" autocomplete="off" value="{{--{{$car->model}}--}}">
-						<datalist id="car_model_datalist"></datalist>
+						<input list="car_model_datalist" id="car_model_list" name="car_model" placeholder="Choose or input car model" autocomplete="off" value="{{$car->model}}">
+						<datalist id="car_model_datalist" load_models_uri="{{route("car.load_model_datalist")}}"></datalist>
 					</div>
 					<div class="col-12 mt-2">
 						<label for="price" class="">Price, $</label>
@@ -91,11 +99,11 @@
 					<div class="col-12 mt-2">
 						<h6 class="">Dimensions of a car:</h6>
 						<label for="dimensions_length" class="mt-2">Length, mm</label>
-						<input id="dimensions_length" name="dimensions_length" type="number" placeholder="Input height, mm" value="510" style="width: 5rem" class="me-3"><br>
+						<input id="dimensions_length" name="dimensions_length" type="number" placeholder="Input height, mm" value="5100" style="width: 5rem" class="me-3"><br>
 						<label for="dimensions_width" class="mt-2">Width, mm</label>
-						<input id="dimensions_width" name="dimensions_width" type="number" placeholder="Input width, mm" value="181" style="width: 5rem" class="me-3"><br>
+						<input id="dimensions_width" name="dimensions_width" type="number" placeholder="Input width, mm" value="1810" style="width: 5rem" class="me-3"><br>
 						<label for="dimensions_height" class="mt-2">Height, mm</label>
-						<input id="dimensions_height" name="dimensions_height" type="number" placeholder="Input height, mm" value="176" style="width: 5rem">
+						<input id="dimensions_height" name="dimensions_height" type="number" placeholder="Input height, mm" value="1760" style="width: 5rem">
 					</div>
 					<div class=" col-12 mt-2 ">
 						<span class="mt-3 me-2">Was a car in accident ?</span>
@@ -128,13 +136,12 @@
 			</div>
 			<div class="row my-1">
 				<div class="col-12 text-center">
-					<a class="btn btn-primary me-3" id="send_data" style="min-width: 7rem">Send</a>
-					<button class="btn btn-success" id="clear_data" type="button" style="min-width: 7rem">Clear data</button>
+					<a href="{{route("car.update",$car)}}" class="btn btn-primary me-3" id="send_data" style="min-width: 7rem">Save</a>
+					<a class="btn btn-success" id="clear_data" type="button" style="min-width: 7rem">Clear data</a>
 				</div>
 			</div>
 		</form>
 		{{--		<div class="dropzone" id="dropzone">--}}{{-- DROPZONE --}}
 	</div>
 	<div class="row my-1 php_response"></div>
-</div></div>
-</div></div>
+</div></div></div></div>

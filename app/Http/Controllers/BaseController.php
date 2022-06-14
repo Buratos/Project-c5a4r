@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Services\Car\Service;
 
-class ColorController extends Controller
-{
-    //
+class BaseController extends Controller {
+   public $service;
+
+   public function __construct(Service $service) {
+      $this->service = $service;
+   }
+
+/*   public function store() {
+
+   }*/
 }

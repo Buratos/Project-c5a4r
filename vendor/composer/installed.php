@@ -1,11 +1,11 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => 'v8.6.10',
-        'version' => '8.6.10.0',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => '4970eb640d1ae01c85d0ebcdbc098c5ee89c814d',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -158,12 +158,12 @@
             'dev_requirement' => false,
         ),
         'guzzlehttp/guzzle' => array(
-            'pretty_version' => '7.4.1',
-            'version' => '7.4.1.0',
+            'pretty_version' => '7.4.2',
+            'version' => '7.4.2.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../guzzlehttp/guzzle',
             'aliases' => array(),
-            'reference' => 'ee0a041b1760e6a53d2a39c8c34115adc2af2c79',
+            'reference' => 'ac1ec1cd9b5624694c3a40be801d94137afb12b4',
             'dev_requirement' => false,
         ),
         'guzzlehttp/promises' => array(
@@ -395,12 +395,12 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => 'v8.6.10',
-            'version' => '8.6.10.0',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => '4970eb640d1ae01c85d0ebcdbc098c5ee89c814d',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -437,6 +437,15 @@
             'install_path' => __DIR__ . '/../laravel/tinker',
             'aliases' => array(),
             'reference' => '5f2f9815b7631b9f586a3de7933c25f9327d4073',
+            'dev_requirement' => false,
+        ),
+        'laravel/ui' => array(
+            'pretty_version' => 'v3.4.2',
+            'version' => '3.4.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/ui',
+            'aliases' => array(),
+            'reference' => 'e01198123f7f4369d13c1f83a897c3f5e97fc9f4',
             'dev_requirement' => false,
         ),
         'league/commonmark' => array(
@@ -769,8 +778,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0',
             ),
         ),
         'psr/simple-cache' => array(
